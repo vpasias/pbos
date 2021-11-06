@@ -56,7 +56,7 @@ cat > /mnt/extra/provider.xml <<EOF
   <bridge name="virbr103" stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
   <mac address='52:54:00:7a:7b:cd'/>
-  <ip address='192.168.100.1' netmask='255.255.255.0'>
+  <ip address='172.16.100.1' netmask='255.255.255.0'>
   </ip>  
 </network>
 EOF
