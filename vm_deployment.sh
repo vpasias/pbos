@@ -41,7 +41,6 @@ cat > /mnt/extra/storage.xml <<EOF
   <bridge name="virbr102" stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
   <mac address='52:54:00:9a:9b:cd'/>
-  <ip address='192.168.250.1' netmask='255.255.255.0'>
   </ip>    
 </network>
 EOF
