@@ -28,18 +28,15 @@ EOF
 
 cat > /mnt/extra/overlay.xml <<EOF
 <network>
-  <forward mode='nat'/>
   <name>overlay</name>
   <bridge name="virbr101" stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
   <mac address='52:54:00:6a:6b:cd'/>
-  <ip address='192.168.255.1' netmask='255.255.255.0'>  
 </network>
 EOF
 
 cat > /mnt/extra/storage.xml <<EOF
 <network>
-  <forward mode='nat'/>
   <name>storage</name>
   <bridge name="virbr102" stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
