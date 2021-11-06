@@ -14,6 +14,7 @@ rm -f /home/ubuntu/.ssh/id_rsa.pub
 echo 'run-conf.sh: Establish Connectivity'
 ssh-keygen -q -t rsa -N "" -f /home/ubuntu/.ssh/id_rsa
 
+sshpass -p kyax7344 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n1
 sshpass -p kyax7344 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n2
 sshpass -p kyax7344 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n3
 sshpass -p kyax7344 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n4
