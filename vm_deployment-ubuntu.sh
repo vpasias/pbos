@@ -131,13 +131,13 @@ sleep 30
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo apt update -y"; done
 
-for i in {4..6}; do qemu-img create -f qcow2 vbdnode1$i 120G; done
-for i in {4..6}; do qemu-img create -f qcow2 vbdnode2$i 120G; done
-for i in {4..6}; do qemu-img create -f qcow2 vbdnode3$i 120G; done
+for i in {1..6}; do qemu-img create -f qcow2 vbdnode1$i 120G; done
+for i in {1..6}; do qemu-img create -f qcow2 vbdnode2$i 120G; done
+for i in {1..6}; do qemu-img create -f qcow2 vbdnode3$i 120G; done
 
-for i in {4..6}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode1$i.qcow2 -t vdb n$i; done
-for i in {4..6}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode2$i.qcow2 -t vdc n$i; done
-for i in {4..6}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode3$i.qcow2 -t vdd n$i; done
+for i in {1..6}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode1$i.qcow2 -t vdb n$i; done
+for i in {1..6}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode2$i.qcow2 -t vdc n$i; done
+for i in {1..6}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode3$i.qcow2 -t vdd n$i; done
 
 for i in {1..6}; do virsh attach-interface --domain n$i --type network --source overlay --model e1000 --mac 02:00:aa:0a:01:1$i --config --live; done
 for i in {1..6}; do virsh attach-interface --domain n$i --type network --source storage --model e1000 --mac 02:00:aa:0a:02:1$i --config --live; done
@@ -191,17 +191,17 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false     
-    ens11:
+    ens8:
       dhcp4: false
       dhcp6: false    
       addresses:
         - 192.168.255.11/24
-    ens12:
+    ens10:
       dhcp4: false
       dhcp6: false
       addresses:
         - 192.168.250.11/24
-    ens13:
+    ens11:
       dhcp4: false
       dhcp6: false
       addresses:
@@ -218,17 +218,17 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false     
-    ens11:
+    ens8:
       dhcp4: false
       dhcp6: false    
       addresses:
         - 192.168.255.12/24
-    ens12:
+    ens10:
       dhcp4: false
       dhcp6: false
       addresses:
         - 192.168.250.12/24
-    ens13:
+    ens11:
       dhcp4: false
       dhcp6: false
       addresses:
@@ -245,17 +245,17 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false     
-    ens11:
+    ens8:
       dhcp4: false
       dhcp6: false    
       addresses:
         - 192.168.255.13/24
-    ens12:
+    ens10:
       dhcp4: false
       dhcp6: false
       addresses:
         - 192.168.250.13/24
-    ens13:
+    ens11:
       dhcp4: false
       dhcp6: false
       addresses:
@@ -272,17 +272,17 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false     
-    ens11:
+    ens12:
       dhcp4: false
       dhcp6: false    
       addresses:
         - 192.168.255.14/24
-    ens12:
+    ens13:
       dhcp4: false
       dhcp6: false
       addresses:
         - 192.168.250.14/24
-    ens13:
+    ens14:
       dhcp4: false
       dhcp6: false
       addresses:
@@ -299,17 +299,17 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false     
-    ens11:
+    ens12:
       dhcp4: false
       dhcp6: false    
       addresses:
         - 192.168.255.15/24
-    ens12:
+    ens13:
       dhcp4: false
       dhcp6: false
       addresses:
         - 192.168.250.15/24
-    ens13:
+    ens14:
       dhcp4: false
       dhcp6: false
       addresses:
@@ -326,17 +326,17 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false     
-    ens11:
+    ens12:
       dhcp4: false
       dhcp6: false    
       addresses:
         - 192.168.255.16/24
-    ens12:
+    ens13:
       dhcp4: false
       dhcp6: false
       addresses:
         - 192.168.250.16/24
-    ens13:
+    ens14:
       dhcp4: false
       dhcp6: false
       addresses:
