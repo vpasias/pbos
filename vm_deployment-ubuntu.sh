@@ -38,8 +38,7 @@ cat > /mnt/extra/storage.xml <<EOF
 <network>
   <name>storage</name>
   <bridge name="virbr102" stp='off' macTableManager="kernel"/>
-  <mtu size="9216"/>
-  </ip>    
+  <mtu size="9216"/>  
 </network>
 EOF
 
