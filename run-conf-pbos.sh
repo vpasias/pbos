@@ -40,7 +40,7 @@ echo 'run-conf.sh: Install Ansible and dependencies'
 
 python -m pip install -U pip
 python -m pip install wheel
-python -m pip install ansible pymysql openstacksdk
+python -m pip install 'ansible==2.11.5' pymysql openstacksdk
 
 echo 'run-conf.sh: Clone PBOS repository'
 # https://github.com/iorchard/pbos-ansible
