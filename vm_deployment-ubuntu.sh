@@ -204,8 +204,6 @@ network:
     ens14:
       dhcp4: false
       dhcp6: false
-      addresses:
-        - 0.0.0.0/0
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n2 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -231,8 +229,6 @@ network:
     ens14:
       dhcp4: false
       dhcp6: false
-      addresses:
-        - 0.0.0.0/0      
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n3 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -257,9 +253,7 @@ network:
         - 192.168.250.13/24
     ens14:
       dhcp4: false
-      dhcp6: false
-      addresses:
-        - 0.0.0.0/0      
+      dhcp6: false 
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n4 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -284,9 +278,7 @@ network:
         - 192.168.250.14/24
     ens14:
       dhcp4: false
-      dhcp6: false
-      addresses:
-        - 0.0.0.0/0      
+      dhcp6: false  
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n5 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -311,9 +303,7 @@ network:
         - 192.168.250.15/24
     ens14:
       dhcp4: false
-      dhcp6: false
-      addresses:
-        - 0.0.0.0/0      
+      dhcp6: false  
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n6 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -338,9 +328,7 @@ network:
         - 192.168.250.16/24
     ens14:
       dhcp4: false
-      dhcp6: false
-      addresses:
-        - 0.0.0.0/0      
+      dhcp6: false   
 EOF"
 
 for i in {1..6}; do virsh shutdown n$i; done && sleep 10 && virsh list --all && for i in {1..6}; do virsh start n$i; done && sleep 10 && virsh list --all
