@@ -36,8 +36,8 @@ ceph_osd_devices:
 lvm_size: 50G
 
 # neutron
-provider_interface: "ens13"
-overlay_interface: "ens11"
+provider_interface: "ens14"
+overlay_interface: "ens12"
 
 ######################################################
 # Warn: Do not edit below if you are not an expert.  #
