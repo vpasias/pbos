@@ -21,8 +21,8 @@ storage_backends:
   - ceph
   - lvm
 # ceph
-ceph_public_network_iface: ens12
-ceph_rgw_service_iface: ens12
+ceph_public_network_iface: ens13
+ceph_rgw_service_iface: ens13
 ceph_public_network: 192.168.250.0/24
 ceph_cluster_network: 192.168.250.0/24
 ceph_replicas: 2
