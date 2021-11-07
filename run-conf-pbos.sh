@@ -42,7 +42,7 @@ python -m pip install -U pip
 python -m pip install wheel
 python -m pip install ansible pymysql openstacksdk
 
-echo 'run-conf.sh: Install PBOS'
+echo 'run-conf.sh: Clone PBOS repository'
 # https://github.com/iorchard/pbos-ansible
 
 git clone https://github.com/iorchard/pbos-ansible.git && cd pbos-ansible
@@ -52,24 +52,16 @@ cp -a inventory/default inventory/$MYSITE
 cp -a /home/ubuntu/pbos/hosts inventory/$MYSITE/hosts
 
 sed "s/MYSITE/$MYSITE/" ansible.cfg.sample > ansible.cfg
+
+echo 'run-conf.sh: Set passwords'
 ./vault.sh
 
 cp -a /home/ubuntu/pbos/vars.yml inventory/$MYSITE/group_vars/all/vars.yml
 
+echo 'run-conf.sh: Check connectivity'
 ansible -m ping all
 
+echo 'run-conf.sh: Install PBOS'
 ansible-galaxy role install --force --role-file requirements.yml
 
 ansible-playbook site.yml
-
-source ~/.bashrc
-
-ceph -s && ceph health
-openstack service list && openstack server list && openstack endpoint list && openstack catalog list && openstack image list && \
-openstack flavor list && openstack network list && openstack subnet list && openstack project list && openstack port list && openstack user list && \
-openstack network agent list && openstack hypervisor list && openstack volume list && openstack floating ip list
-
-# Testing
-# ./scripts/openstack_test.sh
-# VM IP = 192.168.22.195
-# ssh cirros@192.168.22.195
