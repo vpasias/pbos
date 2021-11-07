@@ -191,17 +191,17 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false     
-    ens8:
+    ens12:
       dhcp4: false
       dhcp6: false    
       addresses:
         - 192.168.255.11/24
-    ens10:
+    ens13:
       dhcp4: false
       dhcp6: false
       addresses:
         - 192.168.250.11/24
-    ens11:
+    ens14:
       dhcp4: false
       dhcp6: false
       addresses:
@@ -218,17 +218,17 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false     
-    ens8:
+    ens12:
       dhcp4: false
       dhcp6: false    
       addresses:
         - 192.168.255.12/24
-    ens10:
+    ens13:
       dhcp4: false
       dhcp6: false
       addresses:
         - 192.168.250.12/24
-    ens11:
+    ens14:
       dhcp4: false
       dhcp6: false
       addresses:
@@ -245,17 +245,17 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false     
-    ens8:
+    ens12:
       dhcp4: false
       dhcp6: false    
       addresses:
         - 192.168.255.13/24
-    ens10:
+    ens13:
       dhcp4: false
       dhcp6: false
       addresses:
         - 192.168.250.13/24
-    ens11:
+    ens14:
       dhcp4: false
       dhcp6: false
       addresses:
