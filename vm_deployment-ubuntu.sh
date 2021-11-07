@@ -31,7 +31,6 @@ cat > /mnt/extra/overlay.xml <<EOF
   <name>overlay</name>
   <bridge name="virbr101" stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
-  <mac address='52:54:00:6a:6b:cd'/>
 </network>
 EOF
 
@@ -40,7 +39,6 @@ cat > /mnt/extra/storage.xml <<EOF
   <name>storage</name>
   <bridge name="virbr102" stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
-  <mac address='52:54:00:9a:9b:cd'/>
   </ip>    
 </network>
 EOF
@@ -51,7 +49,7 @@ cat > /mnt/extra/provider.xml <<EOF
   <name>provider</name>
   <bridge name="virbr103" stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
-  <mac address='52:54:00:7a:7b:cd'/>
+  <mac address='52:54:00:9a:9b:cd'/>
   <ip address='172.16.100.1' netmask='255.255.255.0'>
   </ip>  
 </network>
@@ -100,7 +98,7 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo hostnamec
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo apt update -y && sudo apt-get install -y git vim net-tools wget curl bash-completion apt-utils iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson python3-venv xfsprogs locate jq"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo apt-get install ntp ntpdate -y && sudo timedatectl set-ntp on"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo apt-get install ntp ntpdate -y && sudo systemctl enable ntp && sudo timedatectl set-ntp off && sudo systemctl restart ntp && sudo systemctl status ntp"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo modprobe -v xfs && sudo grep xfs /proc/filesystems && sudo modinfo xfs && sudo mkdir -p /etc/apt/sources.list.d"; done
 
@@ -206,7 +204,9 @@ network:
         - 192.168.250.11/24
     ens13:
       dhcp4: false
-      dhcp6: false   
+      dhcp6: false
+      addresses:
+        - 0.0.0.0/0
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n2 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -231,7 +231,9 @@ network:
         - 192.168.250.12/24
     ens13:
       dhcp4: false
-      dhcp6: false   
+      dhcp6: false
+      addresses:
+        - 0.0.0.0/0      
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n3 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -256,7 +258,9 @@ network:
         - 192.168.250.13/24
     ens13:
       dhcp4: false
-      dhcp6: false   
+      dhcp6: false
+      addresses:
+        - 0.0.0.0/0      
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n4 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -281,7 +285,9 @@ network:
         - 192.168.250.14/24
     ens13:
       dhcp4: false
-      dhcp6: false   
+      dhcp6: false
+      addresses:
+        - 0.0.0.0/0      
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n5 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -306,7 +312,9 @@ network:
         - 192.168.250.15/24
     ens13:
       dhcp4: false
-      dhcp6: false   
+      dhcp6: false
+      addresses:
+        - 0.0.0.0/0      
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n6 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -331,7 +339,9 @@ network:
         - 192.168.250.16/24
     ens13:
       dhcp4: false
-      dhcp6: false   
+      dhcp6: false
+      addresses:
+        - 0.0.0.0/0      
 EOF"
 
 for i in {1..6}; do virsh shutdown n$i; done && sleep 10 && virsh list --all && for i in {1..6}; do virsh start n$i; done && sleep 10 && virsh list --all
