@@ -14,12 +14,12 @@ rm -f /home/ubuntu/.ssh/id_rsa.pub
 echo 'run-conf.sh: Establish Connectivity'
 ssh-keygen -q -t rsa -N "" -f /home/ubuntu/.ssh/id_rsa
 
-sshpass -p kyax7344 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n1
-sshpass -p kyax7344 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n2
-sshpass -p kyax7344 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n3
-sshpass -p kyax7344 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n4
-sshpass -p kyax7344 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n5
-sshpass -p kyax7344 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n6
+sshpass -p gprm8350 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n1
+sshpass -p gprm8350 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n2
+sshpass -p gprm8350 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n3
+sshpass -p gprm8350 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n4
+sshpass -p gprm8350 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n5
+sshpass -p gprm8350 ssh-copy-id -o StrictHostKeyChecking=no ubuntu@n6
 
 echo 'run-conf.sh: Check Connectivity'
 
