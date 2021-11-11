@@ -87,7 +87,7 @@ sleep 60
 virsh list --all && brctl show && virsh net-list --all
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i 'echo "root:gprm8350" | sudo chpasswd'; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i 'echo "ubuntu:kyax7344" | sudo chpasswd'; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i 'echo "ubuntu:gprm8350" | sudo chpasswd'; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo systemctl restart sshd"; done
