@@ -198,7 +198,6 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "#echo vm.swapp
 ssh -o "StrictHostKeyChecking=no" ubuntu@n1 "cat << EOF | sudo tee /etc/network/interfaces
 auto lo
 iface lo inet loopback
-    address 9.9.9.9/32
 
 auto eth0
 allow-hotplug eth0
@@ -225,29 +224,33 @@ iface eth3 inet manual
 source /etc/network/interfaces.d/*.cfg
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@n2 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
-# This file describes the network interfaces available on your system
-# For more information, see netplan(5).
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    ens3:
-      dhcp4: true
-      dhcp6: false     
-    ens12:
-      dhcp4: false
-      dhcp6: false    
-      addresses:
-        - 192.168.255.12/24
-    ens13:
-      dhcp4: false
-      dhcp6: false
-      addresses:
-        - 192.168.250.12/24
-    ens14:
-      dhcp4: false
-      dhcp6: false
+ssh -o "StrictHostKeyChecking=no" ubuntu@n2 "cat << EOF | sudo tee /etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
+    mtu 9000
+    
+allow-hotplug eth1
+auto eth1
+iface eth1 inet static
+    address 192.168.255.12/24
+    mtu 9000
+    
+allow-hotplug eth2
+auto eth2
+iface eth2 inet static
+    address 192.168.250.12/24
+    mtu 9000
+
+allow-hotplug eth3
+auto eth3
+iface eth3 inet manual
+    mtu 9000    
+
+source /etc/network/interfaces.d/*.cfg
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@n3 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
