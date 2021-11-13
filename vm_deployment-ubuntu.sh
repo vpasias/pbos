@@ -175,6 +175,8 @@ net.core.bpf_jit_limit=3000000000
 kernel.keys.maxkeys=2000
 kernel.keys.maxbytes=2000000
 net.ipv4.ip_forward=1
+net.ipv4.conf.all.forwarding=1
+net.ipv6.conf.all.forwarding=1
 EOF"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo sysctl --system"; done
