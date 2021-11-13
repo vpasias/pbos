@@ -56,7 +56,7 @@ sed "s/MYSITE/$MYSITE/" ansible.cfg.sample > ansible.cfg
 echo 'run-conf.sh: Set passwords'
 ./vault.sh
 
-cp -a /home/ubuntu/pbos/vars.yml inventory/$MYSITE/group_vars/all/vars.yml
+cp -a /home/ubuntu/pbos/vars-ubuntu.yml inventory/$MYSITE/group_vars/all/vars.yml
 
 echo 'run-conf.sh: Check connectivity'
 ansible -m ping all
