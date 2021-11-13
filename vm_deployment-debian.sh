@@ -106,7 +106,8 @@ deb-src http://security.debian.org/debian-security bullseye-security main
 deb http://ftp.debian.org/debian bullseye-backports main contrib non-free
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade --install-recommends -y"; done
+#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade --install-recommends -y"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo DEBIAN_FRONTEND=noninteractive apt -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages --install-recommends full-upgrade"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo hostnamectl set-hostname n$i --static"; done
 
