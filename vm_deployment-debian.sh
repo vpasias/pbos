@@ -369,4 +369,7 @@ iface eth3 inet manual
 source /etc/network/interfaces.d/*.cfg   
 EOF"
 
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "mkdir -p /home/debian/e1000e && cd /home/debian/e1000e && wget https://sourceforge.net/projects/e1000/files/e1000e%20stable/3.8.7/e1000e-3.8.7.tar.gz"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cd /home/debian/e1000e && tar zxf e1000e-3.8.7.tar.gz && cd e1000e-3.8.7/src/ && sudo make install && sudo modprobe e1000e"; done
+
 for i in {1..6}; do virsh shutdown n$i; done && sleep 10 && virsh list --all && for i in {1..6}; do virsh start n$i; done && sleep 10 && virsh list --all
