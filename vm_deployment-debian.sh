@@ -208,19 +208,18 @@ iface eth0 inet dhcp
 allow-hotplug eth1
 auto eth1
 iface eth1 inet static
-    address 10.255.13.1/24
+    address 192.168.255.11/24
     mtu 9000
     
 allow-hotplug eth2
 auto eth2
 iface eth2 inet static
-    address 10.255.14.1/24
+    address 192.168.250.11/24
     mtu 9000
 
 allow-hotplug eth3
 auto eth3
-iface eth3 inet static
-    address 10.255.17.1/24
+iface eth3 inet manual
     mtu 9000    
 
 source /etc/network/interfaces.d/*.cfg
