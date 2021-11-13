@@ -49,7 +49,7 @@ git clone https://github.com/iorchard/pbos-ansible.git && cd pbos-ansible
 
 export MYSITE="pbos"
 cp -a inventory/default inventory/$MYSITE
-cp -a /home/ubuntu/pbos/hosts inventory/$MYSITE/hosts
+cp -a /home/ubuntu/pbos/hosts-ubuntu inventory/$MYSITE/hosts
 
 sed "s/MYSITE/$MYSITE/" ansible.cfg.sample > ansible.cfg
 
