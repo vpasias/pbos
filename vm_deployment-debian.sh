@@ -141,7 +141,7 @@ for i in {1..6}; do virsh shutdown n$i; done && sleep 10 && virsh list --all && 
 
 sleep 30
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo apt --purge autoremove && sudo apt autoclean -y"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo apt --purge autoremove -y && sudo apt autoclean -y"; done
 
 for i in {1..6}; do qemu-img create -f qcow2 vbdnode1$i 120G; done
 for i in {1..6}; do qemu-img create -f qcow2 vbdnode2$i 120G; done
