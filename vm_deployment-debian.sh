@@ -122,20 +122,20 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | s
 TimeoutStartSec=15
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo mv /etc/apt/sources.list /etc/apt/old-sources.list"; done
+#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo mv /etc/apt/sources.list /etc/apt/old-sources.list"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | sudo tee /etc/apt/sources.list
-deb http://deb.debian.org/debian/ bullseye main contrib non-free
-deb-src http://deb.debian.org/debian/ bullseye-updates main contrib non-free
+#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | sudo tee /etc/apt/sources.list
+#deb http://deb.debian.org/debian/ bullseye main contrib non-free
+#deb-src http://deb.debian.org/debian/ bullseye-updates main contrib non-free
 
-deb http://security.debian.org/debian-security bullseye-security main
-deb-src http://security.debian.org/debian-security bullseye-security main
-deb http://ftp.debian.org/debian bullseye-backports main contrib non-free
-EOF"; done
+#deb http://security.debian.org/debian-security bullseye-security main
+#deb-src http://security.debian.org/debian-security bullseye-security main
+#deb http://ftp.debian.org/debian bullseye-backports main contrib non-free
+#EOF"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade --install-recommends -y"; done
+#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade --install-recommends -y"; done
 
 for i in {1..6}; do virsh shutdown n$i; done && sleep 10 && virsh list --all && for i in {1..6}; do virsh start n$i; done && sleep 10 && virsh list --all
 
