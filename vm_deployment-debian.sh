@@ -86,13 +86,6 @@ sleep 60
 
 virsh list --all && brctl show && virsh net-list --all
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i 'echo "root:gprm8350" | sudo chpasswd'; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i 'echo "debian:gprm8350" | sudo chpasswd'; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo systemctl restart sshd"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo rm -rf /root/.ssh/authorized_keys"; done
-
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo apt upgrade -y && sudo apt install gcc-8-base -y"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo mv /etc/apt/sources.list /etc/apt/old-sources.list"; done
@@ -108,6 +101,13 @@ EOF"; done
 
 #for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade --install-recommends -y"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo DEBIAN_FRONTEND=noninteractive apt -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages --install-recommends full-upgrade"; done
+
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i 'echo "root:gprm8350" | sudo chpasswd'; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i 'echo "debian:gprm8350" | sudo chpasswd'; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo systemctl restart sshd"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo rm -rf /root/.ssh/authorized_keys"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo hostnamectl set-hostname n$i --static"; done
 
