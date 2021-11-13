@@ -155,6 +155,10 @@ for i in {1..6}; do virsh attach-interface --domain n$i --type network --source 
 for i in {1..6}; do virsh attach-interface --domain n$i --type network --source storage --model e1000 --mac 02:00:aa:0a:02:1$i --config --live; done
 for i in {1..6}; do virsh attach-interface --domain n$i --type network --source provider --model e1000 --mac 02:00:aa:0a:03:1$i --config --live; done
 
+#for i in {1..6}; do virsh attach-interface --domain n$i --type network --source overlay --model virtio --mac 02:00:aa:0a:01:1$i --config --live; done
+#for i in {1..6}; do virsh attach-interface --domain n$i --type network --source storage --model virtio --mac 02:00:aa:0a:02:1$i --config --live; done
+#for i in {1..6}; do virsh attach-interface --domain n$i --type network --source provider --model virtio --mac 02:00:aa:0a:03:1$i --config --live; done
+
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | sudo tee /etc/hosts
 127.0.0.1 localhost
 192.168.254.101  n1
