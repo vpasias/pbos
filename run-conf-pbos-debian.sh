@@ -49,14 +49,14 @@ git clone https://github.com/iorchard/pbos-ansible.git && cd pbos-ansible
 
 export MYSITE="pbos"
 cp -a inventory/default inventory/$MYSITE
-cp -a /home/debian/pbos/hosts inventory/$MYSITE/hosts
+cp -a /home/debian/pbos/hosts-debian inventory/$MYSITE/hosts
 
 sed "s/MYSITE/$MYSITE/" ansible.cfg.sample > ansible.cfg
 
 echo 'run-conf.sh: Set passwords'
 ./vault.sh
 
-cp -a /home/debian/pbos/vars.yml inventory/$MYSITE/group_vars/all/vars.yml
+cp -a /home/debian/pbos/vars-debian.yml inventory/$MYSITE/group_vars/all/vars.yml
 
 echo 'run-conf.sh: Check connectivity'
 ansible -m ping all
