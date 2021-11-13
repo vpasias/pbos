@@ -93,13 +93,22 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo sed -i 's
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo systemctl restart sshd"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo rm -rf /root/.ssh/authorized_keys"; done
 
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo apt upgrade -y && sudo apt install gcc-8-base -y"; done
+
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo mv /etc/apt/sources.list /etc/apt/old-sources.list"; done
+
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | sudo tee /etc/apt/sources.list
+deb http://deb.debian.org/debian/ bullseye main contrib non-free
+deb-src http://deb.debian.org/debian/ bullseye-updates main contrib non-free
+
+deb http://security.debian.org/debian-security bullseye-security main
+deb-src http://security.debian.org/debian-security bullseye-security main
+deb http://ftp.debian.org/debian bullseye-backports main contrib non-free
+EOF"; done
+
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade --install-recommends -y"; done
+
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo hostnamectl set-hostname n$i --static"; done
-
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo apt-get install -y git vim net-tools wget curl bash-completion apt-utils iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson python3-venv xfsprogs locate jq gcc-8-base"; done
-
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt-get install systemd-timesyncd -y && sudo systemctl unmask systemd-timesyncd.service && sudo systemctl enable systemd-timesyncd.service && sudo systemctl restart systemd-timesyncd.service && sudo timedatectl set-ntp on"; done
-
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo modprobe -v xfs && sudo grep xfs /proc/filesystems && sudo modinfo xfs && sudo mkdir -p /etc/apt/sources.list.d"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo chmod -x /etc/update-motd.d/*"; done
 
@@ -122,26 +131,17 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | s
 TimeoutStartSec=15
 EOF"; done
 
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo mv /etc/apt/sources.list /etc/apt/old-sources.list"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo apt-get install -y git vim net-tools wget curl bash-completion apt-utils iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson python3-venv xfsprogs locate jq gcc-8-base"; done
 
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | sudo tee /etc/apt/sources.list
-#deb http://deb.debian.org/debian/ bullseye main contrib non-free
-#deb-src http://deb.debian.org/debian/ bullseye-updates main contrib non-free
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt-get install systemd-timesyncd -y && sudo systemctl unmask systemd-timesyncd.service && sudo systemctl enable systemd-timesyncd.service && sudo systemctl restart systemd-timesyncd.service && sudo timedatectl set-ntp on"; done
 
-#deb http://security.debian.org/debian-security bullseye-security main
-#deb-src http://security.debian.org/debian-security bullseye-security main
-#deb http://ftp.debian.org/debian bullseye-backports main contrib non-free
-#EOF"; done
-
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update"; done
-
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade --install-recommends -y"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo modprobe -v xfs && sudo grep xfs /proc/filesystems && sudo modinfo xfs && sudo mkdir -p /etc/apt/sources.list.d"; done
 
 for i in {1..6}; do virsh shutdown n$i; done && sleep 10 && virsh list --all && for i in {1..6}; do virsh start n$i; done && sleep 10 && virsh list --all
 
 sleep 30
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo apt --purge autoremove && sudo apt autoclean -y"; done
 
 for i in {1..6}; do qemu-img create -f qcow2 vbdnode1$i 120G; done
 for i in {1..6}; do qemu-img create -f qcow2 vbdnode2$i 120G; done
