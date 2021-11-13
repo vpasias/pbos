@@ -1,0 +1,60 @@
+n1 ansible_host=192.168.254.101 ansible_port=22 ansible_user=debian ansible_connection=local
+n2 ansible_host=192.168.254.102 ansible_port=22 ansible_user=debian
+n3 ansible_host=192.168.254.103 ansible_port=22 ansible_user=debian
+n4 ansible_host=192.168.254.104 ansible_port=22 ansible_user=debian
+n5 ansible_host=192.168.254.105 ansible_port=22 ansible_user=debian
+n6 ansible_host=192.168.254.106 ansible_port=22 ansible_user=debian
+
+[controller]
+n[1:3]
+
+[compute]
+n[4:6]
+
+
+###################################################
+## Do not touch below if you are not an expert!!! #
+###################################################
+
+[mariadb:children]
+controller
+
+[rabbitmq:children]
+controller
+
+[keystone:children]
+controller
+
+[glance:children]
+controller
+
+[placement:children]
+controller
+
+[cinder:children]
+controller
+
+[barbican:children]
+controller
+
+[openstack:children]
+controller
+compute
+
+[ceph_mon:children]
+controller
+
+[ceph_mgr:children]
+controller
+
+[ceph_rgw:children]
+controller
+
+[ceph_osd:children]
+compute
+
+[ceph:children]
+ceph_mon
+ceph_mgr
+ceph_rgw
+ceph_osd
