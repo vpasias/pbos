@@ -183,6 +183,7 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /et
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth2"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth3"; done
 
+### eth0
 ssh -o "StrictHostKeyChecking=no" rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 BOOTPROTO=dhcp
@@ -243,6 +244,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
+### eth1
 ssh -o "StrictHostKeyChecking=no" rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
 DEVICE=eth1
 BOOTPROTO=static
@@ -308,6 +310,79 @@ DEVICE=eth1
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:01:16
 IPADDR=192.168.255.16
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+### eth2
+ssh -o "StrictHostKeyChecking=no" rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+DEVICE=eth2
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:02:11
+IPADDR=192.168.250.11
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+DEVICE=eth2
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:02:12
+IPADDR=192.168.250.12
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+DEVICE=eth2
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:02:13
+IPADDR=192.168.250.13
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+DEVICE=eth2
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:02:14
+IPADDR=192.168.250.14
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+DEVICE=eth2
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:02:15
+IPADDR=192.168.250.15
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+DEVICE=eth2
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:02:16
+IPADDR=192.168.250.16
 NETMASK=255.255.255.0
 MTU=9000
 ONBOOT=yes
