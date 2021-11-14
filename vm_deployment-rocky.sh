@@ -98,10 +98,9 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo hostnamect
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo chmod -x /etc/motd.d/*"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'cat << EOF | sudo tee /etc/motd.d/01-custom
-#!/bin/sh
-echo "****************************WARNING****************************************
+****************************WARNING****************************************
 UNAUTHORISED ACCESS IS PROHIBITED. VIOLATORS WILL BE PROSECUTED.
-*********************************************************************************"
+*********************************************************************************
 EOF'; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo chmod +x /etc/motd.d/01-custom"; done
