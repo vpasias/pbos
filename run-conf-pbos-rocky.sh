@@ -1,6 +1,7 @@
 #! /bin/sh
 
-export LC_ALL=C
+#export LC_ALL=C
+export LC_ALL='en_US.utf8'
 export LC_CTYPE="UTF-8",
 export LANG="en_US.UTF-8"
 
