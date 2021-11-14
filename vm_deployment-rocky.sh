@@ -394,7 +394,7 @@ EOF"
 ### eth3
 ssh -o "StrictHostKeyChecking=no" rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
-BOOTPROTO=static
+BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:11
 MTU=9000
 ONBOOT=yes
@@ -404,7 +404,7 @@ EOF"
 
 ssh -o "StrictHostKeyChecking=no" rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
-BOOTPROTO=static
+BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:12
 MTU=9000
 ONBOOT=yes
@@ -414,7 +414,7 @@ EOF"
 
 ssh -o "StrictHostKeyChecking=no" rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
-BOOTPROTO=static
+BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:13
 MTU=9000
 ONBOOT=yes
@@ -424,7 +424,7 @@ EOF"
 
 ssh -o "StrictHostKeyChecking=no" rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
-BOOTPROTO=static
+BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:14
 MTU=9000
 ONBOOT=yes
@@ -434,7 +434,7 @@ EOF"
 
 ssh -o "StrictHostKeyChecking=no" rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
-BOOTPROTO=static
+BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:15
 MTU=9000
 ONBOOT=yes
@@ -444,7 +444,7 @@ EOF"
 
 ssh -o "StrictHostKeyChecking=no" rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
-BOOTPROTO=static
+BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:16
 MTU=9000
 ONBOOT=yes
