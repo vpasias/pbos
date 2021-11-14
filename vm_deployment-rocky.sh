@@ -106,33 +106,31 @@ EOF'; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo chmod +x /etc/motd.d/01-custom"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | sudo tee /etc/modprobe.d/kvm.conf
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | sudo tee /etc/modprobe.d/kvm.conf
 options kvm_intel nested=1
 EOF"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo modprobe -r kvm_intel && sudo modprobe -a kvm_intel"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo mkdir -p /etc/systemd/system/networking.service.d"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | sudo tee /etc/systemd/system/networking.service.d/reduce-timeout.conf
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo mkdir -p /etc/systemd/system/networking.service.d"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | sudo tee /etc/systemd/system/networking.service.d/reduce-timeout.conf
 [Service]
 TimeoutStartSec=15
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo apt-get install -y git vim net-tools wget curl bash-completion apt-utils iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson python3-venv xfsprogs locate jq gcc-8-base"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf update -y && sudo dnf install -y git vim net-tools wget curl bash-completion iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson python3-venv xfsprogs locate jq gcc-8-base"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt-get install systemd-timesyncd -y && sudo systemctl unmask systemd-timesyncd.service && sudo systemctl enable systemd-timesyncd.service && sudo systemctl restart systemd-timesyncd.service && sudo timedatectl set-ntp on"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo apt-get install systemd-timesyncd -y && sudo systemctl unmask systemd-timesyncd.service && sudo systemctl enable systemd-timesyncd.service && sudo systemctl restart systemd-timesyncd.service && sudo timedatectl set-ntp on"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo modprobe -v xfs && sudo grep xfs /proc/filesystems && sudo modinfo xfs && sudo mkdir -p /etc/apt/sources.list.d"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo modprobe -v xfs && sudo grep xfs /proc/filesystems && sudo modinfo xfs"; done
 
 for i in {1..6}; do virsh shutdown n$i; done && sleep 10 && virsh list --all && for i in {1..6}; do virsh start n$i; done && sleep 10 && virsh list --all
 
 sleep 30
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt update -y && sudo apt --purge autoremove -y && sudo apt autoclean -y"; done
-
-for i in {1..6}; do qemu-img create -f qcow2 vbdnode1$i 120G; done
-for i in {1..6}; do qemu-img create -f qcow2 vbdnode2$i 120G; done
-for i in {1..6}; do qemu-img create -f qcow2 vbdnode3$i 120G; done
+for i in {1..6}; do qemu-img create -f qcow2 vbdnode1$i.qcow2 120G; done
+for i in {1..6}; do qemu-img create -f qcow2 vbdnode2$i.qcow2 120G; done
+for i in {1..6}; do qemu-img create -f qcow2 vbdnode3$i.qcow2 120G; done
 
 for i in {1..6}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode1$i.qcow2 -t vdb n$i; done
 for i in {1..6}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode2$i.qcow2 -t vdc n$i; done
@@ -146,8 +144,9 @@ for i in {1..6}; do virsh attach-interface --domain n$i --type network --source 
 for i in {1..6}; do virsh attach-interface --domain n$i --type network --source storage --model virtio --mac 02:00:aa:0a:02:1$i --config --live; done
 for i in {1..6}; do virsh attach-interface --domain n$i --type network --source provider --model virtio --mac 02:00:aa:0a:03:1$i --config --live; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | sudo tee /etc/hosts
-127.0.0.1 localhost
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | sudo tee /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 192.168.254.101  n1
 192.168.254.102  n2
 192.168.254.103  n3
@@ -157,16 +156,9 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | s
 192.168.254.107  n7
 192.168.254.108  n8
 192.168.254.109  n9
-# The following lines are desirable for IPv6 capable hosts
-::1 ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
-ff02::3 ip6-allhosts
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | sudo tee /etc/sysctl.d/60-lxd-production.conf
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | sudo tee /etc/sysctl.d/60-lxd-production.conf
 fs.inotify.max_queued_events=1048576
 fs.inotify.max_user_instances=1048576
 fs.inotify.max_user_watches=1048576
@@ -182,168 +174,14 @@ net.ipv4.conf.all.forwarding=1
 net.ipv6.conf.all.forwarding=1
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo sysctl --system"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo sysctl --system"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "#echo vm.swappiness=1 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "#echo vm.swappiness=1 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p"; done
 
-ssh -o "StrictHostKeyChecking=no" debian@n1 "cat << EOF | sudo tee /etc/network/interfaces
-auto lo
-iface lo inet loopback
-auto eth0
-allow-hotplug eth0
-iface eth0 inet dhcp
-    mtu 9000
-    
-allow-hotplug eth1
-auto eth1
-iface eth1 inet static
-    address 192.168.255.11/24
-    mtu 9000
-    
-allow-hotplug eth2
-auto eth2
-iface eth2 inet static
-    address 192.168.250.11/24
-    mtu 9000
-allow-hotplug eth3
-auto eth3
-iface eth3 inet manual
-    mtu 9000    
-source /etc/network/interfaces.d/*.cfg
-EOF"
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth1"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth2"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth3"; done
 
-ssh -o "StrictHostKeyChecking=no" debian@n2 "cat << EOF | sudo tee /etc/network/interfaces
-auto lo
-iface lo inet loopback
-auto eth0
-allow-hotplug eth0
-iface eth0 inet dhcp
-    mtu 9000
-    
-allow-hotplug eth1
-auto eth1
-iface eth1 inet static
-    address 192.168.255.12/24
-    mtu 9000
-    
-allow-hotplug eth2
-auto eth2
-iface eth2 inet static
-    address 192.168.250.12/24
-    mtu 9000
-allow-hotplug eth3
-auto eth3
-iface eth3 inet manual
-    mtu 9000    
-source /etc/network/interfaces.d/*.cfg
-EOF"
 
-ssh -o "StrictHostKeyChecking=no" debian@n3 "cat << EOF | sudo tee /etc/network/interfaces
-auto lo
-iface lo inet loopback
-auto eth0
-allow-hotplug eth0
-iface eth0 inet dhcp
-    mtu 9000
-    
-allow-hotplug eth1
-auto eth1
-iface eth1 inet static
-    address 192.168.255.13/24
-    mtu 9000
-    
-allow-hotplug eth2
-auto eth2
-iface eth2 inet static
-    address 192.168.250.13/24
-    mtu 9000
-allow-hotplug eth3
-auto eth3
-iface eth3 inet manual
-    mtu 9000    
-source /etc/network/interfaces.d/*.cfg
-EOF"
-
-ssh -o "StrictHostKeyChecking=no" debian@n4 "cat << EOF | sudo tee /etc/network/interfaces
-auto lo
-iface lo inet loopback
-auto eth0
-allow-hotplug eth0
-iface eth0 inet dhcp
-    mtu 9000
-    
-allow-hotplug eth1
-auto eth1
-iface eth1 inet static
-    address 192.168.255.14/24
-    mtu 9000
-    
-allow-hotplug eth2
-auto eth2
-iface eth2 inet static
-    address 192.168.250.14/24
-    mtu 9000
-allow-hotplug eth3
-auto eth3
-iface eth3 inet manual
-    mtu 9000    
-source /etc/network/interfaces.d/*.cfg  
-EOF"
-
-ssh -o "StrictHostKeyChecking=no" debian@n5 "cat << EOF | sudo tee /etc/network/interfaces
-auto lo
-iface lo inet loopback
-auto eth0
-allow-hotplug eth0
-iface eth0 inet dhcp
-    mtu 9000
-    
-allow-hotplug eth1
-auto eth1
-iface eth1 inet static
-    address 192.168.255.15/24
-    mtu 9000
-    
-allow-hotplug eth2
-auto eth2
-iface eth2 inet static
-    address 192.168.250.15/24
-    mtu 9000
-allow-hotplug eth3
-auto eth3
-iface eth3 inet manual
-    mtu 9000    
-source /etc/network/interfaces.d/*.cfg  
-EOF"
-
-ssh -o "StrictHostKeyChecking=no" debian@n6 "cat << EOF | sudo tee /etc/network/interfaces
-auto lo
-iface lo inet loopback
-auto eth0
-allow-hotplug eth0
-iface eth0 inet dhcp
-    mtu 9000
-    
-allow-hotplug eth1
-auto eth1
-iface eth1 inet static
-    address 192.168.255.16/24
-    mtu 9000
-    
-allow-hotplug eth2
-auto eth2
-iface eth2 inet static
-    address 192.168.250.16/24
-    mtu 9000
-allow-hotplug eth3
-auto eth3
-iface eth3 inet manual
-    mtu 9000    
-source /etc/network/interfaces.d/*.cfg   
-EOF"
-
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo apt-get install gcc make linux-headers-\$(uname -r) -y"; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "mkdir -p /home/debian/e1000e && cd /home/debian/e1000e && wget https://sourceforge.net/projects/e1000/files/e1000e%20historic%20archive/3.8.7/e1000e-3.8.7.tar.gz/download"; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cd /home/debian/e1000e && cp download e1000e-3.8.7.tar.gz && tar zxf e1000e-3.8.7.tar.gz && cd e1000e-3.8.7/src/ && sudo make install && sudo modprobe e1000e"; done
 
 for i in {1..6}; do virsh shutdown n$i; done && sleep 90 && virsh list --all && for i in {1..6}; do virsh start n$i; done && sleep 90 && virsh list --all
