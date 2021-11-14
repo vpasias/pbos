@@ -66,5 +66,5 @@ ansible -m ping all
 echo 'run-conf.sh: Install PBOS'
 ansible-galaxy role install --force --role-file requirements.yml
 
-#ansible-playbook osd.yml
+#ansible-playbook /home/rocky/pbos/osd.yml
 ansible-playbook site.yml
