@@ -62,9 +62,9 @@ cp -a /home/rocky/pbos/vars-rocky.yml inventory/$MYSITE/group_vars/all/vars.yml
 
 echo 'run-conf.sh: Check connectivity'
 ansible -m ping all
-#ansible-playbook osd.yml
 
 echo 'run-conf.sh: Install PBOS'
 ansible-galaxy role install --force --role-file requirements.yml
 
+#ansible-playbook osd.yml
 ansible-playbook site.yml
