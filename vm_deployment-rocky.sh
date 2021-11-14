@@ -178,9 +178,58 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo sysctl --s
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "#echo vm.swappiness=1 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p"; done
 
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth0"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth1"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth2"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth3"; done
+
+ssh -o "StrictHostKeyChecking=no" rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+BOOTPROTO=dhcp
+HWADDR=52:54:00:8a:8b:c1
+MTU=9000
+ONBOOT=yes
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+BOOTPROTO=dhcp
+HWADDR=52:54:00:8a:8b:c2
+MTU=9000
+ONBOOT=yes
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+BOOTPROTO=dhcp
+HWADDR=52:54:00:8a:8b:c3
+MTU=9000
+ONBOOT=yes
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+BOOTPROTO=dhcp
+HWADDR=52:54:00:8a:8b:c4
+MTU=9000
+ONBOOT=yes
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+BOOTPROTO=dhcp
+HWADDR=52:54:00:8a:8b:c5
+MTU=9000
+ONBOOT=yes
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+BOOTPROTO=dhcp
+HWADDR=52:54:00:8a:8b:c6
+MTU=9000
+ONBOOT=yes
+EOF"
 
 
 
