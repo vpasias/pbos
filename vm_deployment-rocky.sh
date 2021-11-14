@@ -243,6 +243,77 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
+ssh -o "StrictHostKeyChecking=no" rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+DEVICE=eth1
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:01:11
+IPADDR=192.168.255.11
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+DEVICE=eth1
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:01:12
+IPADDR=192.168.255.12
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+DEVICE=eth1
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:01:13
+IPADDR=192.168.255.13
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+DEVICE=eth1
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:01:14
+IPADDR=192.168.255.14
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+DEVICE=eth1
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:01:15
+IPADDR=192.168.255.15
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+DEVICE=eth1
+BOOTPROTO=static
+HWADDR=02:00:aa:0a:01:16
+IPADDR=192.168.255.16
+NETMASK=255.255.255.0
+MTU=9000
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+EOF"
 
 
 for i in {1..6}; do virsh shutdown n$i; done && sleep 90 && virsh list --all && for i in {1..6}; do virsh start n$i; done && sleep 90 && virsh list --all
