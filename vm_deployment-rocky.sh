@@ -189,6 +189,8 @@ BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c1
 MTU=9000
 ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -197,6 +199,8 @@ BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c2
 MTU=9000
 ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -205,6 +209,8 @@ BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c3
 MTU=9000
 ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -213,6 +219,8 @@ BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c4
 MTU=9000
 ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -221,6 +229,8 @@ BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c5
 MTU=9000
 ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
@@ -229,6 +239,8 @@ BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c6
 MTU=9000
 ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
 EOF"
 
 
