@@ -126,6 +126,10 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | s
 options kvm_intel nested=1
 EOF"; done
 
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i 'sudo sh -c "echo 'Defaults:debian !requiretty' > /etc/sudoers.d/debian"'; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i 'sudo sh -c "echo '%debian ALL=(ALL) ALL' >> /etc/sudoers.d/debian"'; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo chmod 440 /etc/sudoers.d/debian"; done
+
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo mkdir -p /etc/systemd/system/networking.service.d"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "cat << EOF | sudo tee /etc/systemd/system/networking.service.d/reduce-timeout.conf
 [Service]
