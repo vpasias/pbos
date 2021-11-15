@@ -63,5 +63,6 @@ ansible -m ping all
 
 echo 'run-conf.sh: Install PBOS'
 ansible-galaxy role install --force --role-file requirements.yml
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" debian@n$i "sudo groupadd rabbitmq"; done
 
 ansible-playbook site.yml
