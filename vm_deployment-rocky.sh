@@ -117,8 +117,10 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | su
 TimeoutStartSec=15
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'sudo sh -c "echo 'Defaults:rocky !requiretty' > /etc/sudoers.d/rocky"'; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'sudo sh -c "echo '%rocky ALL=(ALL) ALL' >> /etc/sudoers.d/rocky"'; done
+#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'sudo sh -c "echo 'Defaults:rocky !requiretty' > /etc/sudoers.d/rocky"'; done
+#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'sudo sh -c "echo '%rocky ALL=(ALL) ALL' >> /etc/sudoers.d/rocky"'; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "echo 'Defaults:rocky !requiretty' | sudo tee -a /etc/sudoers.d/rocky"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "echo '%rocky ALL=(ALL) ALL' | sudo tee -a /etc/sudoers.d/rocky"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo chmod 440 /etc/sudoers.d/rocky"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf makecache && sudo dnf install epel-release -y && sudo dnf makecache"; done
