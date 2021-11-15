@@ -1,8 +1,8 @@
 #! /bin/sh
 
-export LC_ALL=C
-export LC_CTYPE="UTF-8",
-export LANG="en_US.UTF-8"
+#export LC_ALL=C
+#export LC_CTYPE="UTF-8",
+#export LANG="en_US.UTF-8"
 
 # ---- PART ONE ------
 # Configure SSH connectivity from 'deployment' - n1 to Target Hosts 
