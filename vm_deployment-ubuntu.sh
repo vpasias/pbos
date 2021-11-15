@@ -125,6 +125,7 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "cat << EOF | s
 TimeoutStartSec=15
 EOF"; done
 
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "sudo chmod 644 /etc/sudoers.d/ubuntu"; done
 #for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i 'sudo sh -c "echo 'Defaults:ubuntu !requiretty' > /etc/sudoers.d/ubuntu"'; done
 #for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i 'sudo sh -c "echo '%ubuntu ALL=(ALL) ALL' >> /etc/sudoers.d/ubuntu"'; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" ubuntu@n$i "echo 'Defaults:ubuntu !requiretty' | sudo tee -a /etc/sudoers.d/ubuntu"; done
