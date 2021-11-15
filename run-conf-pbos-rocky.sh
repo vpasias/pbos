@@ -66,4 +66,5 @@ echo 'run-conf.sh: Install PBOS'
 ansible-galaxy role install --force --role-file requirements.yml
 
 #ansible-playbook /home/rocky/pbos/osd.yml
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo groupadd rabbitmq"; done
 ansible-playbook site.yml
