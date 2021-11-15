@@ -117,7 +117,7 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | su
 TimeoutStartSec=15
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo tee /etc/sudoers.d/rocky && sudo chmod 644 /etc/sudoers.d/rocky"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo cat /etc/sudoers.d/rocky && sudo chmod 644 /etc/sudoers.d/rocky"; done
 #for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'sudo sh -c "echo 'Defaults:rocky !requiretty' > /etc/sudoers.d/rocky"'; done
 #for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'sudo sh -c "echo '%rocky ALL=(ALL) ALL' >> /etc/sudoers.d/rocky"'; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "echo 'Defaults:rocky !requiretty' | sudo tee -a /etc/sudoers.d/rocky"; done
