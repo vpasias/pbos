@@ -35,9 +35,10 @@ upgrade packages and reboot.:
 
 Log in again and install what you want.:
 
-# dnf -y install cloud-utils-growpart curl epel-release python3 bind-utils && dnf -y install openssh-server cloud-init sshpass
+# dnf -y install cloud-utils-growpart curl epel-release python3 bind-utils && dnf -y install openssh-server cloud-init sshpass && \
+dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv
 
-Configure cloud-init and set clex as default login user:
+Configure cloud-init and set rocky as default login user:
 
 # vi /etc/cloud/cloud.cfg
 ...
