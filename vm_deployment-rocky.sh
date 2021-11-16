@@ -128,8 +128,8 @@ EOF"; done
 #%rocky ALL=(ALL) ALL
 #EOF"; done
 #for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo chmod 440 /etc/sudoers.d/90-cloud-init-users"; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf makecache && sudo dnf install epel-release -y && sudo dnf makecache"; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs jq virtualenv"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf makecache && sudo dnf install epel-release -y && sudo dnf makecache"; done
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs jq virtualenv"; done
 #for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf install systemd-timesyncd -y && sudo systemctl unmask systemd-timesyncd.service && sudo systemctl enable systemd-timesyncd.service && sudo systemctl restart systemd-timesyncd.service && sudo timedatectl set-ntp on"; done
 
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo modprobe -v xfs && sudo grep xfs /proc/filesystems && sudo modinfo xfs"; done
