@@ -48,7 +48,7 @@ system_info:
   default_user:
     name: rocky
     lock_passwd: false
-    gecos: VIPNET User
+    gecos: VIPNET
     groups: [adm, systemd-journal]
     sudo: ["ALL=(ALL) ALL"]
     shell: /bin/bash
