@@ -17,27 +17,30 @@ Download Rocky Linux 8.5 minimal iso.:
 ###rootpw --iscrypted <sha512_root_password>
 ###user --name=rocky --iscrypted --password <sha512_user_password>
 
-Run rocky_build.sh.
+Run rocky_build.sh.:
 
 ./rocky_build.sh
 
-After installation is done, log in as a root:
+After installation is done, log in as a root, update and upgrade packages, upgrade to latest stable long term support Linux Kernel and reboot.:
 # virsh console rocky-linux-8
 
 localhost login: root
-Password: <root-password-in-kickstart>
 
-upgrade packages and reboot.:
+# dnf -y update && dnf upgrade -y && rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org && \
+dnf install https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm && dnf --enablerepo=elrepo-kernel install kernel-lt -y
+# systemctl reboot
 
-# dnf -y update
-# reboot
+Log in again as root and install what you want.:
 
-Log in again and install what you want.:
+# virsh console rocky-linux-8
 
+localhost login: root
+
+# uname -a
 # dnf -y install cloud-utils-growpart curl epel-release python3 bind-utils && dnf -y install openssh-server cloud-init sshpass && \
 dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv redhat-lsb-core
 
-Configure cloud-init and set rocky as default login user:
+Configure cloud-init and set rocky as default login user.:
 
 # vi /etc/cloud/cloud.cfg
 ...
