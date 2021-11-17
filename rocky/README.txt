@@ -8,6 +8,7 @@ Download Rocky Linux 8.5 minimal iso.:
 
 ### Create root and rocky sha512 hash password using the following command:
 ### root password
+### python -c 'import crypt,getpass; print(crypt.crypt(getpass.getpass(), crypt.mksalt(crypt.METHOD_SHA512)))'
 ### python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
 ###<sha512_root_password>
 ### rocky user password
@@ -36,7 +37,7 @@ Log in again as root and install what you want.:
 
 localhost login: root
 
-# uname -a
+# cat /etc/os-release && uname -a
 # dnf -y install cloud-utils-growpart curl epel-release python3 bind-utils && dnf -y install openssh-server cloud-init sshpass && \
 dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv redhat-lsb-core
 
