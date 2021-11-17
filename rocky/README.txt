@@ -39,9 +39,12 @@ localhost login: root
 
 # cat /etc/os-release && uname -a
 # dnf -y install cloud-utils-growpart curl epel-release python3 bind-utils && dnf -y install openssh-server cloud-init sshpass && \
-dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv redhat-lsb-core
+dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv redhat-lsb-core && \
+git clone https://github.com/vpasias/pbos.git
 
 Configure cloud-init and set rocky as default login user.:
+
+### mv /etc/cloud/cloud.cfg /root/cloud.cfg.old && cp /root/pbos/rocky/cloud.cfg /etc/cloud/cloud.cfg
 
 # vi /etc/cloud/cloud.cfg
 ...
@@ -62,14 +65,14 @@ Enable sshd and cloud-init services.:
 
 Run cleanup.sh inside the VM.:
 
-# git clone https://github.com/vpasias/pbos.git && cp /root/pbos/rocky/cleanup.sh . && chmod +x cleanup.sh && ./cleanup.sh
+# cp /root/pbos/rocky/cleanup.sh . && chmod +x cleanup.sh && ./cleanup.sh
 
 ### vi cleanup.sh  # copy text from cleanup.sh
 ### chmod +x cleanup.sh && ./cleanup.sh
 
 Exit the console.:
 
-# rm -f cleanup.sh && cat /dev/null > ~/.bash_history && history -c && shutdown -h now
+# rm -f cleanup.sh && cd ~ && rm -rf /root/pbos && cat /dev/null > ~/.bash_history && history -c && shutdown -h now
 
 Press CTRL+] to close VM console.
 
