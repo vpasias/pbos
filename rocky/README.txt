@@ -10,9 +10,11 @@ Create root and rocky sha512 hash password using the following command:
 
 ### root password
 # python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+<sha512_root_password>
 
 ### rocky password
 # python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+<sha512_user_password>
 
 Edit ks.cfg to put root and user password.:
 
@@ -24,6 +26,7 @@ Run rocky_build.sh.
 ./rocky_build.sh
 
 After installation is done, log in as a root:
+# virsh console rocky-linux-8
 
 localhost login: root
 Password: <root-password-in-kickstart>
@@ -59,14 +62,14 @@ Enable sshd and cloud-init services.:
 
 Run cleanup.sh inside the VM.:
 
-# vi cleanup.sh  # copy text from cleanup.sh
-# chmod +x cleanup.sh
-# ./cleanup.sh
+# git clone https://github.com/vpasias/pbos.git && cp /root/pbos/rocky/cleanup.sh . && chmod +x cleanup.sh && ./cleanup.sh
+
+### vi cleanup.sh  # copy text from cleanup.sh
+### chmod +x cleanup.sh && ./cleanup.sh
 
 Exit the console.:
 
-# rm -f cleanup.sh
-# cat /dev/null > ~/.bash_history && history -c && shutdown -h now
+# rm -f cleanup.sh && cat /dev/null > ~/.bash_history && history -c && shutdown -h now
 
 Press CTRL+] to close VM console.
 
