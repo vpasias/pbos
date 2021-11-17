@@ -1,4 +1,4 @@
-Create Rocky Linux 8 Cloud Image
+Create customised Rocky Linux 8 Cloud Image
 
 This is a guide to create Rocky Linux 8 cloud image.
 
