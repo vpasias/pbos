@@ -6,20 +6,16 @@ Download Rocky Linux 8.5 minimal iso.:
 
 # cd /mnt/extra/virt/images && curl -sLO http://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-minimal.iso && ls -la && cd /mnt/extra/kvm-install-vm/pbos/rocky
 
-Create root and rocky sha512 hash password using the following command:
-
+### Create root and rocky sha512 hash password using the following command:
 ### root password
-# python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
-<sha512_root_password>
-
-### rocky password
-# python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
-<sha512_user_password>
-
-Edit ks.cfg to put root and user password.:
-
-rootpw --iscrypted <sha512_root_password>
-user --name=rocky --iscrypted --password <sha512_user_password>
+### python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+###<sha512_root_password>
+### rocky user password
+### python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+###<sha512_user_password>
+###Edit ks.cfg to put root and user password.:
+###rootpw --iscrypted <sha512_root_password>
+###user --name=rocky --iscrypted --password <sha512_user_password>
 
 Run rocky_build.sh.
 
@@ -39,7 +35,7 @@ upgrade packages and reboot.:
 Log in again and install what you want.:
 
 # dnf -y install cloud-utils-growpart curl epel-release python3 bind-utils && dnf -y install openssh-server cloud-init sshpass && \
-dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv
+dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv redhat-lsb-core
 
 Configure cloud-init and set rocky as default login user:
 
@@ -113,6 +109,9 @@ Run virt-sysprep for the VM domain.:
 [   7.2] Setting a random seed
 [   7.3] Setting the machine ID in /etc/machine-id
 [   7.3] Performing "lvm-uuids" ...
+
+Undefine the VM.:
+virsh undefine rocky-linux-8
 
 Trim the image.:
 
