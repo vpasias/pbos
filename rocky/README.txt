@@ -112,12 +112,12 @@ Run virt-sysprep for the VM domain.:
 [   7.3] Setting the machine ID in /etc/machine-id
 [   7.3] Performing "lvm-uuids" ...
 
-Undefine the VM.:
-virsh undefine rocky-linux-8
-
 Trim the image.:
 
 # cd /mnt/extra/virt/images && mv rocky-8.5-x86_64-genericcloud.qcow2 rocky-8.5-x86_64-genericcloud.qcow2.new && \
 qemu-img convert -O qcow2 rocky-8.5-x86_64-genericcloud.qcow2.new CentOS-8-GenericCloud-8.1.1911-20200113.3.x86_64.qcow2
 
-It shrank down from 5GiB to about 1.8GiB.
+It shrank down from 5GiB to about 2.0GiB.
+
+Undefine the VM.:
+# virsh undefine rocky-linux-8
