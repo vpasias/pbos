@@ -30,8 +30,8 @@ After installation is done, start the VM, log in as a root, update and upgrade p
 localhost login: root
 
 # dnf -y update && dnf upgrade -y && rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org && \
-dnf install https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm -y && dnf --enablerepo=elrepo-kernel install kernel-lt -y
-# systemctl reboot
+dnf install https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm -y && dnf --enablerepo=elrepo-kernel install kernel-lt -y && \
+sleep 10 && systemctl reboot
 
 Log in again as root and install what you want.:
 
