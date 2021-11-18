@@ -44,37 +44,30 @@ localhost login: root
 dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv redhat-lsb-core && \
 git clone https://github.com/vpasias/pbos.git
 
-Configure cloud-init and set rocky as default login user.:
+Configure cloud-init and set rocky as default login user and enable sshd and cloud-init services..:
 
-### mv /etc/cloud/cloud.cfg /root/cloud.cfg.old && cp /root/pbos/rocky/cloud.cfg /etc/cloud/cloud.cfg
+# mv /etc/cloud/cloud.cfg /root/cloud.cfg.old && cp /root/pbos/rocky/cloud.cfg /etc/cloud/cloud.cfg && systemctl enable cloud-init sshd
 
-# vi /etc/cloud/cloud.cfg
-...
-ssh_pwauth: 1
-...
-system_info:
-  default_user:
-    name: rocky
-    lock_passwd: false
-    gecos: Cloud User
-    groups: [adm, systemd-journal]
-    sudo: ["ALL=(ALL) ALL"]
-    shell: /bin/bash
+### vi /etc/cloud/cloud.cfg
+###...
+###ssh_pwauth: 1
+###...
+###system_info:
+###  default_user:
+###    name: rocky
+###    lock_passwd: false
+###    gecos: Cloud User
+###    groups: [adm, systemd-journal]
+###    sudo: ["ALL=(ALL) ALL"]
+###    shell: /bin/bash
 
-Enable sshd and cloud-init services.:
+Run cleanup.sh inside the VM and exit the console.:
 
-# systemctl enable cloud-init sshd
-
-Run cleanup.sh inside the VM.:
-
-# cp /root/pbos/rocky/cleanup.sh . && chmod +x cleanup.sh && ./cleanup.sh
+# cp /root/pbos/rocky/cleanup.sh . && chmod +x cleanup.sh && ./cleanup.sh && rm -f cleanup.sh && cd ~ && rm -rf /root/pbos && \
+cat /dev/null > ~/.bash_history && history -c && shutdown -h now
 
 ### vi cleanup.sh  # copy text from cleanup.sh
 ### chmod +x cleanup.sh && ./cleanup.sh
-
-Exit the console.:
-
-# rm -f cleanup.sh && cd ~ && rm -rf /root/pbos && cat /dev/null > ~/.bash_history && history -c && shutdown -h now
 
 Press CTRL+] to close VM console.
 
