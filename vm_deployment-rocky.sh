@@ -85,13 +85,13 @@ sleep 60
 
 virsh list --all && brctl show && virsh net-list --all
 
-for i in {1..6}; do sshpass -f /mnt/extra/kvm-install-vm/rocky ssh rocky@n$i "sudo dnf update -y"; done
+for i in {1..6}; do sshpass -f /mnt/extra/kvm-install-vm/rocky ssh -o StrictHostKeyChecking=no rocky@n$i "sudo dnf update -y"; done
 
-for i in {1..6}; do sshpass -f /mnt/extra/kvm-install-vm/rocky ssh rocky@n$i "sudo rm -rf /root/.ssh/authorized_keys"; done
+for i in {1..6}; do sshpass -f /mnt/extra/kvm-install-vm/rocky ssh -o StrictHostKeyChecking=no rocky@n$i "sudo rm -rf /root/.ssh/authorized_keys"; done
 
-for i in {1..6}; do sshpass -f /mnt/extra/kvm-install-vm/rocky ssh rocky@n$i "sudo hostnamectl set-hostname n$i --static"; done
+for i in {1..6}; do sshpass -f /mnt/extra/kvm-install-vm/rocky ssh -o StrictHostKeyChecking=no rocky@n$i "sudo hostnamectl set-hostname n$i --static"; done
 
-for i in {1..6}; do sshpass -f /mnt/extra/kvm-install-vm/rocky ssh rocky@n$i "sudo chmod -x /etc/motd.d/*"; done
+for i in {1..6}; do sshpass -f /mnt/extra/kvm-install-vm/rocky ssh -o StrictHostKeyChecking=no rocky@n$i "sudo chmod -x /etc/motd.d/*"; done
 
 for i in {1..6}; do sshpass -f /mnt/extra/kvm-install-vm/rocky ssh rocky@n$i 'cat << EOF | sudo tee /etc/motd.d/01-custom
 ****************************WARNING****************************************
