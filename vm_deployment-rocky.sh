@@ -64,22 +64,22 @@ ip a && sudo virsh net-list --all
 sleep 20
 
 # Node 1
-./kvm-install-vm create -c 6 -m 32768 -t centos8 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c1 n1
+./kvm-install-vm create -c 6 -m 32768 -t centos8 -d 120 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c1 n1
 
 # Node 2
-./kvm-install-vm create -c 6 -m 32768 -t centos8 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c2 n2
+./kvm-install-vm create -c 6 -m 32768 -t centos8 -d 120 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c2 n2
 
 # Node 3
-./kvm-install-vm create -c 6 -m 32768 -t centos8 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c3 n3
+./kvm-install-vm create -c 6 -m 32768 -t centos8 -d 120 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c3 n3
 
 # Node 4
-./kvm-install-vm create -c 6 -m 32768 -t centos8 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c4 n4
+./kvm-install-vm create -c 6 -m 32768 -t centos8 -d 120 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c4 n4
 
 # Node 5
-./kvm-install-vm create -c 6 -m 32768 -t centos8 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c5 n5
+./kvm-install-vm create -c 6 -m 32768 -t centos8 -d 120 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c5 n5
 
 # Node 6
-./kvm-install-vm create -c 6 -m 32768 -t centos8 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c6 n6
+./kvm-install-vm create -c 6 -m 32768 -t centos8 -d 120 -u rocky -f host-passthrough -k /root/.ssh/id_rsa.pub -l /mnt/extra/virt/images -L /mnt/extra/virt/vms -b virbr100 -T US/Eastern -M 52:54:00:8a:8b:c6 n6
 
 sleep 60
 
@@ -117,17 +117,6 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | su
 TimeoutStartSec=15
 EOF"; done
 
-# Using prepared rocky image
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sudoers.d/90-cloud-init-users && sudo touch /etc/sudoers.d/90-cloud-init-users && sudo chmod 644 /etc/sudoers.d/90-cloud-init-users"; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'sudo sh -c "echo 'Defaults:rocky !requiretty' > /etc/sudoers.d/90-cloud-init-users"'; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'sudo sh -c "echo '%rocky ALL=(ALL) ALL' >> /etc/sudoers.d/90-cloud-init-users"'; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "echo 'Defaults:rocky !requiretty' | sudo tee -a /etc/sudoers.d/90-cloud-init-users"; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "echo '%rocky ALL=(ALL) ALL' | sudo tee -a /etc/sudoers.d/90-cloud-init-users"; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | sudo tee /etc/sudoers.d/90-cloud-init-users
-#Defaults:rocky !requiretty
-#%rocky ALL=(ALL) ALL
-#EOF"; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo chmod 440 /etc/sudoers.d/90-cloud-init-users"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf makecache && sudo dnf install epel-release -y && sudo dnf makecache"; done
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs jq virtualenv"; done
 #for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf install systemd-timesyncd -y && sudo systemctl unmask systemd-timesyncd.service && sudo systemctl enable systemd-timesyncd.service && sudo systemctl restart systemd-timesyncd.service && sudo timedatectl set-ntp on"; done
