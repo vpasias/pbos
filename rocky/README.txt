@@ -23,7 +23,7 @@ Run rocky_build.sh.:
 
 chmod +x rocky_build.sh && ./rocky_build.sh
 
-After installation is done, log in as a root, update and upgrade packages, upgrade to latest stable long term support Linux Kernel and reboot.:
+After installation is done, start the VM, log in as a root, update and upgrade packages, upgrade to latest stable long term support Linux Kernel and reboot.:
 # virsh start rocky-linux-8
 # virsh console rocky-linux-8
 
