@@ -85,43 +85,39 @@ sleep 60
 
 virsh list --all && brctl show && virsh net-list --all
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf update -y"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo dnf update -y"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'echo "root:gprm8350" | sudo chpasswd'; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'echo "rocky:gprm8350" | sudo chpasswd'; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo systemctl restart sshd"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /root/.ssh/authorized_keys"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo rm -rf /root/.ssh/authorized_keys"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo hostnamectl set-hostname n$i --static"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo hostnamectl set-hostname n$i --static"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo chmod -x /etc/motd.d/*"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo chmod -x /etc/motd.d/*"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i 'cat << EOF | sudo tee /etc/motd.d/01-custom
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i 'cat << EOF | sudo tee /etc/motd.d/01-custom
 ****************************WARNING****************************************
 UNAUTHORISED ACCESS IS PROHIBITED. VIOLATORS WILL BE PROSECUTED.
 ***************************************************************************
 EOF'; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo chmod +x /etc/motd.d/01-custom"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo chmod +x /etc/motd.d/01-custom"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | sudo tee /etc/modprobe.d/kvm.conf
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "cat << EOF | sudo tee /etc/modprobe.d/kvm.conf
 options kvm_intel nested=1
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo modprobe -r kvm_intel && sudo modprobe -a kvm_intel"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo modprobe -r kvm_intel && sudo modprobe -a kvm_intel"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo mkdir -p /etc/systemd/system/networking.service.d"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | sudo tee /etc/systemd/system/networking.service.d/reduce-timeout.conf
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo mkdir -p /etc/systemd/system/networking.service.d"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "cat << EOF | sudo tee /etc/systemd/system/networking.service.d/reduce-timeout.conf
 [Service]
 TimeoutStartSec=15
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf makecache && sudo dnf install epel-release -y && sudo dnf makecache"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs jq virtualenv"; done
-#for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo dnf install systemd-timesyncd -y && sudo systemctl unmask systemd-timesyncd.service && sudo systemctl enable systemd-timesyncd.service && sudo systemctl restart systemd-timesyncd.service && sudo timedatectl set-ntp on"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo dnf makecache && sudo dnf install epel-release -y && sudo dnf makecache"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo dnf install -y git vim net-tools wget curl bash-completion iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs jq virtualenv"; done
+#for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo dnf install systemd-timesyncd -y && sudo systemctl unmask systemd-timesyncd.service && sudo systemctl enable systemd-timesyncd.service && sudo systemctl restart systemd-timesyncd.service && sudo timedatectl set-ntp on"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo modprobe -v xfs && sudo grep xfs /proc/filesystems && sudo modinfo xfs"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo modprobe -v xfs && sudo grep xfs /proc/filesystems && sudo modinfo xfs"; done
 
 for i in {1..6}; do virsh shutdown n$i; done && sleep 10 && virsh list --all && for i in {1..6}; do virsh start n$i; done && sleep 10 && virsh list --all
 
@@ -143,7 +139,7 @@ for i in {1..6}; do virsh attach-interface --domain n$i --type network --source 
 for i in {1..6}; do virsh attach-interface --domain n$i --type network --source storage --model virtio --mac 02:00:aa:0a:02:1$i --config --live; done
 for i in {1..6}; do virsh attach-interface --domain n$i --type network --source provider --model virtio --mac 02:00:aa:0a:03:1$i --config --live; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | sudo tee /etc/hosts
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "cat << EOF | sudo tee /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 192.168.254.101  n1
@@ -157,7 +153,7 @@ for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | su
 192.168.254.109  n9
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "cat << EOF | sudo tee /etc/sysctl.d/60-lxd-production.conf
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "cat << EOF | sudo tee /etc/sysctl.d/60-lxd-production.conf
 fs.inotify.max_queued_events=1048576
 fs.inotify.max_user_instances=1048576
 fs.inotify.max_user_watches=1048576
@@ -173,17 +169,17 @@ net.ipv4.conf.all.forwarding=1
 net.ipv6.conf.all.forwarding=1
 EOF"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo sysctl --system"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo sysctl --system"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "#echo vm.swappiness=1 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "#echo vm.swappiness=1 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p"; done
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth0"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth1"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth2"; done
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth3"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth0"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth1"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth2"; done
+for i in {1..6}; do sshpass -f rocky ssh rocky@n$i "sudo rm -rf /etc/sysconfig/network-scripts/ifcfg-eth3"; done
 
 ### eth0
-ssh -o "StrictHostKeyChecking=no" rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+sshpass -f rocky ssh rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c1
@@ -193,7 +189,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+sshpass -f rocky ssh rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c2
@@ -203,7 +199,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+sshpass -f rocky ssh rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c3
@@ -213,7 +209,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+sshpass -f rocky ssh rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c4
@@ -223,7 +219,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+sshpass -f rocky ssh rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c5
@@ -233,7 +229,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
+sshpass -f rocky ssh rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 BOOTPROTO=dhcp
 HWADDR=52:54:00:8a:8b:c6
@@ -244,7 +240,7 @@ USERCTL=no
 EOF"
 
 ### eth1
-ssh -o "StrictHostKeyChecking=no" rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+sshpass -f rocky ssh rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
 DEVICE=eth1
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:01:11
@@ -256,7 +252,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+sshpass -f rocky ssh rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
 DEVICE=eth1
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:01:12
@@ -268,7 +264,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+sshpass -f rocky ssh rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
 DEVICE=eth1
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:01:13
@@ -280,7 +276,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+sshpass -f rocky ssh rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
 DEVICE=eth1
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:01:14
@@ -292,7 +288,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+sshpass -f rocky ssh rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
 DEVICE=eth1
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:01:15
@@ -304,7 +300,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
+sshpass -f rocky ssh rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1
 DEVICE=eth1
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:01:16
@@ -317,7 +313,7 @@ USERCTL=no
 EOF"
 
 ### eth2
-ssh -o "StrictHostKeyChecking=no" rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+sshpass -f rocky ssh rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
 DEVICE=eth2
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:02:11
@@ -329,7 +325,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+sshpass -f rocky ssh rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
 DEVICE=eth2
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:02:12
@@ -341,7 +337,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+sshpass -f rocky ssh rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
 DEVICE=eth2
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:02:13
@@ -353,7 +349,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+sshpass -f rocky ssh rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
 DEVICE=eth2
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:02:14
@@ -365,7 +361,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+sshpass -f rocky ssh rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
 DEVICE=eth2
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:02:15
@@ -377,7 +373,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
+sshpass -f rocky ssh rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth2
 DEVICE=eth2
 BOOTPROTO=static
 HWADDR=02:00:aa:0a:02:16
@@ -390,7 +386,7 @@ USERCTL=no
 EOF"
 
 ### eth3
-ssh -o "StrictHostKeyChecking=no" rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
+sshpass -f rocky ssh rocky@n1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
 BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:11
@@ -400,7 +396,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
+sshpass -f rocky ssh rocky@n2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
 BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:12
@@ -410,7 +406,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
+sshpass -f rocky ssh rocky@n3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
 BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:13
@@ -420,7 +416,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
+sshpass -f rocky ssh rocky@n4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
 BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:14
@@ -430,7 +426,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
+sshpass -f rocky ssh rocky@n5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
 BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:15
@@ -440,7 +436,7 @@ TYPE=Ethernet
 USERCTL=no
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
+sshpass -f rocky ssh rocky@n6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth3
 DEVICE=eth3
 BOOTPROTO=none
 HWADDR=02:00:aa:0a:03:16
