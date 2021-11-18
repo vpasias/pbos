@@ -21,7 +21,7 @@ cd /mnt/extra/kvm-install-vm/ && git clone https://github.com/vpasias/pbos.git &
 
 Run rocky_build.sh.:
 
-./rocky_build.sh
+chmod +x rocky_build.sh && ./rocky_build.sh
 
 After installation is done, log in as a root, update and upgrade packages, upgrade to latest stable long term support Linux Kernel and reboot.:
 # virsh console rocky-linux-8
