@@ -6,9 +6,9 @@ USERID = 'rocky'
 
 PREFIX = 'node-'
 # VM location and size.
-SRC_DIR = '/mnt/extra/' + os.environ.get('USER') + '/images'
-DST_DIR = '/mnt/extra/' + os.environ.get('USER') + '/vms' + PREFIX + 'lab'
-OSD_DIR = '/mnt/extra/' + os.environ.get('USER') + '/vms' + PREFIX + 'lab'
+SRC_DIR = '/home/' + os.environ.get('USER') + '/images'
+DST_DIR = '/home/' + os.environ.get('USER') + '/vms' + PREFIX + 'lab'
+OSD_DIR = '/home/' + os.environ.get('USER') + '/vms' + PREFIX + 'lab'
 
 # machine list.
 VMS = [
