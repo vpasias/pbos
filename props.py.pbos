@@ -73,12 +73,12 @@ IPS = {
     PREFIX + '1': {
         'external': {
             'ip': NET['ext'] + '.' + str(IP+1),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+1),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
         'provider': {
@@ -86,22 +86,22 @@ IPS = {
         },
         'overlay': {
             'ip': NET['overlay'] + '.' + str(IP+1),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+1),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
     },
     PREFIX + '2': {
         'external': {
             'ip': NET['ext'] + '.' + str(IP+2),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+2),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
         'provider': {
@@ -109,22 +109,22 @@ IPS = {
         },
         'overlay': {
             'ip': NET['overlay'] + '.' + str(IP+2),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+2),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
     },
     PREFIX + '3': {
         'external': {
             'ip': NET['ext'] + '.' + str(IP+3),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+3),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
         'provider': {
@@ -132,22 +132,22 @@ IPS = {
         },
         'overlay': {
             'ip': NET['overlay'] + '.' + str(IP+3),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+3),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
     },
     PREFIX + '4': {
         'external': {
             'ip': NET['ext'] + '.' + str(IP+4),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+4),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
         'provider': {
@@ -155,22 +155,22 @@ IPS = {
         },
         'overlay': {
             'ip': NET['overlay'] + '.' + str(IP+4),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+4),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
     },
     PREFIX + '5': {
         'external': {
             'ip': NET['ext'] + '.' + str(IP+5),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+5),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
         'provider': {
@@ -178,22 +178,22 @@ IPS = {
         },
         'overlay': {
             'ip': NET['overlay'] + '.' + str(IP+5),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+5),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
     },
     PREFIX + '6': {
         'external': {
             'ip': NET['ext'] + '.' + str(IP+6),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+6),
-            'nm': 24,
+            'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
         'provider': {
@@ -201,11 +201,11 @@ IPS = {
         },
         'overlay': {
             'ip': NET['overlay'] + '.' + str(IP+6),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+6),
-            'nm': 24,
+            'nm': '255.255.255.0',
         },
     },
 }
