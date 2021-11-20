@@ -17,7 +17,7 @@ VMS = [
         PREFIX + '3',
         PREFIX + '4',
         PREFIX + '5',
-        PREFIX + '6',        
+        PREFIX + '6',
 ]
 
 # machine role list.
