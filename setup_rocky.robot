@@ -49,7 +49,7 @@ Set Up Lab
 
         Log     Define VM     console=True
         ${rc} =     Wait Until Keyword Succeeds		6x	1s
-		...		Run And Return Rc	sudo virsh define ${TEMPDIR}/xml
+		...		Run And Return Rc	virsh define ${TEMPDIR}/xml
         Should Be Equal As Integers     ${rc}   0
 
         Log     Create disk for ${vm}    console=True
@@ -71,7 +71,7 @@ Start Lab
     Log     \n      console=True
     FOR     ${vm}   IN  @{VMS}
         Log     Start ${vm}     console=True
-        ${rc} =     Run And Return Rc     sudo virsh start ${vm}
+        ${rc} =     Run And Return Rc     virsh start ${vm}
         Should Be Equal As Integers     ${rc}   0
     END
 
@@ -106,7 +106,7 @@ Create XML
 
 Create Disk
     [Arguments]     ${vm}
-    Run     sudo virsh attach-disk ${vm} ${DST_DIR}/${vm}.qcow2 sda --driver qemu --subdriver qcow2 --targetbus scsi --persistent
+    Run     virsh attach-disk ${vm} ${DST_DIR}/${vm}.qcow2 sda --driver qemu --subdriver qcow2 --targetbus scsi --persistent
 
     Run Keyword If  'storage' in ${ROLES}[${vm}]
     ...        Create OSD Disks    ${vm}
@@ -120,7 +120,7 @@ Create OSD Disks
         ${rc} =     Run And Return Rc
         ...     qemu-img create -f qcow2 ${OSD_DIR}/${vm}-${drv}.qcow2 ${OSD_SIZE}G
         Should Be Equal As Integers     ${rc}   0
-        Run     sudo virsh attach-disk ${vm} ${OSD_DIR}/${vm}-${drv}.qcow2 sd${LETTERS}[${drv}] --driver qemu --subdriver qcow2 --targetbus scsi --persistent
+        Run     virsh attach-disk ${vm} ${OSD_DIR}/${vm}-${drv}.qcow2 sd${LETTERS}[${drv}] --driver qemu --subdriver qcow2 --targetbus scsi --persistent
     END
 
 Create Interfaces
@@ -135,7 +135,7 @@ Create Interfaces
         ${rc}   ${mac} =    Run And Return Rc And Output    ${MACGEN}
         Should Be Equal As Integers     ${rc}   0
 
-        Run     sudo virsh attach-interface --domain ${vm} --type bridge --source ${br} --model virtio --mac ${mac} --persistent
+        Run     virsh attach-interface --domain ${vm} --type bridge --source ${br} --model virtio --mac ${mac} --persistent
 
         Run Keyword If    "${netinfo['ip']}" == ""
         ...         Create File     ${TEMPDIR}/ifcfg-eth${i}
