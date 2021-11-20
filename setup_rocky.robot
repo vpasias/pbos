@@ -139,12 +139,12 @@ Create Interfaces
 
         Run Keyword If    "${netinfo['ip']}" == ""
         ...         Create File     ${TEMPDIR}/ifcfg-eth${i}
-        ...         DEVICE=eth${i}\nHWADDR=${mac}\nONBOOT=yes
+        ...         DEVICE=eth${i}\nBOOTPROTO=none\nHWADDR=${mac}\nONBOOT=yes\nTYPE=Ethernet\nUSERCTL=no
         ...     ELSE IF     'gw' in ${netinfo}
         ...         Create File     ${TEMPDIR}/ifcfg-eth${i}
-        ...         DEVICE=eth${i}\nHWADDR=${mac}\nGATEWAY=${netinfo['gw']}\nIPADDR=${netinfo['ip']}\nNETMASK=${netinfo['nm']}\nONBOOT=yes
+        ...         DEVICE=eth${i}\nBOOTPROTO=static\nHWADDR=${mac}\nGATEWAY=${netinfo['gw']}\nIPADDR=${netinfo['ip']}\nNETMASK=${netinfo['nm']}\nONBOOT=yes\nTYPE=Ethernet\nUSERCTL=no
         ...     ELSE
         ...         Create File     ${TEMPDIR}/ifcfg-eth${i}
-        ...         DEVICE=eth${i}\nHWADDR=${mac}\nIPADDR=${netinfo['ip']}\nNETMASK=${netinfo['nm']}\nONBOOT=yes
+        ...         DEVICE=eth${i}\nBOOTPROTO=static\nHWADDR=${mac}\nIPADDR=${netinfo['ip']}\nNETMASK=${netinfo['nm']}\nONBOOT=yes\nTYPE=Ethernet\nUSERCTL=no
         ${i} =        Evaluate    ${i} + 1
     END
