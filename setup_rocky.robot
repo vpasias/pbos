@@ -48,7 +48,7 @@ Set Up Lab
         Create XML  ${vm}   ${uuid}    default.tpl
 
         Log     Define VM     console=True
-        ${rc} =     Wait Until Keyword Succeeds		3x	1s
+        ${rc} =     Wait Until Keyword Succeeds		6x	1s
 		...		Run And Return Rc	sudo virsh define ${TEMPDIR}/xml
         Should Be Equal As Integers     ${rc}   0
 
