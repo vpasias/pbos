@@ -49,7 +49,7 @@ Set Up Lab
 
         Log     Define VM     console=True
         ${rc} =     Wait Until Keyword Succeeds		3x	1s
-		...		Run And Return Rc	virsh define ${TEMPDIR}/xml
+		...		Run And Return Rc	sudo virsh define ${TEMPDIR}/xml
         Should Be Equal As Integers     ${rc}   0
 
         Log     Create disk for ${vm}    console=True
@@ -71,7 +71,7 @@ Start Lab
     Log     \n      console=True
     FOR     ${vm}   IN  @{VMS}
         Log     Start ${vm}     console=True
-        ${rc} =     Run And Return Rc     virsh start ${vm}
+        ${rc} =     Run And Return Rc     sudo virsh start ${vm}
         Should Be Equal As Integers     ${rc}   0
     END
 
