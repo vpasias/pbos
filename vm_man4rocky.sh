@@ -77,7 +77,11 @@ TIMEZONE="America/Denver"
 $VIRTC -a ${IMGFILE} \
     --hostname ${HOSTN} \
     --upload data/hosts:/etc/hosts \
-    $(for i in $(ls /home/iason/vms/ifcfg-eth*);do echo --upload $i:/etc/sysconfig/network-scripts;done) \
-	--ssh-inject ${USERID} \
-	--firstboot-command "echo nameserver ${DNSSERVER} > /etc/resolv.conf" \
+    --upload /tmp/ifcfg-eth0:/etc/sysconfig/network-scripts/ifcfg-eth0 \
+    --upload /tmp/ifcfg-eth1:/etc/sysconfig/network-scripts/ifcfg-eth1 \
+    --upload /tmp/ifcfg-eth2:/etc/sysconfig/network-scripts/ifcfg-eth2 \
+    --upload /tmp/ifcfg-eth3:/etc/sysconfig/network-scripts/ifcfg-eth3 \
+    --upload /tmp/ifcfg-eth4:/etc/sysconfig/network-scripts/ifcfg-eth4 \
+    --ssh-inject ${USERID} \
+    --firstboot-command "echo nameserver ${DNSSERVER} > /etc/resolv.conf" \
     --run-command "dnf -y remove cloud-init"
