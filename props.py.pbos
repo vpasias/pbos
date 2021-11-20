@@ -27,7 +27,7 @@ ROLES = {
         PREFIX + '3': ['master'],
         PREFIX + '4': ['storage'],
         PREFIX + '5': ['storage'],
-        PREFIX + '6': ['storage'],        
+        PREFIX + '6': ['storage'],
 }
 CORES = {
         PREFIX + '1': 8,
@@ -35,7 +35,7 @@ CORES = {
         PREFIX + '3': 8,
         PREFIX + '4': 8,
         PREFIX + '5': 8,
-        PREFIX + '6': 8,        
+        PREFIX + '6': 8,
 }
 MEM = {
         PREFIX + '1': 32,
@@ -43,7 +43,7 @@ MEM = {
         PREFIX + '3': 32,
         PREFIX + '4': 32,
         PREFIX + '5': 32,
-        PREFIX + '6': 32,        
+        PREFIX + '6': 32,
 }
 DISK = {
         PREFIX + '1': 120,
@@ -51,7 +51,7 @@ DISK = {
         PREFIX + '3': 120,
         PREFIX + '4': 120,
         PREFIX + '5': 120,
-        PREFIX + '6': 120,        
+        PREFIX + '6': 120,
 }
 # For VM with storage role
 OSD_NUM = 3     # The number of osd disks for VM with storage role
@@ -206,9 +206,9 @@ IPS = {
             'ip': NET['storage'] + '.' + str(IP+6),
             'nm': 24,
         },
-    },        
+    },
 }
-
+        
 # which OS you choose. DEB or ROCKY?
 OS = 'ROCKY'
 
