@@ -9,7 +9,7 @@ PREFIX = 'node-'
 SRC_DIR = '/home/' + os.environ.get('USER') + '/images'
 DST_DIR = '/home/' + os.environ.get('USER') + '/' + PREFIX + 'lab'
 OSD_DIR = '/home/' + os.environ.get('USER') + '/' + PREFIX + 'lab'
-TEMPDIR = '/home/' + os.environ.get('USER') + '/' + PREFIX + 'lab'
+TEMPDIR = '/home/' + os.environ.get('USER') + '/vms'
 
 # machine list.
 VMS = [
