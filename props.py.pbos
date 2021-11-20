@@ -139,7 +139,7 @@ IPS = {
 }
 
 # which OS you choose. DEB or CENTOS?
-OS = 'DEB'
+OS = 'centos'
 
 # Do not edit below this line!!!
 # debian openstack image 
@@ -158,16 +158,20 @@ DEB_KEYID = 'DF9B9C49EAA9298432589D76DA87E80D6294BE9B' # debian buster key
 # centos openstack image 
 # disk total size: 8G
 # Login account: centos
-CENTOS_VER = '7'
-CENTOS_IMG_URL = 'http://cloud.centos.org/centos/{}/images'.format(CENTOS_VER)
-CENTOS_ARCH = 'x86_64'
+#CENTOS_VER = '7'
+CENTOS_VER = '8'
+#CENTOS_IMG_URL = 'http://cloud.centos.org/centos/{}/images'.format(CENTOS_VER)
+CENTOS_IMG_URL = 'http://download.rockylinux.org/pub/rocky/'.format(CENTOS_VER)
+CENTOS_ARCH = 'x86_64
 CENTOS_IMG = 'CentOS-{}-{}-GenericCloud.qcow2'.format(CENTOS_VER, CENTOS_ARCH)
-CENTOS_UID = 'centos'
+#CENTOS_UID = 'centos'
+CENTOS_UID = 'rocky'
 
 IMG_URL = eval('{}_IMG_URL'.format(OS))
 VER = eval('{}_VER'.format(OS))
 ARCH = eval('{}_ARCH'.format(OS))
-IMG = eval('{}_IMG'.format(OS))
+#IMG = eval('{}_IMG'.format(OS))
+IMG = rocky-8.5-x86_64-genericcloud.qcow2
 UID = eval('{}_UID'.format(OS))
 
 SSHKEY = os.environ.get('HOME') + '/.ssh/id_rsa'
