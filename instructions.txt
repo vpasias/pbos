@@ -43,7 +43,7 @@ cd ~ && git clone https://github.com/vpasias/pbos.git && cd /home/iason/pbos/roc
 #virsh console rocky-linux-8
 #localhost login: root
 
-dnf -y update && dnf upgrade -y && \
+dnf -y update && dnf install -y git vim && dnf upgrade -y && \
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org && \
 dnf install https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm -y && dnf --enablerepo=elrepo-kernel install kernel-lt -y
 sleep 10 && systemctl reboot
@@ -71,8 +71,7 @@ virsh undefine rocky-linux-8
 cd ~ && git clone https://github.com/iorchard/robot4kvm.git && cd /home/iason/robot4kvm && \
 python3 -m venv ~/.envs/robot
 
-source ~/.envs/robot/bin/activate
-pip install wheel && pip install robotframework
+source ~/.envs/robot/bin/activate && pip install wheel && pip install robotframework
 
 sudo sed -i 's/Debian/Rocky Linux/' /home/iason/robot4kvm/data/grub && \
 mv /home/iason/pbos/vm_man4rocky.sh /home/iason/robot4kvm/scripts/vm_man4rocky.sh && \
@@ -86,18 +85,16 @@ export USERPW && robot -d output setup_rocky.robot
 # for i in {1..6}; do virsh shutdown node-$i; done && sleep 90 && virsh list --all && for i in {1..6}; do virsh start node-$i; done && sleep 90 && virsh list --all
 #unset USERPW
 
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@node-$i "uname -a"; done
-
-for i in {1..6}; do sshpass -p gprm8350 ssh -o StrictHostKeyChecking=no root@node-$i "hostnamectl set-hostname node-$i --static"; done && \
+for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@node-$i "uname -a"; done && \
+for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "hostnamectl set-hostname node-$i --static"; done && \
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" rocky@node-$i "ip a"; done && \
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" rocky@node-$i "uname -a"; done 
+for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" rocky@node-$i "lsblk && uname -a"; done 
 
 ##################################################################################################################################################################################
 ######################################## PBOS Cluster based on Rocky Linux 8.5 (https://github.com/iorchard/pbos-ansible - https://github.com/vpasias/pbos) #############################################################################################################
 ##################################################################################################################################################################################
 
 ssh rocky@node-1
-#lsblk
 
 ### Install PBOS
 
@@ -112,7 +109,7 @@ export MYSITE="pbos" && cp -a inventory/default inventory/$MYSITE && cp -a /home
 
 cp -a /home/rocky/pbos/vars-rocky.yml inventory/$MYSITE/group_vars/all/vars.yml
 
-ansible -m ping all && ansible-galaxy role install --force --role-file requirements.yml && for i in {1..6}; do sshpass -p gprm8350 ssh -o StrictHostKeyChecking=no root@node-$i "sudo groupadd rabbitmq"; done
+ansible -m ping all && ansible-galaxy role install --force --role-file requirements.yml
 #ansible-playbook /home/rocky/pbos/osd.yml
 
 ansible-playbook site.yml
