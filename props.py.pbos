@@ -23,9 +23,9 @@ VMS = [
 
 # machine role list.
 ROLES = {
-        PREFIX + '1': ['master'],
-        PREFIX + '2': ['master'],
-        PREFIX + '3': ['master'],
+        PREFIX + '1': ['storage'],
+        PREFIX + '2': ['storage'],
+        PREFIX + '3': ['storage'],
         PREFIX + '4': ['storage'],
         PREFIX + '5': ['storage'],
         PREFIX + '6': ['storage'],
