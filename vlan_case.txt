@@ -2,8 +2,8 @@
 Hypervisor Hosts Interfaces:
 - eth0 - admin (PXE-admin)
 - eth1 - cluster (mgmt-overlay-rados GW)
-- eth2 - storage
-- eth3 - external (provider)
+- eth2 - external (provider)
+- eth3 - storage
 
 interfaces & VLANs allocation:
 - eth0: admin network: 192.168.254.0/24
