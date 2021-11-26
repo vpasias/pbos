@@ -1,8 +1,8 @@
 # VLAN case
 Hypervisor Hosts Interfaces:
-- eth0 - external-PXE-admin
-- eth1 - cluster-mgmt-provider-overlay
-- eth2 - storage-rados GW
+- eth0 - external: PXE-admin
+- eth1 - cluster: mgmt-provider-overlay
+- eth2 - storage: storage-rados GW
 
 VLANs:
 - VLAN 0 (eth1): mgmt network
