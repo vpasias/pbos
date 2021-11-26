@@ -4,10 +4,10 @@ Hypervisor Hosts Interfaces:
 - eth1 - cluster: mgmt-provider-overlay
 - eth2 - storage: storage-rados GW
 
-VLANs:
-- VLAN 0 (eth1): mgmt network
+interfaces & VLANs allocation:
+- eth1: mgmt network
 - VLAN 20 (eth1.20): provider network
 - VLAN 30 (eth1.30): overlay network
-- VLAN 40 (eth2.40): storage network
+- eth2: storage network
 - VLAN 50 (eth2.50): rados GW network
 
