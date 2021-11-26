@@ -1,7 +1,8 @@
 #!/bin/bash
 #
 
-cat /etc/os-release && uname -a
+cat /etc/os-release
+uname -a
 dnf -y install cloud-utils-growpart curl epel-release python3 bind-utils
 dnf -y install openssh-server cloud-init sshpass
 dnf install -y net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv redhat-lsb-core mdadm
@@ -25,7 +26,8 @@ cat << EOF | tee /etc/modprobe.d/kvm.conf
 options kvm_intel nested=1
 EOF
 
-modprobe -r kvm_intel && modprobe -a kvm_intel
+modprobe -r kvm_intel
+modprobe -a kvm_intel
 
 mkdir -p /etc/systemd/system/networking.service.d
 
@@ -34,6 +36,8 @@ cat << EOF | tee /etc/systemd/system/networking.service.d/reduce-timeout.conf
 TimeoutStartSec=15
 EOF
 
-modprobe -v xfs && grep xfs /proc/filesystems && modinfo xfs
+modprobe -v xfs
+grep xfs /proc/filesystems
+modinfo xfs
 
 groupadd rabbitmq
