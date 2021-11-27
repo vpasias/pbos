@@ -3,7 +3,6 @@
 
 export USERPW=gprm8350
 
-git clone https://github.com/vpasias/pbos.git
 git clone https://github.com/iorchard/robot4kvm.git && cd /home/iason/robot4kvm
 python3 -m venv ~/.envs/robot
 source ~/.envs/robot/bin/activate
