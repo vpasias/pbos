@@ -1,7 +1,7 @@
 ---
 ## custom variables
 # keepalived
-keepalived_interface: "eth1"
+keepalived_interface: "eth0"
 keepalived_vip: "192.168.200.100"
 
 # openstack
