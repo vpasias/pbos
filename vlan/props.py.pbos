@@ -59,8 +59,8 @@ OSD_NUM = 3     # The number of osd disks for VM with storage role
 OSD_SIZE = 120   # OSD disk size in GiB.
 # machine IP list.
 NET = {
-        'admin': '192.168.254',
-        'mgmt': '192.168.200',
+        'mgmt': '192.168.200',        
+        'overlay': '192.168.254',
         'provider': '192.168.230',
         'storage': '192.168.250',
 }
@@ -70,16 +70,14 @@ IP = 200  # The last octet of the IP address to begin.
 REP_BR = 'mgmt'  # Select this bridge's ip to insert into /etc/hosts
 IPS = {
     PREFIX + '1': {
-        'admin': {
-            'ip': NET['admin'] + '.' + str(IP+1),
-            'nm': '255.255.255.0',
-            'gw': NET['admin'] + '.' + '1',
-        },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+1),
             'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
+        'overlay': {
+            'ip': '',
+        },    
         'provider': {
             'ip': '',
         },
@@ -89,16 +87,14 @@ IPS = {
         },
     },
     PREFIX + '2': {
-        'admin': {
-            'ip': NET['admin'] + '.' + str(IP+2),
-            'nm': '255.255.255.0',
-            'gw': NET['admin'] + '.' + '1',
-        },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+2),
             'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
+        'overlay': {
+            'ip': '',
+        },    
         'provider': {
             'ip': '',
         },
@@ -108,16 +104,14 @@ IPS = {
         },
     },
     PREFIX + '3': {
-        'admin': {
-            'ip': NET['admin'] + '.' + str(IP+3),
-            'nm': '255.255.255.0',
-            'gw': NET['admin'] + '.' + '1',
-        },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+3),
             'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
+        'overlay': {
+            'ip': '',
+        },    
         'provider': {
             'ip': '',
         },
@@ -127,16 +121,14 @@ IPS = {
         },
     },
     PREFIX + '4': {
-        'admin': {
-            'ip': NET['admin'] + '.' + str(IP+4),
-            'nm': '255.255.255.0',
-            'gw': NET['admin'] + '.' + '1',
-        },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+4),
             'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
+        'overlay': {
+            'ip': '',
+        },    
         'provider': {
             'ip': '',
         },
@@ -146,16 +138,14 @@ IPS = {
         },
     },
     PREFIX + '5': {
-        'admin': {
-            'ip': NET['admin'] + '.' + str(IP+5),
-            'nm': '255.255.255.0',
-            'gw': NET['admin'] + '.' + '1',
-        },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+5),
             'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
+        'overlay': {
+            'ip': '',
+        },    
         'provider': {
             'ip': '',
         },
@@ -165,16 +155,14 @@ IPS = {
         },
     },
     PREFIX + '6': {
-        'admin': {
-            'ip': NET['admin'] + '.' + str(IP+6),
-            'nm': '255.255.255.0',
-            'gw': NET['admin'] + '.' + '1',
-        },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+6),
             'nm': '255.255.255.0',
             'gw': NET['mgmt'] + '.' + '1',
         },
+        'overlay': {
+            'ip': '',
+        },    
         'provider': {
             'ip': '',
         },
