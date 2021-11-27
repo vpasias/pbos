@@ -23,6 +23,61 @@ for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "lsmod | grep 8021q"; done
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 8021q >> /etc/modules-load.d/8021q.conf"; done
 
+# API network configuration
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1.5
+ONBOOT=yes
+VLAN=yes
+DEVICE=eth1.5
+BOOTPROTO=none
+IPADDR=192.168.205.201
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1.5
+ONBOOT=yes
+VLAN=yes
+DEVICE=eth1.5
+BOOTPROTO=none
+IPADDR=192.168.205.202
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1.5
+ONBOOT=yes
+VLAN=yes
+DEVICE=eth1.5
+BOOTPROTO=none
+IPADDR=192.168.205.203
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1.5
+ONBOOT=yes
+VLAN=yes
+DEVICE=eth1.5
+BOOTPROTO=none
+IPADDR=192.168.205.204
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1.5
+ONBOOT=yes
+VLAN=yes
+DEVICE=eth1.5
+BOOTPROTO=none
+IPADDR=192.168.205.205
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1.5
+ONBOOT=yes
+VLAN=yes
+DEVICE=eth1.5
+BOOTPROTO=none
+IPADDR=192.168.205.206
+NETMASK=255.255.255.0
+EOF"
+
 # overlay network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1.10
 ONBOOT=yes
