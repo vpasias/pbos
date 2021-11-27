@@ -64,13 +64,13 @@ NET = {
         'provider': '192.168.230',
         'storage': '192.168.250',
 }
-# GW = '192.168.20.1'    # Gateway IP address
+# GW = '192.168.200.1'    # Gateway IP address
 # DNS = '8.8.8.8'
 IP = 200  # The last octet of the IP address to begin.
 REP_BR = 'mgmt'  # Select this bridge's ip to insert into /etc/hosts
 IPS = {
     PREFIX + '1': {
-        'external': {
+        'admin': {
             'ip': NET['ext'] + '.' + str(IP+1),
             'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
@@ -83,17 +83,13 @@ IPS = {
         'provider': {
             'ip': '',
         },
-        'overlay': {
-            'ip': NET['overlay'] + '.' + str(IP+1),
-            'nm': '255.255.255.0',
-        },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+1),
             'nm': '255.255.255.0',
         },
     },
     PREFIX + '2': {
-        'external': {
+        'admin': {
             'ip': NET['ext'] + '.' + str(IP+2),
             'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
@@ -106,17 +102,13 @@ IPS = {
         'provider': {
             'ip': '',
         },
-        'overlay': {
-            'ip': NET['overlay'] + '.' + str(IP+2),
-            'nm': '255.255.255.0',
-        },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+2),
             'nm': '255.255.255.0',
         },
     },
     PREFIX + '3': {
-        'external': {
+        'admin': {
             'ip': NET['ext'] + '.' + str(IP+3),
             'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
@@ -129,17 +121,13 @@ IPS = {
         'provider': {
             'ip': '',
         },
-        'overlay': {
-            'ip': NET['overlay'] + '.' + str(IP+3),
-            'nm': '255.255.255.0',
-        },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+3),
             'nm': '255.255.255.0',
         },
     },
     PREFIX + '4': {
-        'external': {
+        'admin': {
             'ip': NET['ext'] + '.' + str(IP+4),
             'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
@@ -152,17 +140,13 @@ IPS = {
         'provider': {
             'ip': '',
         },
-        'overlay': {
-            'ip': NET['overlay'] + '.' + str(IP+4),
-            'nm': '255.255.255.0',
-        },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+4),
             'nm': '255.255.255.0',
         },
     },
     PREFIX + '5': {
-        'external': {
+        'admin': {
             'ip': NET['ext'] + '.' + str(IP+5),
             'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
@@ -175,17 +159,13 @@ IPS = {
         'provider': {
             'ip': '',
         },
-        'overlay': {
-            'ip': NET['overlay'] + '.' + str(IP+5),
-            'nm': '255.255.255.0',
-        },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+5),
             'nm': '255.255.255.0',
         },
     },
     PREFIX + '6': {
-        'external': {
+        'admin': {
             'ip': NET['ext'] + '.' + str(IP+6),
             'nm': '255.255.255.0',
             'gw': NET['ext'] + '.' + '1',
@@ -197,10 +177,6 @@ IPS = {
         },
         'provider': {
             'ip': '',
-        },
-        'overlay': {
-            'ip': NET['overlay'] + '.' + str(IP+6),
-            'nm': '255.255.255.0',
         },
         'storage': {
             'ip': NET['storage'] + '.' + str(IP+6),
