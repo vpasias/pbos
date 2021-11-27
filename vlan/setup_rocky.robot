@@ -135,7 +135,7 @@ Create Interfaces
         ${rc}   ${mac} =    Run And Return Rc And Output    ${MACGEN}
         Should Be Equal As Integers     ${rc}   0
 
-        Run     virsh attach-interface --domain ${vm} --type bridge --source ${br} --model virtio --mac ${mac} --config --persistent
+        Run     virsh attach-interface --domain ${vm} --type network --source ${br} --model virtio --mac ${mac} --config --persistent
 
         Run Keyword If    "${netinfo['ip']}" == ""
         ...         Create File     ${TEMPDIR}/ifcfg-eth${i}
