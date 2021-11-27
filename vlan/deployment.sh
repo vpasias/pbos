@@ -11,7 +11,7 @@ pip install robotframework
 sudo sed -i 's/Debian/Rocky Linux/' /home/iason/robot4kvm/data/grub
 cp -rf /home/iason/pbos/vlan/vm_man4rocky.sh /home/iason/robot4kvm/scripts/vm_man4rocky.sh
 chmod +x /home/iason/robot4kvm/scripts/vm_man4rocky.sh
-cp -rf /home/iason/pbos/setup_rocky.robot /home/iason/robot4kvm/setup_rocky.robot
+cp -rf /home/iason/pbos/vlan/setup_rocky.robot /home/iason/robot4kvm/setup_rocky.robot
 cp -rf /home/iason/pbos/vlan/vm_networks.sh .
 chmod +x vm_networks.sh && ./vm_networks.sh
 cp -rf /home/iason/pbos/vlan/props.py.pbos /home/iason/robot4kvm/props.py
