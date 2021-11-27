@@ -16,7 +16,7 @@ cp -rf /home/iason/pbos/vlan/vm_networks.sh .
 chmod +x vm_networks.sh && ./vm_networks.sh
 cp -rf /home/iason/pbos/vlan/props.py.pbos /home/iason/robot4kvm/props.py
 robot -d output setup_rocky.robot
-sleep 10
+sleep 30
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@node-$i "uname -a"; done
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "hostnamectl set-hostname node-$i --static"; done
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "modprobe 8021q"; done
