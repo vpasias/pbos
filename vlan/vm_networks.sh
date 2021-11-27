@@ -2,7 +2,7 @@
 #
 
 sudo ovs-vsctl add-br mgmt
-sudo ip addr add 192.168.200.0/24 dev mgmt
+sudo ip addr add 192.168.200.1/24 dev mgmt
 sudo ovs-vsctl set int mgmt mtu_request=9216
 sudo ip link set mgmt up
 
