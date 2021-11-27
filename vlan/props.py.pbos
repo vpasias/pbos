@@ -71,9 +71,9 @@ REP_BR = 'mgmt'  # Select this bridge's ip to insert into /etc/hosts
 IPS = {
     PREFIX + '1': {
         'admin': {
-            'ip': NET['ext'] + '.' + str(IP+1),
+            'ip': NET['admin'] + '.' + str(IP+1),
             'nm': '255.255.255.0',
-            'gw': NET['ext'] + '.' + '1',
+            'gw': NET['admin'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+1),
@@ -90,9 +90,9 @@ IPS = {
     },
     PREFIX + '2': {
         'admin': {
-            'ip': NET['ext'] + '.' + str(IP+2),
+            'ip': NET['admin'] + '.' + str(IP+2),
             'nm': '255.255.255.0',
-            'gw': NET['ext'] + '.' + '1',
+            'gw': NET['admin'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+2),
@@ -109,9 +109,9 @@ IPS = {
     },
     PREFIX + '3': {
         'admin': {
-            'ip': NET['ext'] + '.' + str(IP+3),
+            'ip': NET['admin'] + '.' + str(IP+3),
             'nm': '255.255.255.0',
-            'gw': NET['ext'] + '.' + '1',
+            'gw': NET['admin'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+3),
@@ -128,9 +128,9 @@ IPS = {
     },
     PREFIX + '4': {
         'admin': {
-            'ip': NET['ext'] + '.' + str(IP+4),
+            'ip': NET['admin'] + '.' + str(IP+4),
             'nm': '255.255.255.0',
-            'gw': NET['ext'] + '.' + '1',
+            'gw': NET['admin'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+4),
@@ -147,9 +147,9 @@ IPS = {
     },
     PREFIX + '5': {
         'admin': {
-            'ip': NET['ext'] + '.' + str(IP+5),
+            'ip': NET['admin'] + '.' + str(IP+5),
             'nm': '255.255.255.0',
-            'gw': NET['ext'] + '.' + '1',
+            'gw': NET['admin'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+5),
@@ -166,9 +166,9 @@ IPS = {
     },
     PREFIX + '6': {
         'admin': {
-            'ip': NET['ext'] + '.' + str(IP+6),
+            'ip': NET['admin'] + '.' + str(IP+6),
             'nm': '255.255.255.0',
-            'gw': NET['ext'] + '.' + '1',
+            'gw': NET['admin'] + '.' + '1',
         },
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+6),
