@@ -1,8 +1,8 @@
 ---
 ## custom variables
 # keepalived
-keepalived_interface: "eth0"
-keepalived_vip: "192.168.200.100"
+keepalived_interface: "eth1.5"
+keepalived_vip: "192.168.205.100"
 
 # openstack
 openstack_release: "wallaby"
@@ -10,7 +10,7 @@ openstack_release: "wallaby"
 # openstack mariadb
 openstack_mariadb_acl_cidr:
   - "localhost"
-  - "192.168.200.0/255.255.255.0"
+  - "192.168.205.0/255.255.255.0"
 
 # storage
 # storage backends: ceph, lvm, or both
