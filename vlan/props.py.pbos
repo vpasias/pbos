@@ -59,10 +59,10 @@ OSD_NUM = 3     # The number of osd disks for VM with storage role
 OSD_SIZE = 120   # OSD disk size in GiB.
 # machine IP list.
 NET = {
-        'mgmt': '192.168.200',        
-        'overlay': '192.168.254',
-        'provider': '192.168.230',
-        'storage': '192.168.250',
+        'mgmt': '192.168.20',        
+        'overlay': '0.0.0',
+        'provider': '192.168.22',
+        'storage': '192.168.24',
 }
 # GW = '192.168.200.1'    # Gateway IP address
 # DNS = '8.8.8.8'
