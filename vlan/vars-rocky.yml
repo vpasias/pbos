@@ -2,7 +2,7 @@
 ## custom variables
 # keepalived
 keepalived_interface: "eth1.5"
-keepalived_vip: "192.168.205.100"
+keepalived_vip: "192.168.21.100"
 
 # openstack
 openstack_release: "wallaby"
@@ -10,7 +10,7 @@ openstack_release: "wallaby"
 # openstack mariadb
 openstack_mariadb_acl_cidr:
   - "localhost"
-  - "192.168.205.0/255.255.255.0"
+  - "192.168.21.0/255.255.255.0"
 
 # storage
 # storage backends: ceph, lvm, or both
@@ -23,8 +23,8 @@ storage_backends:
 # ceph
 ceph_public_network_iface: eth3
 ceph_rgw_service_iface: eth1.20
-ceph_public_network: 192.168.250.0/24
-ceph_cluster_network: 192.168.250.0/24
+ceph_public_network: 192.168.24.0/24
+ceph_cluster_network: 192.168.24.0/24
 ceph_replicas: 2
 ceph_mgr_pg_autoscaler: true
 ceph_osd_devices:
