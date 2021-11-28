@@ -235,11 +235,6 @@ TEAM_MASTER=bond2
 DEVICETYPE=TeamPort
 EOF"
 
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "ip link set eth1 down && sudo ip link set eth2 down && ifup bond1"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "ip link set eth3 down && sudo ip link set eth4 down && ifup bond2"; done
-
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "teamnl bond1 ports && teamnl bond2 ports"; done
-
 ### VLAN configuration
 # API network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.5
@@ -462,6 +457,11 @@ NETMASK=255.255.255.0
 EOF"
 
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "systemctl restart network"; done
+
+for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "ip link set eth1 down && sudo ip link set eth2 down && ifup bond1"; done
+for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "ip link set eth3 down && sudo ip link set eth4 down && ifup bond2"; done
+
+for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "teamnl bond1 ports && teamnl bond2 ports"; done
 
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" rocky@node-$i "ip a"; done
 
