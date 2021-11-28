@@ -9,19 +9,32 @@ source ~/.envs/robot/bin/activate
 pip install wheel
 pip install robotframework
 sudo sed -i 's/Debian/Rocky Linux/' /home/iason/robot4kvm/data/grub
-cp -rf /home/iason/pbos/vlan/vm_man4rocky.sh /home/iason/robot4kvm/scripts/vm_man4rocky.sh
+cp -rf /home/iason/pbos/bond/vm_man4rocky.sh /home/iason/robot4kvm/scripts/vm_man4rocky.sh
 chmod +x /home/iason/robot4kvm/scripts/vm_man4rocky.sh
-cp -rf /home/iason/pbos/vlan/setup_rocky.robot /home/iason/robot4kvm/setup_rocky.robot
-cp -rf /home/iason/pbos/vlan/vm_networks.sh .
+cp -rf /home/iason/pbos/bond/setup_rocky.robot /home/iason/robot4kvm/setup_rocky.robot
+cp -rf /home/iason/pbos/bond/vm_networks.sh .
 chmod +x vm_networks.sh && ./vm_networks.sh
-cp -rf /home/iason/pbos/vlan/props.py.pbos /home/iason/robot4kvm/props.py
+cp -rf /home/iason/pbos/bond/props.py.pbos /home/iason/robot4kvm/props.py
 robot -d output setup_rocky.robot
 sleep 30
 for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@node-$i "uname -a"; done
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "hostnamectl set-hostname node-$i --static"; done
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "modprobe 8021q"; done
+for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "modprobe bonding"; done
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "lsmod | grep 8021q"; done
+for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "lsmod | grep bonding"; done
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 8021q >> /etc/modules-load.d/8021q.conf"; done
+for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
+
+### Bond configuration
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
+ONBOOT=yes
+DEVICE=bond1
+Type=Bond
+BOOTPROTO=none
+BONDING_MASTER=yes
+BONDING_OPTS="mode=4 miimon=100 lacp_rate=1"
+EOF'
 
 ### VLAN configuration
 # API network configuration
