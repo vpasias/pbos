@@ -27,14 +27,14 @@ for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
 
 ### Bond configuration
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
 DEVICE=bond1
 NAME=bond1
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
 TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
-EOF'
+EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
 DEVICE=bond2
