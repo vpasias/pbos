@@ -1,9 +1,9 @@
-node-1 ansible_host=192.168.205.201 ansible_port=22 ansible_user=rocky ansible_connection=local
-node-2 ansible_host=192.168.205.202 ansible_port=22 ansible_user=rocky
-node-3 ansible_host=192.168.205.203 ansible_port=22 ansible_user=rocky
-#node-4 ansible_host=192.168.205.204 ansible_port=22 ansible_user=rocky
-#node-5 ansible_host=192.168.205.205 ansible_port=22 ansible_user=rocky
-#node-6 ansible_host=192.168.205.206 ansible_port=22 ansible_user=rocky
+node-1 ansible_host=192.168.21.201 ansible_port=22 ansible_user=rocky ansible_connection=local
+node-2 ansible_host=192.168.21.202 ansible_port=22 ansible_user=rocky
+node-3 ansible_host=192.168.21.203 ansible_port=22 ansible_user=rocky
+#node-4 ansible_host=192.168.21.204 ansible_port=22 ansible_user=rocky
+#node-5 ansible_host=192.168.21.205 ansible_port=22 ansible_user=rocky
+#node-6 ansible_host=192.168.21.206 ansible_port=22 ansible_user=rocky
 
 [controller]
 node-[1:3]
