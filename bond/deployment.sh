@@ -51,7 +51,7 @@ NAME=bond1
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
 EOF'
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
@@ -60,7 +60,7 @@ NAME=bond2
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
 EOF'
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
@@ -69,7 +69,7 @@ NAME=bond1
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
 EOF'
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
@@ -78,7 +78,7 @@ NAME=bond2
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
 EOF'
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-4 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
@@ -87,7 +87,7 @@ NAME=bond1
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
 EOF'
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-4 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
@@ -96,7 +96,7 @@ NAME=bond2
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
 EOF'
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-5 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
@@ -105,7 +105,7 @@ NAME=bond1
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
 EOF'
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-5 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
@@ -114,7 +114,7 @@ NAME=bond2
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
 EOF'
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-6 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
@@ -123,7 +123,7 @@ NAME=bond1
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
 EOF'
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-6 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
@@ -132,7 +132,7 @@ NAME=bond2
 DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
 EOF'
 
 ### Bond port configuration
