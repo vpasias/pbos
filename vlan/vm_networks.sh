@@ -13,7 +13,7 @@ cat > /home/iason/vms/mgmt.xml <<EOF
   <bridge name='mgmt' stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
   <mac address='52:54:00:8a:8b:ca'/>
-  <ip address='192.168.200.1' netmask='255.255.255.0'>
+  <ip address='192.168.21.1' netmask='255.255.255.0'>
   </ip>
 </network>
 EOF
@@ -21,12 +21,8 @@ EOF
 cat > /home/iason/vms/overlay.xml <<EOF
 <network>
   <name>overlay</name>
-  <forward mode='nat'/>
   <bridge name='overlay' stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
-  <mac address='52:54:00:8a:8b:cc'/>
-  <ip address='192.168.254.1' netmask='255.255.255.0'>
-  </ip>
 </network>
 EOF
 
@@ -37,7 +33,7 @@ cat > /home/iason/vms/storage.xml <<EOF
   <bridge name='storage' stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
   <mac address='52:54:00:8a:8b:cd'/>
-  <ip address='192.168.250.1' netmask='255.255.255.0'>
+  <ip address='192.168.24.1' netmask='255.255.255.0'>
   </ip>
 </network>
 EOF
@@ -49,7 +45,7 @@ cat > /home/iason/vms/provider.xml <<EOF
   <bridge name='provider' stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
   <mac address='52:54:00:8a:8b:ce'/>
-  <ip address='192.168.230.1' netmask='255.255.255.0'>
+  <ip address='192.168.22.1' netmask='255.255.255.0'>
   </ip>
 </network>
 EOF
