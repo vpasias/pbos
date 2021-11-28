@@ -1,0 +1,6 @@
+DEVICE=bond2
+NAME=bond2
+DEVICETYPE=Team
+ONBOOT=yes
+BOOTPROTO=none
+TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
