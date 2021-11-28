@@ -1,0 +1,14 @@
+# Bond case
+Hypervisor Hosts Interfaces:
+- eth0 - mgmt (PXE-admin)
+- eth1 - cluster (API-keepalived-overlay-rados GW)
+- eth2 - external (provider)
+- eth3 - storage
+
+interfaces & VLANs allocation:
+- eth0 (VLAN 0 - native): mgmt network: 192.168.20.0/24
+- eth1.5 (VLAN 5): API-keepalived network: 192.168.21.0/24
+- eth1.10 (VLAN 10): overlay network: 192.168.23.0/24
+- eth1.20 (VLAN 20): rados GW network: 192.168.25.0/24 
+- eth2 (VLAN 0 - native): provider network: 192.168.22.0/24 (in real implemenation: eth1.30 - VLAN 30)
+- eth3 (VLAN 0 - native): storage network: 192.168.24.0/24
