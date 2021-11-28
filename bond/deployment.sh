@@ -28,19 +28,19 @@ for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 
 ### Bond configuration
 
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond1
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond1
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-3:/etc/sysconfig/network-scripts/ifcfg-bond1
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-4:/etc/sysconfig/network-scripts/ifcfg-bond1
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-5:/etc/sysconfig/network-scripts/ifcfg-bond1
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-6:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-3:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-4:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-5:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-6:/etc/sysconfig/network-scripts/ifcfg-bond1
 
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond2
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond2
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-3:/etc/sysconfig/network-scripts/ifcfg-bond2
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-4:/etc/sysconfig/network-scripts/ifcfg-bond2
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-5:/etc/sysconfig/network-scripts/ifcfg-bond2
-scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-6:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-3:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-4:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-5:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-6:/etc/sysconfig/network-scripts/ifcfg-bond2
 
 ### Bond port configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1-slave1
