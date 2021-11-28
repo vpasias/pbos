@@ -27,113 +27,20 @@ for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
 
 ### Bond configuration
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
-DEVICE=bond1
-NAME=bond1
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{'runner': {'name': 'activebackup'}, 'link_watch': {'name': 'ethtool'}}"
-EOF'
 
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
-DEVICE=bond2
-NAME=bond2
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond1
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond1
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-3:/etc/sysconfig/network-scripts/ifcfg-bond1
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-4:/etc/sysconfig/network-scripts/ifcfg-bond1
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-5:/etc/sysconfig/network-scripts/ifcfg-bond1
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-6:/etc/sysconfig/network-scripts/ifcfg-bond1
 
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
-DEVICE=bond1
-NAME=bond1
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
-DEVICE=bond2
-NAME=bond2
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
-DEVICE=bond1
-NAME=bond1
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
-DEVICE=bond2
-NAME=bond2
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-4 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
-DEVICE=bond1
-NAME=bond1
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-4 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
-DEVICE=bond2
-NAME=bond2
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-5 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
-DEVICE=bond1
-NAME=bond1
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-5 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
-DEVICE=bond2
-NAME=bond2
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-6 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
-DEVICE=bond1
-NAME=bond1
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-6 'cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond2
-DEVICE=bond2
-NAME=bond2
-DEVICETYPE=Team
-ONBOOT=yes
-BOOTPROTO=none
-TEAM_CONFIG="{runner: {name: activebackup}, link_watch: {name: ethtool}}"
-EOF'
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond2
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond2
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-3:/etc/sysconfig/network-scripts/ifcfg-bond2
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-4:/etc/sysconfig/network-scripts/ifcfg-bond2
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-5:/etc/sysconfig/network-scripts/ifcfg-bond2
+scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-6:/etc/sysconfig/network-scripts/ifcfg-bond2
 
 ### Bond port configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1-slave1
