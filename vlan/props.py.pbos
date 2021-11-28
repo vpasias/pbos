@@ -64,7 +64,7 @@ NET = {
         'provider': '192.168.22',
         'storage': '192.168.24',
 }
-# GW = '192.168.200.1'    # Gateway IP address
+# GW = '192.168.20.1'    # Gateway IP address
 # DNS = '8.8.8.8'
 IP = 200  # The last octet of the IP address to begin.
 REP_BR = 'mgmt'  # Select this bridge's ip to insert into /etc/hosts
