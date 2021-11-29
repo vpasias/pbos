@@ -2,4 +2,6 @@ DEVICE=bond1
 NAME=bond1
 ONBOOT=yes
 BOOTPROTO=none
+TYPE=Bond
+BONDING_MASTER=yes
 BONDING_OPTS="mode=active-backup primary=eth1 miimon=100 primary_reselect=always fail_over_mac=follow use_carrier=0"
