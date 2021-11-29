@@ -242,59 +242,12 @@ NETMASK=255.255.255.0
 EOF"
 
 # provider network configuration
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
+for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
 ONBOOT=yes
 VLAN=yes
 DEVICE=bond1.30
 BOOTPROTO=none
-IPADDR=192.168.22.201
-NETMASK=255.255.255.0
-EOF"
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
-ONBOOT=yes
-VLAN=yes
-DEVICE=bond1.30
-BOOTPROTO=none
-IPADDR=192.168.22.202
-NETMASK=255.255.255.0
-EOF"
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
-ONBOOT=yes
-VLAN=yes
-DEVICE=bond1.30
-BOOTPROTO=none
-IPADDR=192.168.22.203
-NETMASK=255.255.255.0
-EOF"
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-4 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
-ONBOOT=yes
-VLAN=yes
-DEVICE=bond1.30
-BOOTPROTO=none
-IPADDR=192.168.22.204
-NETMASK=255.255.255.0
-EOF"
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-5 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
-ONBOOT=yes
-VLAN=yes
-DEVICE=bond1.30
-BOOTPROTO=none
-IPADDR=192.168.22.205
-NETMASK=255.255.255.0
-EOF"
-
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-6 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
-ONBOOT=yes
-VLAN=yes
-DEVICE=bond1.30
-BOOTPROTO=none
-IPADDR=192.168.22.206
-NETMASK=255.255.255.0
-EOF"
+EOF"; done
 
 # storage network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
