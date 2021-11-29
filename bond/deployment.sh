@@ -296,6 +296,43 @@ IPADDR=192.168.22.206
 NETMASK=255.255.255.0
 EOF"
 
+# storage network configuration
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
+
+IPADDR=192.168.24.201
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
+
+IPADDR=192.168.24.202
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
+
+IPADDR=192.168.24.203
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-4 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
+
+IPADDR=192.168.24.204
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-5 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
+
+IPADDR=192.168.24.205
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-6 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
+
+IPADDR=192.168.24.206
+NETMASK=255.255.255.0
+EOF"
+
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "systemctl restart network"; done
 
 #for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "ip link set eth1 down && sudo ip link set eth2 down && ifup bond1"; done
