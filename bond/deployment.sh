@@ -48,24 +48,28 @@ for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 
 ### Bond port configuration
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth1
+
 NAME=bond-slave-eth1
 MASTER=bond1
 SLAVE=yes
 EOF"; done
 
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth2
+
 NAME=bond-slave-eth2
 MASTER=bond1
 SLAVE=yes
 EOF"; done
 
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth3
+
 NAME=bond-slave-eth3
 MASTER=bond2
 SLAVE=yes
 EOF"; done
 
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth4
+
 NAME=bond-slave-eth4
 MASTER=bond2
 SLAVE=yes
