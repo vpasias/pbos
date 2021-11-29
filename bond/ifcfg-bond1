@@ -1,6 +1,5 @@
 DEVICE=bond1
 NAME=bond1
-DEVICETYPE=Team
 ONBOOT=yes
 BOOTPROTO=none
-TEAM_CONFIG='{"runner": {"name": "activebackup"}, "link_watch": {"name": "ethtool"}}'
+BONDING_OPTS="mode=active-backup primary=eth1 miimon=100 primary_reselect=always fail_over_mac=follow use_carrier=0"
