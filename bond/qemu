@@ -4,7 +4,7 @@
 # change file rights: chmod +x /etc/libvirt/hooks/qemu
 # and restart the libvirtd service: sudo systemctl restart libvirtd
 # or
-# export GUEST_IP=192.168.22.216 && export GUEST_PORT=22 && export HOST_PORT=22022 && \
+# export GUEST_IP=192.168.22.216 && export GUEST_PORT=22 && export HOST_PORT=20002 && \
 # /sbin/iptables -D FORWARD -o ds1 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT && \
 # /sbin/iptables -D FORWARD -o ds2 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT && \
 # /sbin/iptables -t nat -D PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT && \
@@ -19,7 +19,7 @@ if [ "${1}" = "test" ]; then
    # Update the following variables to fit your setup
    GUEST_IP=192.168.22.216
    GUEST_PORT=22
-   HOST_PORT=22022
+   HOST_PORT=20002
 
    if [ "${2}" = "stopped" ] || [ "${2}" = "reconnect" ]; then
 	/sbin/iptables -D FORWARD -o ds1 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
