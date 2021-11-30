@@ -15,12 +15,12 @@ if [ "${1}" = "test" ]; then
 
    if [ "${2}" = "stopped" ] || [ "${2}" = "reconnect" ]; then
 	/sbin/iptables -D FORWARD -o ds1 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
-  /sbin/iptables -D FORWARD -o ds2 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
+        /sbin/iptables -D FORWARD -o ds2 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
 	/sbin/iptables -t nat -D PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
    fi
    if [ "${2}" = "start" ] || [ "${2}" = "reconnect" ]; then
 	/sbin/iptables -I FORWARD -o ds1 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
-  /sbin/iptables -I FORWARD -o ds2 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
+        /sbin/iptables -I FORWARD -o ds2 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT
 	/sbin/iptables -t nat -I PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
    fi
 fi
