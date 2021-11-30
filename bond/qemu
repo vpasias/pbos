@@ -3,6 +3,14 @@
 # save file: sudo cp ~/pbos/bond/qemu /etc/libvirt/hooks/qemu
 # change file rights: chmod +x /etc/libvirt/hooks/qemu
 # and restart the libvirtd service: sudo systemctl restart libvirtd
+# or
+# export GUEST_IP=192.168.22.216 && export GUEST_PORT=22 && export HOST_PORT=22022 && \
+# /sbin/iptables -D FORWARD -o ds1 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT && \
+# /sbin/iptables -D FORWARD -o ds2 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT && \
+# /sbin/iptables -t nat -D PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT && \
+# /sbin/iptables -I FORWARD -o ds1 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT && \
+# /sbin/iptables -I FORWARD -o ds2 -p tcp -d $GUEST_IP --dport $GUEST_PORT -j ACCEPT && \
+# /sbin/iptables -t nat -I PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
 # IMPORTANT: Change the "VM NAME" string to match your actual VM Name.
 # In order to create rules to other VMs, just duplicate the below block and configure
 # it accordingly.
