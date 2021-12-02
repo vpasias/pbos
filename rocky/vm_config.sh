@@ -13,6 +13,7 @@ echo "configfs" >> /etc/modules
 update-initramfs -u
 systemctl daemon-reload
 
+mkdir -p /storage
 mkdir -p /etc/motd.d
 
 cat << EOF | tee /etc/motd.d/01-custom
