@@ -39,7 +39,7 @@ loopback_file: "/storage/pbos.lvm"
 lvm_size: 50G
 
 # neutron
-provider_interface: "bond1.30"
+provider_interface: "bond1"
 overlay_interface: "bond1.10"
 
 ######################################################
