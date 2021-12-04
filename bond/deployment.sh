@@ -241,7 +241,15 @@ IPADDR=192.168.25.206
 NETMASK=255.255.255.0
 EOF"
 
-# provider network configuration
+# flat provider network configuration
+for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1
+BOOTPROTO=none
+EOF"; done
+
+# vlan provider network configuration
 for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
 ONBOOT=yes
 VLAN=yes
