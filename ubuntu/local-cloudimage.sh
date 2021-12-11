@@ -36,7 +36,7 @@ qemu-img info $snapshot
 
 # insert metadata into seed image
 echo "instance-id: $(uuidgen || echo i-abcdefg)" > $hostname-metadata
-cloud-localds -v --network-config=network_config_static.cfg $seed cloud_init.cfg $hostname-metadata
+cloud-localds -v --network-config=network_config.cfg $seed cloud_init.cfg $hostname-metadata
 
 # ensure file permissions belong to kvm group
 sudo chmod 666 $baseimg
