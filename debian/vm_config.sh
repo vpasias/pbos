@@ -4,7 +4,7 @@
 cat /etc/os-release
 uname -a
 apt update
-apt -y install cloud-utils-growpart curl
+apt -y install growpart curl
 apt -y install python3 bind-utils
 apt -y install openssh-server cloud-init sshpass python3-venv
 apt install -y net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv mdadm
