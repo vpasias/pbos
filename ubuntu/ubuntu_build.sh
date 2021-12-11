@@ -27,7 +27,6 @@ seed=$hostname-seed.img
 # vnc|none
 graphicsType=none
 
-
 # create working snapshot, increase size to 5G
 sudo rm $snapshot
 qemu-img create -b ~/images/$baseimg -f qcow2 $snapshot 5G
