@@ -50,5 +50,4 @@ virt-install --name $hostname \
   --graphics $graphicsType \
   --os-type Linux --os-variant $os_variant \
   --network network:default \
-  --console pty,target_type=serial \
-  --extra-args "console=tty0 console=ttyS0,115200n8"
+  --console pty,target_type=serial
