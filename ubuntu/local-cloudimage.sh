@@ -20,7 +20,6 @@ if [ ! -f ~/images/$baseimg ]; then
   exit 2
 fi
 
-
 hostname=ubuntu-2004
 
 snapshot=$hostname-snapshot-cloudimg.qcow2
