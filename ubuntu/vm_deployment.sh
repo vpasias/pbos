@@ -263,7 +263,7 @@ network:
       dhcp6: false
     ens13:
       dhcp4: false
-      dhcp6: false      
+      dhcp6: false
   bonds:
     bond1:
       dhcp4: true
