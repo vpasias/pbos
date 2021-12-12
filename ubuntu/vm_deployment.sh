@@ -208,7 +208,7 @@ network:
       dhcp6: false
   bonds:
     bond1:
-      dhcp4: yes
+      dhcp4: true
       interfaces:
         - ens10
         - ens11
@@ -216,7 +216,7 @@ network:
         mode: active-backup
         primary: ens10
     bond2:
-      dhcp4: yes
+      dhcp4: true
       interfaces:
         - ens12
         - ens13
@@ -254,7 +254,7 @@ network:
       dhcp6: false
   bonds:
     bond1:
-      dhcp4: yes
+      dhcp4: true
       interfaces:
         - ens10
         - ens11
@@ -262,7 +262,7 @@ network:
         mode: active-backup
         primary: ens10
     bond2:
-      dhcp4: yes
+      dhcp4: true
       interfaces:
         - ens12
         - ens13
@@ -300,7 +300,7 @@ network:
       dhcp6: false
   bonds:
     bond1:
-      dhcp4: yes
+      dhcp4: true
       interfaces:
         - ens10
         - ens11
@@ -308,7 +308,7 @@ network:
         mode: active-backup
         primary: ens10
     bond2:
-      dhcp4: yes
+      dhcp4: true
       interfaces:
         - ens12
         - ens13
