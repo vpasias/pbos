@@ -99,6 +99,9 @@ for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo rm -r
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo hostnamectl set-hostname node-$i --static"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo apt update -y && sudo apt-get install -y git vim net-tools wget curl bash-completion apt-utils iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs locate jq"; done
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo apt-get install -y cloud-guest-utils dnsutils cloud-init python3-venv virtualenv mdadm"; done
+
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo mkdir -p /storage && sudo groupadd rabbitmq"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo apt-get install ntp ntpdate -y && sudo timedatectl set-ntp on"; done
 
@@ -184,6 +187,14 @@ EOF"; done
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo sysctl --system"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "#echo vm.swappiness=1 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p"; done
+
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "modprobe 8021q"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "modprobe bonding"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "lsmod | grep 8021q"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "lsmod | grep bonding"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 8021q >> /etc/modules-load.d/8021q.conf"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo configfs >> /etc/modules"; done
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@node-1 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
 # This file describes the network interfaces available on your system
