@@ -224,22 +224,22 @@ network:
       parameters:
         mode: active-backup
         primary: ens12
- vlans:
-   vlan5:
-     id: 5
-     link: bond1
-     addresses: [192.168.21.201/24]
-   vlan10:
-     id: 10
-     link: bond1
-     addresses: [192.168.23.201/24]
-   vlan20:
-     id: 20
-     link: bond1
-     addresses: [192.168.25.201/24]
-   vlan30:
-     id: 30
-     link: bond1
+  vlans:
+    vlan5:
+      id: 5
+      link: bond1
+      addresses: [192.168.21.201/24]
+    vlan10:
+      id: 10
+      link: bond1
+      addresses: [192.168.23.201/24]
+    vlan20:
+      id: 20
+      link: bond1
+      addresses: [192.168.25.201/24]
+    vlan30:
+      id: 30
+      link: bond1
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@node-2 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -252,6 +252,18 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false
+    ens10:
+      dhcp4: false
+      dhcp6: false
+    ens11:
+      dhcp4: false
+      dhcp6: false
+    ens12:
+      dhcp4: false
+      dhcp6: false
+    ens13:
+      dhcp4: false
+      dhcp6: false      
   bonds:
     bond1:
       dhcp4: true
@@ -270,22 +282,22 @@ network:
       parameters:
         mode: active-backup
         primary: ens12
- vlans:
-   vlan5:
-     id: 5
-     link: bond1
-     addresses: [192.168.21.202/24]
-   vlan10:
-     id: 10
-     link: bond1
-     addresses: [192.168.23.202/24]
-   vlan20:
-     id: 20
-     link: bond1
-     addresses: [192.168.25.202/24]
-   vlan30:
-     id: 30
-     link: bond1
+  vlans:
+    vlan5:
+      id: 5
+      link: bond1
+      addresses: [192.168.21.202/24]
+    vlan10:
+      id: 10
+      link: bond1
+      addresses: [192.168.23.202/24]
+    vlan20:
+      id: 20
+      link: bond1
+      addresses: [192.168.25.202/24]
+    vlan30:
+      id: 30
+      link: bond1
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@node-3 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -316,22 +328,22 @@ network:
       parameters:
         mode: active-backup
         primary: ens12
- vlans:
-   vlan5:
-     id: 5
-     link: bond1
-     addresses: [192.168.21.203/24]
-   vlan10:
-     id: 10
-     link: bond1
-     addresses: [192.168.23.203/24]
-   vlan20:
-     id: 20
-     link: bond1
-     addresses: [192.168.25.203/24]
-   vlan30:
-     id: 30
-     link: bond1    
+  vlans:
+    vlan5:
+      id: 5
+      link: bond1
+      addresses: [192.168.21.203/24]
+    vlan10:
+      id: 10
+      link: bond1
+      addresses: [192.168.23.203/24]
+    vlan20:
+      id: 20
+      link: bond1
+      addresses: [192.168.25.203/24]
+    vlan30:
+      id: 30
+      link: bond1    
 EOF"
 
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 'Defaults:ubuntu !requiretty' > /etc/sudoers.d/ubuntu"; done
