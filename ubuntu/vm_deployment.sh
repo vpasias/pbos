@@ -205,17 +205,41 @@ network:
   ethernets:
     ens3:
       dhcp4: true
-      dhcp6: false     
-    ens11:
-      dhcp4: false
-      dhcp6: false    
-      addresses:
-        - 172.16.1.11/24
-    ens12:
-      dhcp4: false
-      dhcp6: false      
-      addresses:
-        - 172.16.2.11/24     
+      dhcp6: false
+  bonds:
+    bond1:
+      dhcp4: yes
+      interfaces:
+        - ens11
+        - ens12
+      parameters:
+        mode: active-backup
+        primary: ens11
+    bond2:
+      dhcp4: yes
+      interfaces:
+        - ens13
+        - ens14
+      addresses: [192.168.24.201/24]          
+      parameters:
+        mode: active-backup
+        primary: ens13
+ vlans:
+   vlan5:
+     id: 5
+     link: bond1
+     addresses: [192.168.21.201/24]
+   vlan10:
+     id: 10
+     link: bond1
+     addresses: [192.168.23.201/24]
+   vlan20:
+     id: 20
+     link: bond1
+     addresses: [192.168.25.201/24]
+   vlan30:
+     id: 30
+     link: bond1
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@node-2 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -227,17 +251,41 @@ network:
   ethernets:
     ens3:
       dhcp4: true
-      dhcp6: false      
-    ens11:
-      dhcp4: false
-      dhcp6: false      
-      addresses:
-        - 172.16.1.12/24
-    ens12:
-      dhcp4: false
-      dhcp6: false      
-      addresses:
-        - 172.16.2.12/24     
+      dhcp6: false
+  bonds:
+    bond1:
+      dhcp4: yes
+      interfaces:
+        - ens11
+        - ens12
+      parameters:
+        mode: active-backup
+        primary: ens11
+    bond2:
+      dhcp4: yes
+      interfaces:
+        - ens13
+        - ens14
+      addresses: [192.168.24.202/24]          
+      parameters:
+        mode: active-backup
+        primary: ens13
+ vlans:
+   vlan5:
+     id: 5
+     link: bond1
+     addresses: [192.168.21.202/24]
+   vlan10:
+     id: 10
+     link: bond1
+     addresses: [192.168.23.202/24]
+   vlan20:
+     id: 20
+     link: bond1
+     addresses: [192.168.25.202/24]
+   vlan30:
+     id: 30
+     link: bond1
 EOF"
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@node-3 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
@@ -249,17 +297,41 @@ network:
   ethernets:
     ens3:
       dhcp4: true
-      dhcp6: false      
-    ens11:
-      dhcp4: false
-      dhcp6: false      
-      addresses:
-        - 172.16.1.13/24
-    ens12:
-      dhcp4: false
-      dhcp6: false      
-      addresses:
-        - 172.16.2.13/24     
+      dhcp6: false
+  bonds:
+    bond1:
+      dhcp4: yes
+      interfaces:
+        - ens11
+        - ens12
+      parameters:
+        mode: active-backup
+        primary: ens11
+    bond2:
+      dhcp4: yes
+      interfaces:
+        - ens13
+        - ens14
+      addresses: [192.168.24.203/24]          
+      parameters:
+        mode: active-backup
+        primary: ens13
+ vlans:
+   vlan5:
+     id: 5
+     link: bond1
+     addresses: [192.168.21.203/24]
+   vlan10:
+     id: 10
+     link: bond1
+     addresses: [192.168.23.203/24]
+   vlan20:
+     id: 20
+     link: bond1
+     addresses: [192.168.25.203/24]
+   vlan30:
+     id: 30
+     link: bond1    
 EOF"
 
 for i in {1..3}; do virsh shutdown node-$i; done && sleep 10 && virsh list --all && for i in {1..3}; do virsh start node-$i; done && sleep 10 && virsh list --all
