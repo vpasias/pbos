@@ -334,4 +334,8 @@ network:
      link: bond1    
 EOF"
 
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 'Defaults:ubuntu !requiretty' > /etc/sudoers.d/ubuntu"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo '%ubuntu ALL=(ALL) ALL' >> /etc/sudoers.d/ubuntu"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "chmod 440 /etc/sudoers.d/ubuntu"; done
+
 for i in {1..3}; do virsh shutdown node-$i; done && sleep 10 && virsh list --all && for i in {1..3}; do virsh start node-$i; done && sleep 10 && virsh list --all
