@@ -103,7 +103,7 @@ for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo apt-g
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo mkdir -p /storage && sudo groupadd rabbitmq"; done
 
-for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo apt-get install ntp ntpdate -y && sudo timedatectl set-ntp on"; done
+#for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo apt-get install ntp ntpdate -y && sudo timedatectl set-ntp on"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo modprobe -v xfs && sudo grep xfs /proc/filesystems && sudo modinfo xfs && sudo mkdir -p /etc/apt/sources.list.d"; done
 
