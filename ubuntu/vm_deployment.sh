@@ -206,6 +206,18 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false
+    ens10:
+      dhcp4: false
+      dhcp6: false
+    ens11:
+      dhcp4: false
+      dhcp6: false
+    ens12:
+      dhcp4: false
+      dhcp6: false
+    ens13:
+      dhcp4: false
+      dhcp6: false      
   bonds:
     bond1:
       dhcp4: true
@@ -310,6 +322,18 @@ network:
     ens3:
       dhcp4: true
       dhcp6: false
+    ens10:
+      dhcp4: false
+      dhcp6: false
+    ens11:
+      dhcp4: false
+      dhcp6: false
+    ens12:
+      dhcp4: false
+      dhcp6: false
+    ens13:
+      dhcp4: false
+      dhcp6: false      
   bonds:
     bond1:
       dhcp4: true
