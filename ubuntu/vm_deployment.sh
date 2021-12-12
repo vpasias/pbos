@@ -210,20 +210,20 @@ network:
     bond1:
       dhcp4: yes
       interfaces:
+        - ens10
         - ens11
-        - ens12
       parameters:
         mode: active-backup
-        primary: ens11
+        primary: ens10
     bond2:
       dhcp4: yes
       interfaces:
+        - ens12
         - ens13
-        - ens14
       addresses: [192.168.24.201/24]          
       parameters:
         mode: active-backup
-        primary: ens13
+        primary: ens12
  vlans:
    vlan5:
      id: 5
@@ -256,20 +256,20 @@ network:
     bond1:
       dhcp4: yes
       interfaces:
+        - ens10
         - ens11
-        - ens12
       parameters:
         mode: active-backup
-        primary: ens11
+        primary: ens10
     bond2:
       dhcp4: yes
       interfaces:
+        - ens12
         - ens13
-        - ens14
       addresses: [192.168.24.202/24]          
       parameters:
         mode: active-backup
-        primary: ens13
+        primary: ens12
  vlans:
    vlan5:
      id: 5
@@ -302,20 +302,20 @@ network:
     bond1:
       dhcp4: yes
       interfaces:
+        - ens10
         - ens11
-        - ens12
       parameters:
         mode: active-backup
-        primary: ens11
+        primary: ens10
     bond2:
       dhcp4: yes
       interfaces:
+        - ens12
         - ens13
-        - ens14
       addresses: [192.168.24.203/24]          
       parameters:
         mode: active-backup
-        primary: ens13
+        primary: ens12
  vlans:
    vlan5:
      id: 5
