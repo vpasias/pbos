@@ -141,9 +141,9 @@ for i in {1..3}; do qemu-img create -f qcow2 vbdnode1$i 120G; done
 for i in {1..3}; do qemu-img create -f qcow2 vbdnode2$i 120G; done
 for i in {1..3}; do qemu-img create -f qcow2 vbdnode3$i 120G; done
 
-for i in {1..3}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode1$i.qcow2 -t sdb node-$i; done
-for i in {1..3}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode2$i.qcow2 -t sdc node-$i; done
-for i in {1..3}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode3$i.qcow2 -t sdd node-$i; done
+for i in {1..3}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode1$i.qcow2 -t sda node-$i; done
+for i in {1..3}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode2$i.qcow2 -t sdb node-$i; done
+for i in {1..3}; do ./kvm-install-vm attach-disk -d 120 -s /mnt/extra/kvm-install-vm/vbdnode3$i.qcow2 -t sdc node-$i; done
 
 for i in {1..3}; do virsh attach-interface --domain node-$i --type network --source ds1 --model virtio --mac 02:00:aa:0a:01:1$i --config --live; done
 for i in {1..3}; do virsh attach-interface --domain node-$i --type network --source ds2 --model virtio --mac 02:00:aa:0a:02:1$i --config --live; done
