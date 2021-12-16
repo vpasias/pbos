@@ -1,0 +1,79 @@
+---
+## custom variables
+# keepalived
+keepalived_interface: "bond1.5"
+keepalived_vip: "192.168.21.100"
+
+# openstack
+openstack_release: "wallaby"
+
+# openstack mariadb
+openstack_mariadb_acl_cidr:
+  - "localhost"
+  - "192.168.21.0/255.255.255.0"
+
+# storage
+# storage backends: ceph, lvm, or both
+# ceph for production, lvm for demo/test.
+# Never use lvm for production since lvm creates and uses loopback device.
+# If there are multiple backends, the first one will be the default backend.
+storage_backends:
+  - ceph
+  - lvm
+# ceph
+ceph_public_network_iface: bond2
+ceph_rgw_service_iface: bond1.20
+ceph_public_network: 192.168.24.0/24
+ceph_cluster_network: 192.168.24.0/24
+ceph_replicas: 2
+ceph_mgr_pg_autoscaler: true
+ceph_osd_devices:
+  - /dev/sda
+  - /dev/sdb
+  - /dev/sdc
+
+## LVM
+# loopback file path for LVM.
+loopback_file: "/storage/pbos.lvm"
+# lvm size in GiB.
+lvm_size: 50G
+
+# neutron
+provider_interface: "bond1"
+overlay_interface: "bond1.10"
+
+######################################################
+# Warn: Do not edit below if you are not an expert.  #
+######################################################
+# global
+#ansible_ssh_password: "{{ vault_ssh_password }}"
+ansible_password: "{{ vault_ssh_password }}"
+ansible_become_password: "{{ vault_sudo_password }}"
+ansible_python_interpreter: "/usr/bin/python3"
+
+# mariadb / openstack password
+mariadb_root_password: "{{ vault_mariadb_root_password }}"
+keystone_password: "{{ vault_keystone_password }}"
+glance_password: "{{ vault_glance_password }}"
+placement_password: "{{ vault_placement_password }}"
+neutron_password: "{{ vault_neutron_password }}"
+cinder_password: "{{ vault_cinder_password }}"
+nova_password: "{{ vault_nova_password }}"
+barbican_password: "{{ vault_barbican_password }}"
+
+# rabbitmq
+rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
+
+# openstack common
+openstack_admin_password: "{{ vault_openstack_admin_password }}"
+
+# neutron
+metadata_secret: "{{ vault_metadata_secret }}"
+
+# nova
+rbd_secret: "{{ vault_rbd_secret }}"
+ceph_rgw_uid: "cloudpc"
+
+# barbican
+barbican_kek: "{{ vault_barbican_kek | b64encode }}"
+...
