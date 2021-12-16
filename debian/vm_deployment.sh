@@ -89,6 +89,21 @@ sleep 60
 
 virsh list --all && brctl show && virsh net-list --all
 
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo apt upgrade -y && sudo apt install gcc-8-base -y"; done
+
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo mv /etc/apt/sources.list /etc/apt/old-sources.list"; done
+
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "cat << EOF | sudo tee /etc/apt/sources.list
+deb http://deb.debian.org/debian/ bullseye main contrib non-free
+deb-src http://deb.debian.org/debian/ bullseye-updates main contrib non-free
+deb http://security.debian.org/debian-security bullseye-security main
+deb-src http://security.debian.org/debian-security bullseye-security main
+deb http://ftp.debian.org/debian bullseye-backports main contrib non-free
+EOF"; done
+
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade --install-recommends -y"; done
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo DEBIAN_FRONTEND=noninteractive apt -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages --install-recommends full-upgrade"; done
+
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i 'echo "root:gprm8350" | sudo chpasswd'; done
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i 'echo "debian:gprm8350" | sudo chpasswd'; done
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"; done
@@ -98,7 +113,7 @@ for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo rm -r
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo hostnamectl set-hostname node-$i --static"; done
 
-for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo apt-get install -y git vim net-tools wget curl bash-completion apt-utils iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs locate jq"; done
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo apt-get install -y git vim net-tools wget curl bash-completion apt-utils iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs locate jq gcc-8-base"; done
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt-get install -y cloud-guest-utils dnsutils cloud-init python3-venv virtualenv mdadm"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo mkdir -p /storage && sudo groupadd rabbitmq"; done
@@ -193,6 +208,33 @@ for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo configfs >> /etc/modules"; done
 
+ssh -o "StrictHostKeyChecking=no" debian@node-1 "cat << EOF | sudo tee /etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
+    mtu 9000
+    
+allow-hotplug eth1
+auto eth1
+iface eth1 inet static
+    address 192.168.255.11/24
+    mtu 9000
+    
+allow-hotplug eth2
+auto eth2
+iface eth2 inet static
+    address 192.168.250.11/24
+    mtu 9000
+allow-hotplug eth3
+auto eth3
+iface eth3 inet manual
+    mtu 9000    
+source /etc/network/interfaces.d/*.cfg
+EOF"
+
 ssh -o "StrictHostKeyChecking=no" ubuntu@node-1 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
 # This file describes the network interfaces available on your system
 # For more information, see netplan(5).
@@ -249,122 +291,6 @@ network:
     vlan30:
       id: 30
       link: bond1
-EOF"
-
-ssh -o "StrictHostKeyChecking=no" ubuntu@node-2 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
-# This file describes the network interfaces available on your system
-# For more information, see netplan(5).
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    ens3:
-      dhcp4: true
-      dhcp6: false
-    ens10:
-      dhcp4: false
-      dhcp6: false
-    ens11:
-      dhcp4: false
-      dhcp6: false
-    ens12:
-      dhcp4: false
-      dhcp6: false
-    ens13:
-      dhcp4: false
-      dhcp6: false
-  bonds:
-    bond1:
-      dhcp4: true
-      interfaces:
-        - ens10
-        - ens11
-      parameters:
-        mode: active-backup
-        primary: ens10
-    bond2:
-      dhcp4: true
-      interfaces:
-        - ens12
-        - ens13
-      addresses: [192.168.24.202/24]          
-      parameters:
-        mode: active-backup
-        primary: ens12
-  vlans:
-    vlan5:
-      id: 5
-      link: bond1
-      addresses: [192.168.21.202/24]
-    vlan10:
-      id: 10
-      link: bond1
-      addresses: [192.168.23.202/24]
-    vlan20:
-      id: 20
-      link: bond1
-      addresses: [192.168.25.202/24]
-    vlan30:
-      id: 30
-      link: bond1
-EOF"
-
-ssh -o "StrictHostKeyChecking=no" ubuntu@node-3 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
-# This file describes the network interfaces available on your system
-# For more information, see netplan(5).
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    ens3:
-      dhcp4: true
-      dhcp6: false
-    ens10:
-      dhcp4: false
-      dhcp6: false
-    ens11:
-      dhcp4: false
-      dhcp6: false
-    ens12:
-      dhcp4: false
-      dhcp6: false
-    ens13:
-      dhcp4: false
-      dhcp6: false      
-  bonds:
-    bond1:
-      dhcp4: true
-      interfaces:
-        - ens10
-        - ens11
-      parameters:
-        mode: active-backup
-        primary: ens10
-    bond2:
-      dhcp4: true
-      interfaces:
-        - ens12
-        - ens13
-      addresses: [192.168.24.203/24]          
-      parameters:
-        mode: active-backup
-        primary: ens12
-  vlans:
-    vlan5:
-      id: 5
-      link: bond1
-      addresses: [192.168.21.203/24]
-    vlan10:
-      id: 10
-      link: bond1
-      addresses: [192.168.23.203/24]
-    vlan20:
-      id: 20
-      link: bond1
-      addresses: [192.168.25.203/24]
-    vlan30:
-      id: 30
-      link: bond1    
 EOF"
 
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 'Defaults:debian !requiretty' > /etc/sudoers.d/debian"; done
