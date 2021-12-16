@@ -131,9 +131,9 @@ UNAUTHORISED ACCESS IS PROHIBITED. VIOLATORS WILL BE PROSECUTED.
 *********************************************************************************"
 EOF'; done
 
-for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "sudo chmod +x /etc/update-motd.d/01-custom"; done
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo chmod +x /etc/update-motd.d/01-custom"; done
 
-for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" ubuntu@node-$i "cat << EOF | sudo tee /etc/modprobe.d/qemu-system-x86.conf
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "cat << EOF | sudo tee /etc/modprobe.d/qemu-system-x86.conf
 options kvm_intel nested=1
 EOF"; done
 
