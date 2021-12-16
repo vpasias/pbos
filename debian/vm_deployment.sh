@@ -114,7 +114,7 @@ for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo rm -r
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo hostnamectl set-hostname node-$i --static"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo apt-get install -y git vim net-tools wget curl bash-completion apt-utils iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs locate jq gcc-8-base"; done
-for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt-get install -y cloud-guest-utils dnsutils cloud-init python3-venv virtualenv mdadm"; done
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt-get install -y cloud-guest-utils dnsutils cloud-init python3-venv virtualenv mdadm vlan ifenslave"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo mkdir -p /storage && sudo groupadd rabbitmq"; done
 
@@ -194,6 +194,8 @@ net.core.bpf_jit_limit=3000000000
 kernel.keys.maxkeys=2000
 kernel.keys.maxbytes=2000000
 net.ipv4.ip_forward=1
+net.ipv4.conf.all.arp_filter=0
+net.ipv4.conf.all.rp_filter=2
 EOF"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo sysctl --system"; done
@@ -207,6 +209,8 @@ for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 8021q >> /etc/modules-load.d/8021q.conf"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo configfs >> /etc/modules"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "500    firsttable" | tee -a /etc/iproute2/rt_tables'; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "501    echo "500    firsttable" | sudo tee -a /etc/iproute2/rt_tables" | tee -a /etc/iproute2/rt_tables'; done
 
 ssh -o "StrictHostKeyChecking=no" debian@node-1 "cat << EOF | sudo tee /etc/network/interfaces
 auto lo
@@ -215,82 +219,255 @@ iface lo inet loopback
 auto eth0
 allow-hotplug eth0
 iface eth0 inet dhcp
-    mtu 9000
+    mtu 1500
+#   mtu 9000
+
+#auto eth1
+#iface eth1 inet manual
+#auto eth2
+#iface eth2 inet manual
+#auto eth3
+#iface eth3 inet manual
+#auto eth4
+#iface eth4 inet manual
+
+auto bond1
+iface bond1 inet manual
+    bond-slaves eth1 eth2
+    bond-mode active-backup
+    bond-primary eth1    
+    bond-miimon 100
+    bond-downdelay 200
+    bond-updelay 200
+    up ifconfig bond1 0.0.0.0 up
     
-allow-hotplug eth1
-auto eth1
-iface eth1 inet static
-    address 192.168.255.11/24
-    mtu 9000
+auto bond2
+iface bond2 inet static
+    address 192.168.24.201
+    netmask 255.255.255.0    
+    bond-slaves eth3 eth4
+    bond-mode active-backup
+    bond-primary eth3
+    bond-miimon 100
+    bond-downdelay 200
+    bond-updelay 200
     
-allow-hotplug eth2
-auto eth2
-iface eth2 inet static
-    address 192.168.250.11/24
-    mtu 9000
-allow-hotplug eth3
-auto eth3
-iface eth3 inet manual
-    mtu 9000    
+auto bond1.5
+iface bond1.5 inet static
+    address 192.168.21.201
+    netmask 255.255.255.0
+    mtu 1500
+#   mtu 9000
+    vlan-raw-device bond1
+    post-up ifconfig bond1.5 mtu 1500
+#   post-up ifconfig vlan5 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.5 9000
+
+auto bond1.10
+iface bond1.10 inet static
+    address 192.168.23.201
+    netmask 255.255.255.0
+    mtu 1500
+#   mtu 9000
+    vlan-raw-device bond1
+    post-up ifconfig bond1.10 mtu 1500
+#   post-up ifconfig vlan10 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.10 9000
+    
+auto bond1.20
+iface bond1.20 inet static
+    address 192.168.25.201
+    netmask 255.255.255.0
+    mtu 1500
+#   mtu 9000
+    vlan-raw-device bond1
+    post-up ifconfig bond1.20 mtu 1500
+#   post-up ifconfig vlan20 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.20 9000
+
+auto bond1.30
+iface bond1.30 inet static
+    mtu 1500
+#   mtu 9000    
+    vlan-raw-device bond1
+    post-up ifconfig bond1.30 mtu 1500
+#   post-up ifconfig vlan30 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.30 9000
+    post-up ifconfig bond1.30 0.0.0.0 up
+
 source /etc/network/interfaces.d/*.cfg
 EOF"
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@node-1 "cat << EOF | sudo tee /etc/netplan/01-netcfg.yaml
-# This file describes the network interfaces available on your system
-# For more information, see netplan(5).
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    ens3:
-      dhcp4: true
-      dhcp6: false
-    ens10:
-      dhcp4: false
-      dhcp6: false
-    ens11:
-      dhcp4: false
-      dhcp6: false
-    ens12:
-      dhcp4: false
-      dhcp6: false
-    ens13:
-      dhcp4: false
-      dhcp6: false      
-  bonds:
-    bond1:
-      dhcp4: true
-      interfaces:
-        - ens10
-        - ens11
-      parameters:
-        mode: active-backup
-        primary: ens10
-    bond2:
-      dhcp4: true
-      interfaces:
-        - ens12
-        - ens13
-      addresses: [192.168.24.201/24]          
-      parameters:
-        mode: active-backup
-        primary: ens12
-  vlans:
-    vlan5:
-      id: 5
-      link: bond1
-      addresses: [192.168.21.201/24]
-    vlan10:
-      id: 10
-      link: bond1
-      addresses: [192.168.23.201/24]
-    vlan20:
-      id: 20
-      link: bond1
-      addresses: [192.168.25.201/24]
-    vlan30:
-      id: 30
-      link: bond1
+ssh -o "StrictHostKeyChecking=no" debian@node-2 "cat << EOF | sudo tee /etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
+    mtu 1500
+#   mtu 9000
+
+#auto eth1
+#iface eth1 inet manual
+#auto eth2
+#iface eth2 inet manual
+#auto eth3
+#iface eth3 inet manual
+#auto eth4
+#iface eth4 inet manual
+
+auto bond1
+iface bond1 inet manual
+    bond-slaves eth1 eth2
+    bond-mode active-backup
+    bond-primary eth1    
+    bond-miimon 100
+    bond-downdelay 200
+    bond-updelay 200
+    up ifconfig bond1 0.0.0.0 up
+    
+auto bond2
+iface bond2 inet static
+    address 192.168.24.202
+    netmask 255.255.255.0    
+    bond-slaves eth3 eth4
+    bond-mode active-backup
+    bond-primary eth3
+    bond-miimon 100
+    bond-downdelay 200
+    bond-updelay 200
+    
+auto bond1.5
+iface bond1.5 inet static
+    address 192.168.21.202
+    netmask 255.255.255.0
+    mtu 1500
+#   mtu 9000
+    vlan-raw-device bond1
+    post-up ifconfig bond1.5 mtu 1500
+#   post-up ifconfig vlan5 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.5 9000
+
+auto bond1.10
+iface bond1.10 inet static
+    address 192.168.23.202
+    netmask 255.255.255.0
+    mtu 1500
+#   mtu 9000
+    vlan-raw-device bond1
+    post-up ifconfig bond1.10 mtu 1500
+#   post-up ifconfig vlan10 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.10 9000
+    
+auto bond1.20
+iface bond1.20 inet static
+    address 192.168.25.202
+    netmask 255.255.255.0
+    mtu 1500
+#   mtu 9000
+    vlan-raw-device bond1
+    post-up ifconfig bond1.20 mtu 1500
+#   post-up ifconfig vlan20 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.20 9000
+
+auto bond1.30
+iface bond1.30 inet static
+    mtu 1500
+#   mtu 9000    
+    vlan-raw-device bond1
+    post-up ifconfig bond1.30 mtu 1500
+#   post-up ifconfig vlan30 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.30 9000
+    post-up ifconfig bond1.30 0.0.0.0 up
+
+source /etc/network/interfaces.d/*.cfg
+EOF"
+
+ssh -o "StrictHostKeyChecking=no" debian@node-3 "cat << EOF | sudo tee /etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
+    mtu 1500
+#   mtu 9000
+
+#auto eth1
+#iface eth1 inet manual
+#auto eth2
+#iface eth2 inet manual
+#auto eth3
+#iface eth3 inet manual
+#auto eth4
+#iface eth4 inet manual
+
+auto bond1
+iface bond1 inet manual
+    bond-slaves eth1 eth2
+    bond-mode active-backup
+    bond-primary eth1    
+    bond-miimon 100
+    bond-downdelay 200
+    bond-updelay 200
+    up ifconfig bond1 0.0.0.0 up
+    
+auto bond2
+iface bond2 inet static
+    address 192.168.24.203
+    netmask 255.255.255.0
+    bond-slaves eth3 eth4
+    bond-mode active-backup
+    bond-primary eth3
+    bond-miimon 100
+    bond-downdelay 200
+    bond-updelay 200
+    
+auto bond1.5
+iface bond1.5 inet static
+    address 192.168.21.203
+    netmask 255.255.255.0
+    mtu 1500
+#   mtu 9000
+    vlan-raw-device bond1
+    post-up ifconfig bond1.5 mtu 1500
+#   post-up ifconfig vlan5 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.5 9000
+
+auto bond1.10
+iface bond1.10 inet static
+    address 192.168.23.203
+    netmask 255.255.255.0
+    mtu 1500
+#   mtu 9000
+    vlan-raw-device bond1
+    post-up ifconfig bond1.10 mtu 1500
+#   post-up ifconfig vlan10 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.10 9000
+    
+auto bond1.20
+iface bond1.20 inet static
+    address 192.168.25.203
+    netmask 255.255.255.0
+    mtu 1500
+#   mtu 9000
+    vlan-raw-device bond1
+    post-up ifconfig bond1.20 mtu 1500
+#   post-up ifconfig vlan20 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.20 9000
+
+auto bond1.30
+iface bond1.30 inet static
+    mtu 1500
+#   mtu 9000    
+    vlan-raw-device bond1
+    post-up ifconfig bond1.30 mtu 1500
+#   post-up ifconfig vlan30 mtu 9000
+#   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.30 9000
+    post-up ifconfig bond1.30 0.0.0.0 up
+
+source /etc/network/interfaces.d/*.cfg
 EOF"
 
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 'Defaults:debian !requiretty' > /etc/sudoers.d/debian"; done
