@@ -251,6 +251,8 @@ iface bond2 inet static
     bond-miimon 100
     bond-downdelay 200
     bond-updelay 200
+    post-up ifconfig bond2 mtu 1500
+#   post-up ifconfig bond2 mtu 9000
     
 auto bond1.5
 iface bond1.5 inet static
@@ -337,6 +339,8 @@ iface bond2 inet static
     bond-miimon 100
     bond-downdelay 200
     bond-updelay 200
+    post-up ifconfig bond2 mtu 1500
+#   post-up ifconfig bond2 mtu 9000    
     
 auto bond1.5
 iface bond1.5 inet static
@@ -423,6 +427,8 @@ iface bond2 inet static
     bond-miimon 100
     bond-downdelay 200
     bond-updelay 200
+    post-up ifconfig bond2 mtu 1500
+#   post-up ifconfig bond2 mtu 9000    
     
 auto bond1.5
 iface bond1.5 inet static
