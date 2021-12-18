@@ -246,7 +246,6 @@ auto bond2
 iface bond2 inet static
     address 192.168.24.201
     netmask 255.255.255.0
-    address 192.168.24.1
     bond-slaves eth3 eth4
     bond-mode 1
     bond-primary eth3
@@ -259,8 +258,7 @@ iface bond2 inet static
 auto bond1.5
 iface bond1.5 inet static
     address 192.168.21.201
-    netmask 255.255.255.0
-    address 192.168.21.1    
+    netmask 255.255.255.0 
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -272,7 +270,6 @@ auto bond1.10
 iface bond1.10 inet static
     address 192.168.23.201
     netmask 255.255.255.0
-    address 192.168.23.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -284,7 +281,6 @@ auto bond1.20
 iface bond1.20 inet static
     address 192.168.25.201
     netmask 255.255.255.0
-    address 192.168.25.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -338,7 +334,6 @@ auto bond2
 iface bond2 inet static
     address 192.168.24.202
     netmask 255.255.255.0
-    address 192.168.24.1    
     bond-slaves eth3 eth4
     bond-mode 1
     bond-primary eth3
@@ -352,7 +347,6 @@ auto bond1.5
 iface bond1.5 inet static
     address 192.168.21.202
     netmask 255.255.255.0
-    address 192.168.21.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -364,7 +358,6 @@ auto bond1.10
 iface bond1.10 inet static
     address 192.168.23.202
     netmask 255.255.255.0
-    address 192.168.23.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -376,7 +369,6 @@ auto bond1.20
 iface bond1.20 inet static
     address 192.168.25.202
     netmask 255.255.255.0
-    address 192.168.25.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -430,7 +422,6 @@ auto bond2
 iface bond2 inet static
     address 192.168.24.203
     netmask 255.255.255.0
-    address 192.168.24.1
     bond-slaves eth3 eth4
     bond-mode 1
     bond-primary eth3
@@ -444,7 +435,6 @@ auto bond1.5
 iface bond1.5 inet static
     address 192.168.21.203
     netmask 255.255.255.0
-    address 192.168.21.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -456,7 +446,6 @@ auto bond1.10
 iface bond1.10 inet static
     address 192.168.23.203
     netmask 255.255.255.0
-    address 192.168.23.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -468,7 +457,6 @@ auto bond1.20
 iface bond1.20 inet static
     address 192.168.25.203
     netmask 255.255.255.0
-    address 192.168.25.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
