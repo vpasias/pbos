@@ -210,8 +210,8 @@ for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 8021q >> /etc/modules-load.d/8021q.conf"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo configfs >> /etc/modules"; done
-#for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "500    firsttable" | tee -a /etc/iproute2/rt_tables'; done
-#for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "501    secondtable" | tee -a /etc/iproute2/rt_tables'; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "500    firsttable" | tee -a /etc/iproute2/rt_tables'; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "501    secondtable" | tee -a /etc/iproute2/rt_tables'; done
 
 ssh -o "StrictHostKeyChecking=no" debian@node-1 "cat << EOF | sudo tee /etc/network/interfaces
 auto lo
@@ -480,5 +480,9 @@ EOF"
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 'Defaults:debian !requiretty' > /etc/sudoers.d/debian"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo '%debian ALL=(ALL) ALL' >> /etc/sudoers.d/debian"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "chmod 440 /etc/sudoers.d/debian"; done
+
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "chmod 644 /etc/sudoers"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 'debian ALL=(ALL) ALL' >> /etc/sudoers"; done
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "chmod 440 /etc/sudoers"; done
 
 for i in {1..3}; do virsh shutdown node-$i; done && sleep 90 && virsh list --all && for i in {1..3}; do virsh start node-$i; done && sleep 90 && virsh list --all
