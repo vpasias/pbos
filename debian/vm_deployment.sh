@@ -74,7 +74,7 @@ virsh net-define /mnt/extra/ss2.xml && virsh net-autostart ss2 && virsh net-star
 
 ip a && sudo virsh net-list --all
 
-sudo wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-generic-amd64.qcow2 && sudo mv debian-11-generic-amd64.qcow2 /mnt/extra/virt/images/debian-10-openstack-amd64.qcow2
+#sudo wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-generic-amd64.qcow2 && sudo mv debian-11-generic-amd64.qcow2 /mnt/extra/virt/images/debian-10-openstack-amd64.qcow2
 
 sleep 20
 
@@ -93,17 +93,17 @@ virsh list --all && brctl show && virsh net-list --all
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo apt upgrade -y && sudo apt install gcc-8-base -y"; done
 
-#for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo mv /etc/apt/sources.list /etc/apt/old-sources.list"; done
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo mv /etc/apt/sources.list /etc/apt/old-sources.list"; done
 
-#for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "cat << EOF | sudo tee /etc/apt/sources.list
-#deb http://deb.debian.org/debian/ bullseye main contrib non-free
-#deb-src http://deb.debian.org/debian/ bullseye-updates main contrib non-free
-#deb http://security.debian.org/debian-security bullseye-security main
-#deb-src http://security.debian.org/debian-security bullseye-security main
-#deb http://ftp.debian.org/debian bullseye-backports main contrib non-free
-#EOF"; done
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "cat << EOF | sudo tee /etc/apt/sources.list
+deb http://deb.debian.org/debian/ bullseye main contrib non-free
+deb-src http://deb.debian.org/debian/ bullseye-updates main contrib non-free
+deb http://security.debian.org/debian-security bullseye-security main
+deb-src http://security.debian.org/debian-security bullseye-security main
+deb http://ftp.debian.org/debian bullseye-backports main contrib non-free
+EOF"; done
 
-#for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo DEBIAN_FRONTEND=noninteractive apt -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages --install-recommends full-upgrade"; done
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo DEBIAN_FRONTEND=noninteractive apt -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages --install-recommends full-upgrade"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i 'echo "root:gprm8350" | sudo chpasswd'; done
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i 'echo "debian:gprm8350" | sudo chpasswd'; done
