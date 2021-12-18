@@ -115,7 +115,7 @@ for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo rm -r
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo hostnamectl set-hostname node-$i --static"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo apt-get install -y git vim net-tools wget curl bash-completion apt-utils iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs locate jq gcc-8-base"; done
-for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt-get install -y cloud-guest-utils dnsutils cloud-init python3-venv virtualenv mdadm"; done
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt-get install -y cloud-guest-utils dnsutils cloud-init python3-venv virtualenv mdadm vlan ifenslave"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo mkdir -p /storage && sudo groupadd rabbitmq"; done
 
@@ -235,7 +235,7 @@ iface eth0 inet dhcp
 auto bond1
 iface bond1 inet manual
     bond-slaves eth1 eth2
-    bond-mode active-backup
+    bond-mode 1
     bond-primary eth1    
     bond-miimon 100
     bond-downdelay 200
@@ -245,9 +245,10 @@ iface bond1 inet manual
 auto bond2
 iface bond2 inet static
     address 192.168.24.201
-    netmask 255.255.255.0    
+    netmask 255.255.255.0
+    address 192.168.24.1
     bond-slaves eth3 eth4
-    bond-mode active-backup
+    bond-mode 1
     bond-primary eth3
     bond-miimon 100
     bond-downdelay 200
@@ -259,6 +260,7 @@ auto bond1.5
 iface bond1.5 inet static
     address 192.168.21.201
     netmask 255.255.255.0
+    address 192.168.21.1    
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -270,6 +272,7 @@ auto bond1.10
 iface bond1.10 inet static
     address 192.168.23.201
     netmask 255.255.255.0
+    address 192.168.23.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -281,6 +284,7 @@ auto bond1.20
 iface bond1.20 inet static
     address 192.168.25.201
     netmask 255.255.255.0
+    address 192.168.25.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -323,7 +327,7 @@ iface eth0 inet dhcp
 auto bond1
 iface bond1 inet manual
     bond-slaves eth1 eth2
-    bond-mode active-backup
+    bond-mode 1
     bond-primary eth1    
     bond-miimon 100
     bond-downdelay 200
@@ -333,9 +337,10 @@ iface bond1 inet manual
 auto bond2
 iface bond2 inet static
     address 192.168.24.202
-    netmask 255.255.255.0    
+    netmask 255.255.255.0
+    address 192.168.24.1    
     bond-slaves eth3 eth4
-    bond-mode active-backup
+    bond-mode 1
     bond-primary eth3
     bond-miimon 100
     bond-downdelay 200
@@ -347,6 +352,7 @@ auto bond1.5
 iface bond1.5 inet static
     address 192.168.21.202
     netmask 255.255.255.0
+    address 192.168.21.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -358,6 +364,7 @@ auto bond1.10
 iface bond1.10 inet static
     address 192.168.23.202
     netmask 255.255.255.0
+    address 192.168.23.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -369,6 +376,7 @@ auto bond1.20
 iface bond1.20 inet static
     address 192.168.25.202
     netmask 255.255.255.0
+    address 192.168.25.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -411,7 +419,7 @@ iface eth0 inet dhcp
 auto bond1
 iface bond1 inet manual
     bond-slaves eth1 eth2
-    bond-mode active-backup
+    bond-mode 1
     bond-primary eth1    
     bond-miimon 100
     bond-downdelay 200
@@ -422,8 +430,9 @@ auto bond2
 iface bond2 inet static
     address 192.168.24.203
     netmask 255.255.255.0
+    address 192.168.24.1
     bond-slaves eth3 eth4
-    bond-mode active-backup
+    bond-mode 1
     bond-primary eth3
     bond-miimon 100
     bond-downdelay 200
@@ -435,6 +444,7 @@ auto bond1.5
 iface bond1.5 inet static
     address 192.168.21.203
     netmask 255.255.255.0
+    address 192.168.21.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -446,6 +456,7 @@ auto bond1.10
 iface bond1.10 inet static
     address 192.168.23.203
     netmask 255.255.255.0
+    address 192.168.23.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
@@ -457,6 +468,7 @@ auto bond1.20
 iface bond1.20 inet static
     address 192.168.25.203
     netmask 255.255.255.0
+    address 192.168.25.1
     mtu 1500
 #   mtu 9000
     vlan-raw-device bond1
