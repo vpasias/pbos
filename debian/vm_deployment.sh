@@ -211,7 +211,7 @@ for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo configfs >> /etc/modules"; done
 #for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "500    firsttable" | tee -a /etc/iproute2/rt_tables'; done
-#for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "501    echo "500    firsttable" | sudo tee -a /etc/iproute2/rt_tables" | tee -a /etc/iproute2/rt_tables'; done
+#for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "501    secondtable" | tee -a /etc/iproute2/rt_tables'; done
 
 ssh -o "StrictHostKeyChecking=no" debian@node-1 "cat << EOF | sudo tee /etc/network/interfaces
 auto lo
