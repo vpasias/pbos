@@ -28,9 +28,9 @@ ceph_cluster_network: 192.168.24.0/24
 ceph_replicas: 2
 ceph_mgr_pg_autoscaler: true
 ceph_osd_devices:
-  - /dev/sda
-  - /dev/sdb
-  - /dev/sdc
+  - /dev/vdb
+  - /dev/vdc
+  - /dev/vdd
 
 ## LVM
 # loopback file path for LVM.
