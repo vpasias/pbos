@@ -481,4 +481,4 @@ for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo '%debian ALL=(ALL) ALL' >> /etc/sudoers.d/debian"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "chmod 440 /etc/sudoers.d/debian"; done
 
-for i in {1..3}; do virsh shutdown node-$i; done && sleep 10 && virsh list --all && for i in {1..3}; do virsh start node-$i; done && sleep 10 && virsh list --all
+for i in {1..3}; do virsh shutdown node-$i; done && sleep 90 && virsh list --all && for i in {1..3}; do virsh start node-$i; done && sleep 90 && virsh list --all
