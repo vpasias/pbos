@@ -195,8 +195,8 @@ net.core.bpf_jit_limit=3000000000
 kernel.keys.maxkeys=2000
 kernel.keys.maxbytes=2000000
 net.ipv4.ip_forward=1
-net.ipv4.conf.all.arp_filter=0
-net.ipv4.conf.all.rp_filter=2
+#net.ipv4.conf.all.arp_filter=0
+#net.ipv4.conf.all.rp_filter=2
 EOF"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo sysctl --system"; done
@@ -210,8 +210,8 @@ for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 8021q >> /etc/modules-load.d/8021q.conf"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo configfs >> /etc/modules"; done
-for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "500    firsttable" | tee -a /etc/iproute2/rt_tables'; done
-for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "501    echo "500    firsttable" | sudo tee -a /etc/iproute2/rt_tables" | tee -a /etc/iproute2/rt_tables'; done
+#for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "500    firsttable" | tee -a /etc/iproute2/rt_tables'; done
+#for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i 'echo "501    echo "500    firsttable" | sudo tee -a /etc/iproute2/rt_tables" | tee -a /etc/iproute2/rt_tables'; done
 
 ssh -o "StrictHostKeyChecking=no" debian@node-1 "cat << EOF | sudo tee /etc/network/interfaces
 auto lo
