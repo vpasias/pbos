@@ -115,7 +115,7 @@ for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo rm -r
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo hostnamectl set-hostname node-$i --static"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt update -y && sudo apt-get install -y git vim net-tools wget curl bash-completion apt-utils iperf iperf3 mtr traceroute netcat sshpass socat python3 python3-simplejson xfsprogs locate jq gcc-8-base"; done
-for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt-get install -y cloud-guest-utils dnsutils cloud-init python3-venv virtualenv mdadm ifupdown2"; done
+for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo apt-get install -y cloud-guest-utils dnsutils cloud-init python3-venv virtualenv mdadm"; done
 
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" debian@node-$i "sudo mkdir -p /storage && sudo groupadd rabbitmq"; done
 
