@@ -261,7 +261,7 @@ iface bond1.5 inet static
     netmask 255.255.255.0 
     mtu 1500
 #   mtu 9000
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.5 mtu 1500
 #   post-up ifconfig vlan5 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.5 9000
@@ -272,7 +272,7 @@ iface bond1.10 inet static
     netmask 255.255.255.0
     mtu 1500
 #   mtu 9000
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.10 mtu 1500
 #   post-up ifconfig vlan10 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.10 9000
@@ -283,20 +283,20 @@ iface bond1.20 inet static
     netmask 255.255.255.0
     mtu 1500
 #   mtu 9000
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.20 mtu 1500
 #   post-up ifconfig vlan20 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.20 9000
 
 auto bond1.30
-iface bond1.30 inet static
+iface bond1.30 inet manual
     mtu 1500
 #   mtu 9000    
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.30 mtu 1500
 #   post-up ifconfig vlan30 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.30 9000
-    post-up ifconfig bond1.30 0.0.0.0 up
+#    post-up ifconfig bond1.30 0.0.0.0 up
 
 source /etc/network/interfaces.d/*.cfg
 EOF"
@@ -349,7 +349,7 @@ iface bond1.5 inet static
     netmask 255.255.255.0
     mtu 1500
 #   mtu 9000
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.5 mtu 1500
 #   post-up ifconfig vlan5 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.5 9000
@@ -360,7 +360,7 @@ iface bond1.10 inet static
     netmask 255.255.255.0
     mtu 1500
 #   mtu 9000
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.10 mtu 1500
 #   post-up ifconfig vlan10 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.10 9000
@@ -371,20 +371,20 @@ iface bond1.20 inet static
     netmask 255.255.255.0
     mtu 1500
 #   mtu 9000
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.20 mtu 1500
 #   post-up ifconfig vlan20 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.20 9000
 
 auto bond1.30
-iface bond1.30 inet static
+iface bond1.30 inet manual
     mtu 1500
 #   mtu 9000    
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.30 mtu 1500
 #   post-up ifconfig vlan30 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.30 9000
-    post-up ifconfig bond1.30 0.0.0.0 up
+#    post-up ifconfig bond1.30 0.0.0.0 up
 
 source /etc/network/interfaces.d/*.cfg
 EOF"
@@ -437,7 +437,7 @@ iface bond1.5 inet static
     netmask 255.255.255.0
     mtu 1500
 #   mtu 9000
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.5 mtu 1500
 #   post-up ifconfig vlan5 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.5 9000
@@ -448,7 +448,7 @@ iface bond1.10 inet static
     netmask 255.255.255.0
     mtu 1500
 #   mtu 9000
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.10 mtu 1500
 #   post-up ifconfig vlan10 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.10 9000
@@ -459,20 +459,20 @@ iface bond1.20 inet static
     netmask 255.255.255.0
     mtu 1500
 #   mtu 9000
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.20 mtu 1500
 #   post-up ifconfig vlan20 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.20 9000
 
 auto bond1.30
-iface bond1.30 inet static
+iface bond1.30 inet manual
     mtu 1500
 #   mtu 9000    
-    vlan-raw-device bond1
+#    vlan-raw-device bond1
     post-up ifconfig bond1.30 mtu 1500
 #   post-up ifconfig vlan30 mtu 9000
 #   post-up ifconfig eth1 mtu 9000 && ifconfig eth2 mtu 9000 && ifconfig bond1 mtu 9000 && ifconfig bond1.30 9000
-    post-up ifconfig bond1.30 0.0.0.0 up
+#    post-up ifconfig bond1.30 0.0.0.0 up
 
 source /etc/network/interfaces.d/*.cfg
 EOF"
