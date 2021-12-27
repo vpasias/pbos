@@ -1,0 +1,155 @@
+#!/usr/bin/env python
+import os
+
+# user account in VM.
+USERID = 'rocky'
+
+PREFIX = 'node-'
+# VM location and size.
+SRC_DIR = '/home/' + os.environ.get('USER') + '/images'
+DST_DIR = '/home/' + os.environ.get('USER') + '/' + PREFIX + 'lab'
+OSD_DIR = '/home/' + os.environ.get('USER') + '/' + PREFIX + 'lab'
+#TEMPDIR = '/home/' + os.environ.get('USER') + '/vms'
+
+# machine list.
+VMS = [
+        PREFIX + '1',
+        PREFIX + '2',
+        PREFIX + '3',
+]
+
+# machine role list.
+ROLES = {
+        PREFIX + '1': ['storage'],
+        PREFIX + '2': ['storage'],
+        PREFIX + '3': ['storage'],
+}
+CORES = {
+        PREFIX + '1': 8,
+        PREFIX + '2': 8,
+        PREFIX + '3': 8,
+}
+MEM = {
+        PREFIX + '1': 32,
+        PREFIX + '2': 32,
+        PREFIX + '3': 32,
+}
+DISK = {
+        PREFIX + '1': 120,
+        PREFIX + '2': 120,
+        PREFIX + '3': 120,
+}
+# For VM with storage role
+OSD_NUM = 3     # The number of osd disks for VM with storage role
+OSD_SIZE = 120   # OSD disk size in GiB.
+# machine IP list.
+NET = {
+        'mgmt': '192.168.20',       
+        'l1s1': '0.0.0',
+        'l2s1': '0.0.0',
+        'l1s2': '0.0.0',
+        'l2s2': '0.0.0',
+        'l1s3': '0.0.0',
+        'l2s3': '0.0.0',
+        'ss1': '0.0.0',
+        'ss2': '0.0.0',
+}
+# GW = '192.168.20.1'    # Gateway IP address
+# DNS = '8.8.8.8'
+IP = 200  # The last octet of the IP address to begin.
+REP_BR = 'mgmt'  # Select this bridge's ip to insert into /etc/hosts
+IPS = {
+    PREFIX + '1': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+1),
+            'nm': '255.255.255.0',
+            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'l1s1': {
+            'ip': '',
+        },
+        'l2s1': {
+            'ip': '',
+        },
+        'ss1': {
+            'ip': '',
+        },    
+        'ss2': {
+            'ip': '',
+        },
+    },
+    PREFIX + '2': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+2),
+            'nm': '255.255.255.0',
+            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'l1s2': {
+            'ip': '',
+        },
+        'l2s2': {
+            'ip': '',
+        },
+        'ss1': {
+            'ip': '',
+        },    
+        'ss2': {
+            'ip': '',
+        },    
+    },
+    PREFIX + '3': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+3),
+            'nm': '255.255.255.0',
+            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'l1s3': {
+            'ip': '',
+        },
+        'l2s3': {
+            'ip': '',
+        },
+        'ss1': {
+            'ip': '',
+        },    
+        'ss2': {
+            'ip': '',
+        },
+    },
+}
+        
+# which OS you choose. DEB or ROCKY?
+OS = 'ROCKY'
+
+# Do not edit below this line!!!
+# debian openstack image 
+# disk total size: 2G
+# Login account: debian
+DEB_IMG_URL = 'http://cdimage.debian.org/cdimage/openstack/current-10'
+DEB_VER = '11'
+DEB_ARCH = 'amd64'
+DEB_IMG = 'debian-{}-openstack-{}.qcow2'.format(DEB_VER, DEB_ARCH)
+#DEB_IMG = 'debian-{}-genericcloud-{}.qcow2'.format(DEB_VER, DEB_ARCH)
+DEB_UID = 'debian'
+DEB_KEYSERVER = 'keyring.debian.org'
+# Find out keyid using 'gpg --verify SHA256SUMS.sign' output.
+# And Run gpg --keyserver ${DEB_KEYSERVER} --recv <keyid>
+DEB_KEYID = 'DF9B9C49EAA9298432589D76DA87E80D6294BE9B' # debian buster key
+# rocky cloud image 
+# disk total size: 5G
+# Login account: rocky
+ROCKY_VER = '8.5'
+ROCKY_IMG_URL = 'https://download.rockylinux.org/pub/rocky/{}/images/'.format(ROCKY_VER)
+ROCKY_ARCH = 'x86_64'
+ROCKY_IMG = 'Rocky-{}-{}-GenericCloud.qcow2'.format(ROCKY_VER, ROCKY_ARCH)
+ROCKY_UID = 'rocky'
+
+IMG_URL = eval('{}_IMG_URL'.format(OS))
+VER = eval('{}_VER'.format(OS))
+ARCH = eval('{}_ARCH'.format(OS))
+IMG = eval('{}_IMG'.format(OS))
+UID = eval('{}_UID'.format(OS))
+
+SSHKEY = os.environ.get('HOME') + '/.ssh/id_rsa'
+
+#print(OS, IMG_URL, IMG)
