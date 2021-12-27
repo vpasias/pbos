@@ -1,7 +1,8 @@
 # Clab case
 Hypervisor Hosts Interfaces:
 - eth0 - mgmt (PXE-admin)
-- bond1 (eth1 + eth2) - cluster (API-keepalived-overlay-rados GW-provider-storage)
+- bond1 (eth1 + eth2) - cluster (API-keepalived-overlay-rados GW-provider)
+- bond2 (eth3 + eth4) - storage
 
 interfaces & VLANs allocation:
 - eth0 (VLAN 0 - native): mgmt network: 192.168.20.0/24
@@ -10,4 +11,4 @@ interfaces & VLANs allocation:
 - bond1.10 (VLAN 10): overlay network: 192.168.23.0/24
 - bond1.20 (VLAN 20): rados GW network: 192.168.25.0/24 
 - bond1.30 (VLAN 30): vlan provider network: 192.168.27.0/24 
-- bond1.40 (VLAN 40): storage network: 192.168.24.0/24
+- bond2 (VLAN 0 - native): storage network: 192.168.24.0/24
