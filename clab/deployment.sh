@@ -9,12 +9,12 @@ source ~/.envs/robot/bin/activate
 pip install wheel
 pip install robotframework
 sudo sed -i 's/Debian/Rocky Linux/' /home/iason/robot4kvm/data/grub
-cp -rf /home/iason/pbos/bond/vm_man4rocky.sh /home/iason/robot4kvm/scripts/vm_man4rocky.sh
+cp -rf /home/iason/pbos/clab/vm_man4rocky.sh /home/iason/robot4kvm/scripts/vm_man4rocky.sh
 chmod +x /home/iason/robot4kvm/scripts/vm_man4rocky.sh
-cp -rf /home/iason/pbos/bond/setup_rocky.robot /home/iason/robot4kvm/setup_rocky.robot
-cp -rf /home/iason/pbos/bond/vm_networks.sh .
+cp -rf /home/iason/pbos/clab/setup_rocky.robot /home/iason/robot4kvm/setup_rocky.robot
+cp -rf /home/iason/pbos/clab/vm_networks.sh .
 chmod +x vm_networks.sh && ./vm_networks.sh
-cp -rf /home/iason/pbos/bond/props.py.pbos /home/iason/robot4kvm/props.py
+cp -rf /home/iason/pbos/clab/props.py.pbos /home/iason/robot4kvm/props.py
 robot -d output setup_rocky.robot
 sleep 30
 for i in {1..3}; do ssh -o "StrictHostKeyChecking=no" rocky@node-$i "uname -a"; done
@@ -27,13 +27,13 @@ for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@n
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
 
 ### Bond configuration
-sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond1
-sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond1
-sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-3:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/clab/ifcfg-bond1 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/clab/ifcfg-bond1 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/clab/ifcfg-bond1 root@node-3:/etc/sysconfig/network-scripts/ifcfg-bond1
 
-sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond2
-sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond2
-sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-3:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/clab/ifcfg-bond2 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/clab/ifcfg-bond2 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/clab/ifcfg-bond2 root@node-3:/etc/sysconfig/network-scripts/ifcfg-bond2
 
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cp /etc/sysconfig/network-scripts/ifcfg-eth1 /tmp/ifcfg-eth1"; done
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cp /etc/sysconfig/network-scripts/ifcfg-eth2 /tmp/ifcfg-eth2"; done
