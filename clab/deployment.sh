@@ -95,66 +95,66 @@ NETMASK=255.255.255.0
 EOF"
 
 # overlay network configuration
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.10
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.100
 ONBOOT=yes
 VLAN=yes
-DEVICE=bond1.10
+DEVICE=bond1.100
 BOOTPROTO=none
 IPADDR=192.168.23.201
 NETMASK=255.255.255.0
 EOF"
 
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.10
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.100
 ONBOOT=yes
 VLAN=yes
-DEVICE=bond1.10
+DEVICE=bond1.100
 BOOTPROTO=none
 IPADDR=192.168.23.202
 NETMASK=255.255.255.0
 EOF"
 
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.10
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.100
 ONBOOT=yes
 VLAN=yes
-DEVICE=bond1.10
+DEVICE=bond1.100
 BOOTPROTO=none
 IPADDR=192.168.23.203
 NETMASK=255.255.255.0
 EOF"
 
 # rados GW network configuration
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.20
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.200
 ONBOOT=yes
 VLAN=yes
-DEVICE=bond1.20
+DEVICE=bond1.200
 BOOTPROTO=none
 IPADDR=192.168.25.201
 NETMASK=255.255.255.0
 EOF"
 
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.20
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.200
 ONBOOT=yes
 VLAN=yes
-DEVICE=bond1.20
+DEVICE=bond1.200
 BOOTPROTO=none
 IPADDR=192.168.25.202
 NETMASK=255.255.255.0
 EOF"
 
-sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.20
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.200
 ONBOOT=yes
 VLAN=yes
-DEVICE=bond1.20
+DEVICE=bond1.200
 BOOTPROTO=none
 IPADDR=192.168.25.203
 NETMASK=255.255.255.0
 EOF"
 
 # vlan provider network configuration
-for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.300
 ONBOOT=yes
 VLAN=yes
-DEVICE=bond1.30
+DEVICE=bond1.300
 BOOTPROTO=none
 EOF"; done
 
