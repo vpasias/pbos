@@ -6,7 +6,7 @@ Hypervisor Hosts Interfaces:
 
 interfaces & VLANs allocation:
 - eth0 (VLAN 0 - native): mgmt network: 192.168.20.0/24
-- bond1 (VLAN 0 - native): flat provider network: 192.168.22.0/24
+- bond1.10 (VLAN 10): provider network: 192.168.22.0/24
 - bond1.5 (VLAN 5): API-keepalived network: 192.168.21.0/24
 - bond1.100 (VLAN 100): overlay network: 192.168.23.0/24
 - bond1.200 (VLAN 200): rados GW network: 192.168.25.0/24 
