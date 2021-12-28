@@ -22,7 +22,7 @@ storage_backends:
   - lvm
 # ceph
 ceph_public_network_iface: bond2
-ceph_rgw_service_iface: bond1.20
+ceph_rgw_service_iface: bond1.200
 ceph_public_network: 192.168.24.0/24
 ceph_cluster_network: 192.168.24.0/24
 ceph_replicas: 2
@@ -40,7 +40,7 @@ lvm_size: 50G
 
 # neutron
 provider_interface: "bond1"
-overlay_interface: "bond1.10"
+overlay_interface: "bond1.100"
 
 ######################################################
 # Warn: Do not edit below if you are not an expert.  #
