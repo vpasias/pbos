@@ -94,6 +94,14 @@ IPADDR=192.168.21.203
 NETMASK=255.255.255.0
 EOF"
 
+# provider 1 network configuration
+for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.10
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1.10
+BOOTPROTO=none
+EOF"; done
+
 # overlay network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.100
 ONBOOT=yes
@@ -150,7 +158,7 @@ IPADDR=192.168.25.203
 NETMASK=255.255.255.0
 EOF"
 
-# vlan provider network configuration
+# provider 2 network configuration
 for i in {1..3}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.300
 ONBOOT=yes
 VLAN=yes
