@@ -10,6 +10,7 @@ keepalived_vip_svc: "192.168.20.100"
 
 # openstack
 openstack_release: "wallaby"
+# openstack_release: "xena"
 
 # openstack mariadb
 openstack_mariadb_acl_cidr:
