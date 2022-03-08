@@ -73,6 +73,9 @@ ansible_password: "{{ vault_ssh_password }}"
 ansible_become_password: "{{ vault_sudo_password }}"
 ansible_python_interpreter: "/usr/bin/python3"
 
+# common
+ca_passphrase: "{{ vault_ca_passphrase }}"
+
 # mariadb / openstack password
 mariadb_root_password: "{{ vault_mariadb_root_password }}"
 keystone_password: "{{ vault_keystone_password }}"
@@ -82,6 +85,8 @@ neutron_password: "{{ vault_neutron_password }}"
 cinder_password: "{{ vault_cinder_password }}"
 nova_password: "{{ vault_nova_password }}"
 barbican_password: "{{ vault_barbican_password }}"
+heat_password: "{{ vault_heat_password }}"
+magnum_password: "{{ vault_magnum_password }}"
 
 # rabbitmq
 rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
