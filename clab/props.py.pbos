@@ -138,7 +138,7 @@ DEB_KEYID = 'DF9B9C49EAA9298432589D76DA87E80D6294BE9B' # debian buster key
 # rocky cloud image 
 # disk total size: 5G
 # Login account: rocky
-ROCKY_VER = '8.5'
+ROCKY_VER = '8.6'
 ROCKY_IMG_URL = 'https://download.rockylinux.org/pub/rocky/{}/images/'.format(ROCKY_VER)
 ROCKY_ARCH = 'x86_64'
 ROCKY_IMG = 'Rocky-{}-{}-GenericCloud.qcow2'.format(ROCKY_VER, ROCKY_ARCH)
