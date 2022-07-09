@@ -17,13 +17,18 @@ keepalived_vip_svc: "192.168.20.100"
 ntp_allowed_cidr: "192.168.21.0/24"
 
 # openstack
-openstack_release: "wallaby"
+openstack_release: "yoga"
+# openstack_release: "wallaby"
 # openstack_release: "xena"
 
 # openstack mariadb
 openstack_mariadb_acl_cidr:
   - "localhost"
   - "192.168.21.0/255.255.255.0"
+
+# mariadb_ha_mode: multi-master(default), active-standby
+# used by pbos.haproxy role
+mariadb_ha_mode: 'multi-master'
 
 # storage
 # storage backends: ceph, lvm, or both
@@ -64,6 +69,7 @@ skip_ca_cert_creation_tasks: false
 #  crt: "/path/to/ca-cert.pem"
 #}
 
+
 ######################################################
 # Warn: Do not edit below if you are not an expert.  #
 ######################################################
@@ -89,6 +95,7 @@ heat_password: "{{ vault_heat_password }}"
 magnum_password: "{{ vault_magnum_password }}"
 octavia_password: "{{ vault_octavia_password }}"
 octavia_certs_key_passphrase: "{{ vault_octavia_certs_key_passphrase }}"
+octavia_heartbeat_key: "{{ vault_octavia_heartbeat_key }}"
 
 # rabbitmq
 rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
