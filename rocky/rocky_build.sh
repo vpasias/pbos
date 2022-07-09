@@ -1,8 +1,8 @@
 #!/bin/bash
-#ISO_PATH="/mnt/extra/virt/images/Rocky-8.5-x86_64-minimal.iso"
-#DISK_PATH="/mnt/extra/virt/images/rocky-8.5-x86_64-genericcloud.qcow2"
-ISO_PATH="/home/iason/images/Rocky-8.5-x86_64-minimal.iso"
-DISK_PATH="/home/iason/images/rocky-8.5-x86_64-genericcloud.qcow2"
+#ISO_PATH="/mnt/extra/virt/images/Rocky-8.6-x86_64-minimal.iso"
+#DISK_PATH="/mnt/extra/virt/images/rocky-8.6-x86_64-genericcloud.qcow2"
+ISO_PATH="/home/iason/images/Rocky-8.6-x86_64-minimal.iso"
+DISK_PATH="/home/iason/images/rocky-8.6-x86_64-genericcloud.qcow2"
 DISK_SIZE=5
 DISK_FORMAT="qcow2"
 NET_BRIDGE="virbr0"
