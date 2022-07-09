@@ -12,6 +12,12 @@ node-[1:3]
 node-[1:3]
 #node-[4:6]
 
+[storage_controller]
+node-[1:3]
+
+[storage]
+node-[1:3]
+#node-[4:6]
 
 ###################################################
 ## Do not touch below if you are not an expert!!! #
@@ -44,21 +50,24 @@ controller
 [magnum:children]
 controller
 
+[octavia:children]
+controller
+
 [openstack:children]
 controller
 compute
 
 [ceph_mon:children]
-controller
+storage_controller
 
 [ceph_mgr:children]
-controller
+storage_controller
+
+[ceph_osd:children]
+storage
 
 [ceph_rgw:children]
 controller
-
-[ceph_osd:children]
-compute
 
 [ceph:children]
 ceph_mon
