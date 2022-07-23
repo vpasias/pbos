@@ -38,7 +38,7 @@ mariadb_ha_mode: 'multi-master'
 storage_backends:
   - ceph
   - lvm
-  - lightos
+#  - lightos
 
 ## ceph: set ceph configuration in ceph.yml
 
