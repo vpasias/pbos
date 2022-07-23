@@ -38,23 +38,13 @@ mariadb_ha_mode: 'multi-master'
 storage_backends:
   - ceph
   - lvm
-# ceph
-ceph_public_network_iface: bond2
-ceph_rgw_service_iface: bond1.200
-ceph_public_network: 192.168.24.0/24
-ceph_cluster_network: 192.168.24.0/24
-ceph_replicas: 2
-ceph_mgr_pg_autoscaler: true
-ceph_osd_devices:
-  - /dev/sdb
-  - /dev/sdc
-  - /dev/sdd
+  - lightos
 
-## LVM
-# loopback file path for LVM.
-loopback_file: "/storage/pbos.lvm"
-# lvm size in GiB.
-lvm_size: 50G
+## ceph: set ceph configuration in ceph.yml
+
+## lvm: set lvm configuration in lvm.yml
+
+## lightos: set lightos configuration in lightos.yml
 
 # neutron
 provider_interface: "bond1.10"
@@ -96,6 +86,7 @@ magnum_password: "{{ vault_magnum_password }}"
 octavia_password: "{{ vault_octavia_password }}"
 octavia_certs_key_passphrase: "{{ vault_octavia_certs_key_passphrase }}"
 octavia_heartbeat_key: "{{ vault_octavia_heartbeat_key }}"
+designate_password: "{{ vault_designate_password }}"
 
 # rabbitmq
 rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
