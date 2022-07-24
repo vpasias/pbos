@@ -17,13 +17,18 @@ keepalived_vip_svc: "192.168.20.100"
 ntp_allowed_cidr: "192.168.21.0/24"
 
 # openstack
-openstack_release: "wallaby"
+openstack_release: "yoga"
+# openstack_release: "wallaby"
 # openstack_release: "xena"
 
 # openstack mariadb
 openstack_mariadb_acl_cidr:
   - "localhost"
   - "192.168.21.0/255.255.255.0"
+
+# mariadb_ha_mode: multi-master(default), active-standby
+# used by pbos.haproxy role
+mariadb_ha_mode: 'multi-master'
 
 # storage
 # storage backends: ceph, lvm, or both
@@ -33,27 +38,17 @@ openstack_mariadb_acl_cidr:
 storage_backends:
   - ceph
   - lvm
-# ceph
-ceph_public_network_iface: bond2
-ceph_rgw_service_iface: bond1.20
-ceph_public_network: 192.168.24.0/24
-ceph_cluster_network: 192.168.24.0/24
-ceph_replicas: 2
-ceph_mgr_pg_autoscaler: true
-ceph_osd_devices:
-  - /dev/sdb
-  - /dev/sdc
-  - /dev/sdd
+#  - lightos
 
-## LVM
-# loopback file path for LVM.
-loopback_file: "/storage/pbos.lvm"
-# lvm size in GiB.
-lvm_size: 50G
+## ceph: set ceph configuration in ceph.yml
+
+## lvm: set lvm configuration in lvm.yml
+
+## lightos: set lightos configuration in lightos.yml
 
 # neutron
-provider_interface: "bond1"
-overlay_interface: "bond1.10"
+provider_interface: "bond1.10"
+overlay_interface: "bond1.100"
 
 # CA cert
 # Set this to true to use the existing CA key and certificate
@@ -63,6 +58,7 @@ skip_ca_cert_creation_tasks: false
 #  key: "/path/to/ca-key.pem",
 #  crt: "/path/to/ca-cert.pem"
 #}
+
 
 ######################################################
 # Warn: Do not edit below if you are not an expert.  #
@@ -89,6 +85,8 @@ heat_password: "{{ vault_heat_password }}"
 magnum_password: "{{ vault_magnum_password }}"
 octavia_password: "{{ vault_octavia_password }}"
 octavia_certs_key_passphrase: "{{ vault_octavia_certs_key_passphrase }}"
+octavia_heartbeat_key: "{{ vault_octavia_heartbeat_key }}"
+designate_password: "{{ vault_designate_password }}"
 
 # rabbitmq
 rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
