@@ -17,14 +17,14 @@ chmod +x vm_networks.sh && ./vm_networks.sh
 cp -rf /home/iason/pbos/bond/props.py.pbos /home/iason/robot4kvm/props.py
 robot -d output setup_rocky.robot
 sleep 30
-for i in {1..6}; do ssh -o "StrictHostKeyChecking=no" rocky@node-$i "uname -a"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "hostnamectl set-hostname node-$i --static"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "modprobe 8021q"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "modprobe bonding"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "lsmod | grep 8021q"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "lsmod | grep bonding"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 8021q >> /etc/modules-load.d/8021q.conf"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
+for i in {1..9}; do ssh -o "StrictHostKeyChecking=no" rocky@node-$i "uname -a"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "hostnamectl set-hostname node-$i --static"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "modprobe 8021q"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "modprobe bonding"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "lsmod | grep 8021q"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "lsmod | grep bonding"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo 8021q >> /etc/modules-load.d/8021q.conf"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "echo bonding >> /etc/modules"; done
 
 ### Bond configuration
 sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond1
@@ -33,6 +33,9 @@ sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-
 sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-4:/etc/sysconfig/network-scripts/ifcfg-bond1
 sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-5:/etc/sysconfig/network-scripts/ifcfg-bond1
 sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-6:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-7:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-8:/etc/sysconfig/network-scripts/ifcfg-bond1
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond1 root@node-9:/etc/sysconfig/network-scripts/ifcfg-bond1
 
 sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-1:/etc/sysconfig/network-scripts/ifcfg-bond2
 sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-2:/etc/sysconfig/network-scripts/ifcfg-bond2
@@ -40,43 +43,46 @@ sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-
 sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-4:/etc/sysconfig/network-scripts/ifcfg-bond2
 sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-5:/etc/sysconfig/network-scripts/ifcfg-bond2
 sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-6:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-7:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-8:/etc/sysconfig/network-scripts/ifcfg-bond2
+sshpass -p gprm8350 scp -o StrictHostKeyChecking=no /home/iason/pbos/bond/ifcfg-bond2 root@node-9:/etc/sysconfig/network-scripts/ifcfg-bond2
 
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cp /etc/sysconfig/network-scripts/ifcfg-eth1 /tmp/ifcfg-eth1"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cp /etc/sysconfig/network-scripts/ifcfg-eth2 /tmp/ifcfg-eth2"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cp /etc/sysconfig/network-scripts/ifcfg-eth3 /tmp/ifcfg-eth3"; done
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cp /etc/sysconfig/network-scripts/ifcfg-eth4 /tmp/ifcfg-eth4"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cp /etc/sysconfig/network-scripts/ifcfg-eth1 /tmp/ifcfg-eth1"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cp /etc/sysconfig/network-scripts/ifcfg-eth2 /tmp/ifcfg-eth2"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cp /etc/sysconfig/network-scripts/ifcfg-eth3 /tmp/ifcfg-eth3"; done
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cp /etc/sysconfig/network-scripts/ifcfg-eth4 /tmp/ifcfg-eth4"; done
 
 ### Bond port configuration
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth1
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth1
 
 NAME=bond-slave-eth1
 MASTER=bond1
 SLAVE=yes
 EOF"; done
 
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth2
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth2
 
 NAME=bond-slave-eth2
 MASTER=bond1
 SLAVE=yes
 EOF"; done
 
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth3
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth3
 
 NAME=bond-slave-eth3
 MASTER=bond2
 SLAVE=yes
 EOF"; done
 
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth4
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth4
 
 NAME=bond-slave-eth4
 MASTER=bond2
 SLAVE=yes
 EOF"; done
 
-### VLAN configuration
-# API network configuration
+####### VLAN configuration
+### API network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.5
 ONBOOT=yes
 VLAN=yes
@@ -131,7 +137,34 @@ IPADDR=192.168.21.206
 NETMASK=255.255.255.0
 EOF"
 
-# overlay network configuration
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-7 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.5
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1.5
+BOOTPROTO=none
+IPADDR=192.168.21.207
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-8 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.5
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1.5
+BOOTPROTO=none
+IPADDR=192.168.21.208
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-9 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.5
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1.5
+BOOTPROTO=none
+IPADDR=192.168.21.209
+NETMASK=255.255.255.0
+EOF"
+
+### overlay network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.10
 ONBOOT=yes
 VLAN=yes
@@ -186,7 +219,34 @@ IPADDR=192.168.23.206
 NETMASK=255.255.255.0
 EOF"
 
-# rados GW network configuration
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-7 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.10
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1.10
+BOOTPROTO=none
+IPADDR=192.168.23.207
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-8 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.10
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1.10
+BOOTPROTO=none
+IPADDR=192.168.23.208
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-9 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.10
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1.10
+BOOTPROTO=none
+IPADDR=192.168.23.209
+NETMASK=255.255.255.0
+EOF"
+
+### rados GW network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.20
 ONBOOT=yes
 VLAN=yes
@@ -241,15 +301,42 @@ IPADDR=192.168.25.206
 NETMASK=255.255.255.0
 EOF"
 
-# vlan provider network configuration
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-7 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.20
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1.20
+BOOTPROTO=none
+IPADDR=192.168.25.207
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-8 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.20
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1.20
+BOOTPROTO=none
+IPADDR=192.168.25.208
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-9 "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.20
+ONBOOT=yes
+VLAN=yes
+DEVICE=bond1.20
+BOOTPROTO=none
+IPADDR=192.168.25.209
+NETMASK=255.255.255.0
+EOF"
+
+### vlan provider network configuration
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee /etc/sysconfig/network-scripts/ifcfg-bond1.30
 ONBOOT=yes
 VLAN=yes
 DEVICE=bond1.30
 BOOTPROTO=none
 EOF"; done
 
-# storage network configuration
+### storage network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
 
 IPADDR=192.168.24.201
@@ -286,8 +373,26 @@ IPADDR=192.168.24.206
 NETMASK=255.255.255.0
 EOF"
 
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "systemctl restart network"; done
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-7 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
 
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" rocky@node-$i "ip a"; done
+IPADDR=192.168.24.207
+NETMASK=255.255.255.0
+EOF"
 
-for i in {1..6}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" rocky@node-$i "lsblk && uname -a"; done
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-8 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
+
+IPADDR=192.168.24.208
+NETMASK=255.255.255.0
+EOF"
+
+sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-9 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond2
+
+IPADDR=192.168.24.209
+NETMASK=255.255.255.0
+EOF"
+
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "systemctl restart network"; done
+
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" rocky@node-$i "ip a"; done
+
+for i in {1..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" rocky@node-$i "lsblk && uname -a"; done
