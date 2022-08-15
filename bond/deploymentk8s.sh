@@ -79,47 +79,47 @@ EOF"; done
 
 ### native network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-IPADDR=192.168.20.201
+IPADDR=192.168.30.201
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-IPADDR=192.168.20.202
+IPADDR=192.168.30.202
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-IPADDR=192.168.20.203
+IPADDR=192.168.30.203
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-4 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-IPADDR=192.168.20.204
+IPADDR=192.168.30.204
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-5 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-IPADDR=192.168.20.205
+IPADDR=192.168.30.205
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-6 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-IPADDR=192.168.20.206
+IPADDR=192.168.30.206
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-7 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-IPADDR=192.168.20.207
+IPADDR=192.168.30.207
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-8 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-IPADDR=192.168.20.208
+IPADDR=192.168.30.208
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-9 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-IPADDR=192.168.20.209
+IPADDR=192.168.30.209
 NETMASK=255.255.255.0
 EOF"
 
