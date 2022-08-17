@@ -52,8 +52,8 @@ overlay_interface: "bond1.100"
 
 # CA cert
 # Set this to true to use the existing CA key and certificate
-skip_ca_cert_creation_tasks: true
-# skip_ca_cert_creation_tasks: false
+# skip_ca_cert_creation_tasks: true
+skip_ca_cert_creation_tasks: false
 # Override tls_tmp_ca to the existing CA key and cert directory 
 #tls_tmp_ca: {
 #  key: "/path/to/ca-key.pem",
