@@ -48,15 +48,15 @@ CORES = {
         PREFIX + '9': 6,        
 }
 MEM = {
-        PREFIX + '1': 32,
-        PREFIX + '2': 32,
-        PREFIX + '3': 32,
-        PREFIX + '4': 32,
-        PREFIX + '5': 32,
-        PREFIX + '6': 32,
-        PREFIX + '7': 32,
-        PREFIX + '8': 32,
-        PREFIX + '9': 32,
+        PREFIX + '1': 24,
+        PREFIX + '2': 24,
+        PREFIX + '3': 24,
+        PREFIX + '4': 24,
+        PREFIX + '5': 24,
+        PREFIX + '6': 24,
+        PREFIX + '7': 24,
+        PREFIX + '8': 24,
+        PREFIX + '9': 24,
 }
 DISK = {
         PREFIX + '1': 120,
