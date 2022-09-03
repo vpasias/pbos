@@ -107,9 +107,9 @@
   roles:
     - {role: pbos.magnum, tags: ['magnum', 'openstack-extra']}
 
-- name: Deploy openstack DNSaaS service (designate)
-  hosts: designate
-  any_errors_fatal: true
-  roles:
-    - {role: pbos.designate, tags: ['designate', 'openstack-extra']}
+#- name: Deploy openstack DNSaaS service (designate)
+#  hosts: designate
+#  any_errors_fatal: true
+#  roles:
+#    - {role: pbos.designate, tags: ['designate', 'openstack-extra']}
 ...
