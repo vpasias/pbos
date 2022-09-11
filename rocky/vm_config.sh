@@ -5,9 +5,8 @@ cat /etc/os-release
 uname -a
 dnf -y install cloud-utils-growpart curl epel-release 
 dnf -y install python3 bind-utils
-dnf -y install openssh-server cloud-init sshpass python3-cryptography
-dnf install -y net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat python3-simplejson xfsprogs jq virtualenv redhat-lsb-core mdadm
-#dnf install -y qemu-kvm
+dnf -y install openssh-server cloud-init
+dnf install -y net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat xfsprogs jq redhat-lsb-core mdadm
 
 echo "configfs" >> /etc/modules
 update-initramfs -u
