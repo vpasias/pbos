@@ -1,0 +1,7 @@
+---
+- name: Deploy openstack LBaaS service (octavia)
+  hosts: octavia
+  any_errors_fatal: true
+  roles:
+    - {role: pbos.octavia, tags: ['octavia', 'openstack-extra']}
+...
