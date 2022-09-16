@@ -40,7 +40,7 @@ enable_public_svc: false
 # If there are multiple backends, the first one will be the default backend.
 storage_backends:
   - ceph
-  - lvm
+#  - lvm
 #  - lightos
 
 ## ceph: set ceph configuration in ceph.yml
