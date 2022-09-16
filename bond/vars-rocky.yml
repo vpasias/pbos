@@ -13,13 +13,16 @@ keepalived_vip: "192.168.21.100"
 keepalived_interface_svc: "eth0"
 keepalived_vip_svc: "192.168.20.100"
 
+# common
+# deploy_ssh_key: (boolean) set true to create and deploy ssh keypair 
+# from the first controller to other nodes
+deploy_ssh_key: false
+
 # ntp
 ntp_allowed_cidr: "192.168.21.0/24"
 
-# openstack
+# openstack (wallaby, yoga)
 openstack_release: "yoga"
-# openstack_release: "wallaby"
-# openstack_release: "xena"
 
 # openstack mariadb
 openstack_mariadb_acl_cidr:
@@ -29,11 +32,11 @@ openstack_mariadb_acl_cidr:
 # mariadb_ha_mode: multi-master(default), active-standby
 # used by pbos.haproxy role
 mariadb_ha_mode: 'multi-master'
+# enable_public_svc: set to true for public service of mariadb, rabbitmq
+enable_public_svc: false
 
 # storage
-# storage backends: ceph, lvm, or both
-# ceph for production, lvm for demo/test.
-# Never use lvm for production since lvm creates and uses loopback device.
+# storage backends: ceph, lvm, lightos
 # If there are multiple backends, the first one will be the default backend.
 storage_backends:
   - ceph
@@ -52,7 +55,6 @@ overlay_interface: "bond1.100"
 
 # CA cert
 # Set this to true to use the existing CA key and certificate
-# skip_ca_cert_creation_tasks: true
 skip_ca_cert_creation_tasks: false
 # Override tls_tmp_ca to the existing CA key and cert directory 
 #tls_tmp_ca: {
