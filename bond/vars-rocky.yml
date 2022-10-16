@@ -51,6 +51,11 @@ storage_backends:
 provider_interface: "bond1.10"
 overlay_interface: "bond1.100"
 
+# designate
+# Set dns_domain if you install designate.
+dns_domain: "viptron.local."
+
+
 ######################################################
 # Warn: Do not edit below if you are not an expert.  #
 ######################################################
@@ -81,6 +86,10 @@ designate_password: "{{ vault_designate_password }}"
 
 # rabbitmq
 rabbitmq_openstack_password: "{{ vault_rabbitmq_openstack_password }}"
+
+# redis
+redis_password: "{{ vault_redis_password }}"
+redis_sentinel_password: "{{ vault_redis_sentinel_password }}"
 
 # openstack common
 openstack_admin_password: "{{ vault_openstack_admin_password }}"
