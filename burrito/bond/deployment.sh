@@ -9,12 +9,12 @@ source ~/.envs/robot/bin/activate
 pip install wheel
 pip install robotframework
 sudo sed -i 's/Debian/Rocky Linux/' /home/iason/robot4kvm/data/grub
-cp -rf /home/iason/pbos/bond/vm_man4rocky.sh /home/iason/robot4kvm/scripts/vm_man4rocky.sh
+cp -rf /home/iason/pbos/burrito/bond/vm_man4rocky.sh /home/iason/robot4kvm/scripts/vm_man4rocky.sh
 chmod +x /home/iason/robot4kvm/scripts/vm_man4rocky.sh
-cp -rf /home/iason/pbos/bond/setup_rocky.robot /home/iason/robot4kvm/setup_rocky.robot
-cp -rf /home/iason/pbos/bond/vm_networks.sh .
+cp -rf /home/iason/pbos/burrito/bond/setup_rocky.robot /home/iason/robot4kvm/setup_rocky.robot
+cp -rf /home/iason/pbos/burrito/bond/vm_networks.sh .
 chmod +x vm_networks.sh && ./vm_networks.sh
-cp -rf /home/iason/pbos/bond/props.py.pbos /home/iason/robot4kvm/props.py
+cp -rf /home/iason/pbos/burrito/bond/props.py.pbos /home/iason/robot4kvm/props.py
 robot -d output setup_rocky.robot
 sleep 30
 for i in {0..9}; do ssh -o "StrictHostKeyChecking=no" rocky@node-$i "uname -a"; done
