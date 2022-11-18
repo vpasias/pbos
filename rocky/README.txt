@@ -2,9 +2,9 @@ Create customised Rocky Linux 8 Cloud Image
 
 This is a guide to create Rocky Linux 8 cloud image.
 
-Download Rocky Linux 8.5 minimal iso.:
+Download Rocky Linux 8 minimal iso.:
 
-# cd /mnt/extra/virt/images && curl -sLO http://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.5-x86_64-minimal.iso && ls -lah && \
+# cd /mnt/extra/virt/images && curl -sLO http://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.7-x86_64-minimal.iso && ls -lah && \
 cd /mnt/extra/kvm-install-vm/ && git clone https://github.com/vpasias/pbos.git && cd /mnt/extra/kvm-install-vm/pbos/rocky
 
 ### Create root and rocky sha512 hash password using the following command:
@@ -114,8 +114,8 @@ Run virt-sysprep for the VM domain.:
 
 Trim the image.:
 
-# cd /mnt/extra/virt/images && mv rocky-8.5-x86_64-genericcloud.qcow2 rocky-8.5-x86_64-genericcloud.qcow2.new && \
-qemu-img convert -O qcow2 rocky-8.5-x86_64-genericcloud.qcow2.new CentOS-8-GenericCloud-8.1.1911-20200113.3.x86_64.qcow2
+# cd /mnt/extra/virt/images && mv rocky-8.7-x86_64-genericcloud.qcow2 rocky-8.7-x86_64-genericcloud.qcow2.new && \
+#qemu-img convert -O qcow2 rocky-8.7-x86_64-genericcloud.qcow2.new CentOS-8-GenericCloud-8.1.1911-20200113.3.x86_64.qcow2
 
 It shrank down from 5GiB to about 2.0GiB.
 
