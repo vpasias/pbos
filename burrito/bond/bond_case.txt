@@ -1,0 +1,14 @@
+# Bond case
+Hypervisor Hosts Interfaces:
+- eth0 - service (PXE-admin)
+- bond1 (eth1 + eth2) - cluster (management-overlay-provider)
+- bond2 (eth3 + eth4) - storage - rados GW
+
+interfaces & VLANs allocation:
+- eth0 (VLAN 0 - native): service network: 192.168.20.0/24
+- bond1.5 (VLAN 5): management (API-keepalived) network: 192.168.21.0/24
+- bond1.10 (VLAN 10): provider 1 (main) network: 192.168.22.0/24
+- bond1.100 (VLAN 100): overlay network: 192.168.23.0/24
+- bond1.200 (VLAN 200): provider 2 network: 192.168.25.0/24 
+- bond1.300 (VLAN 300): provider 3 network: 192.168.26.0/24 
+- bond2 (VLAN 0 - native): storage & rados GW network: 192.168.24.0/24
