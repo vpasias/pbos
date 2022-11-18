@@ -84,75 +84,62 @@ ssh rocky@node-0
 # sudo ping -I bond1.200 192.168.25.205
 # ping 192.168.24.206
 
-#sudo -i
-#mkdir -p /etc/pki/pbos && mkdir -p /tmp/tls && chown rocky:rocky /tmp/tls && chown rocky:rocky /etc/pki/pbos
-#sudo openssl req -new -x509 -nodes -days 365000 -keyout /etc/pki/pbos/ca-key.pem -out /etc/pki/pbos/ca-cert.pem
-#exit
-
 ### Install Burrito
 
-#sudo mkdir -p /etc/pki/pbos && sudo mkdir -p /tmp/tls && sudo chown rocky:rocky /tmp/tls && sudo chown rocky:rocky /etc/pki/pbos && \
-sudo dnf -y install epel-release && sudo dnf -y install python3 python39 sshpass python3-cryptography && \
-git clone https://github.com/vpasias/pbos.git && git clone https://github.com/iorchard/pbos-ansible.git && \
-python3.9 -m venv ~/.envs/pbos && source ~/.envs/pbos/bin/activate && \
-python -m pip install -U pip && python -m pip install wheel && python -m pip install ansible==5.10.0 pymysql openstacksdk netaddr && \
-cd pbos-ansible && export MYSITE="pbos" && cp -a inventory/default inventory/$MYSITE && cp -a /home/rocky/pbos/bond/hosts-rocky inventory/$MYSITE/hosts && \
-sed "s/MYSITE/$MYSITE/" ansible.cfg.sample > ansible.cfg && \
-wget https://tarballs.opendev.org/openstack/octavia/test-images/test-only-amphora-x64-haproxy-centos-8-stream.qcow2 && mv test-only-amphora-x64-haproxy-centos-8-stream.qcow2 amphora-x64-haproxy.qcow2 && mv amphora-x64-haproxy.qcow2 /home/rocky/
+sudo dnf -y install python39 python3-cryptography && \
+git clone https://github.com/vpasias/pbos.git && git clone https://github.com/iorchard/burrito.git && \
+cd ~ && ssh-keygen -t rsa -f ~/.ssh/id_rsa -N '' && \
+echo 'gprm8350' > upass && chmod 0400 upass && echo 'gprm8350' > rpass && chmod 0400 rpass && \
+sshpass -f upass ssh-copy-id '-o StrictHostKeyChecking=no' -i ~/.ssh/id_rsa.pub rocky@node-0" && \
+sshpass -f upass ssh-copy-id '-o StrictHostKeyChecking=no' -i ~/.ssh/id_rsa.pub rocky@node-1" && \
+sshpass -f upass ssh-copy-id '-o StrictHostKeyChecking=no' -i ~/.ssh/id_rsa.pub rocky@node-2" && \
+sshpass -f upass ssh-copy-id '-o StrictHostKeyChecking=no' -i ~/.ssh/id_rsa.pub rocky@node-3" && \
+sshpass -f upass ssh-copy-id '-o StrictHostKeyChecking=no' -i ~/.ssh/id_rsa.pub rocky@node-4" && \
+sshpass -f upass ssh-copy-id '-o StrictHostKeyChecking=no' -i ~/.ssh/id_rsa.pub rocky@node-5" && \
+sshpass -f upass ssh-copy-id '-o StrictHostKeyChecking=no' -i ~/.ssh/id_rsa.pub rocky@node-6" && \
+sshpass -f upass ssh-copy-id '-o StrictHostKeyChecking=no' -i ~/.ssh/id_rsa.pub rocky@node-7" && \
+sshpass -f upass ssh-copy-id '-o StrictHostKeyChecking=no' -i ~/.ssh/id_rsa.pub rocky@node-8" && \
+sshpass -f upass ssh-copy-id '-o StrictHostKeyChecking=no' -i ~/.ssh/id_rsa.pub rocky@node-9"
 
-./vault.sh
-# set password for vault: gprm8350 - gprm8350
+# ssh rocky@node-1
 
-cp -a /home/rocky/pbos/bond/vars-rocky.yml inventory/$MYSITE/group_vars/all/vars.yml && cp -a /home/rocky/pbos/bond/ceph-rocky.yml inventory/$MYSITE/group_vars/all/ceph.yml && \
-cp -a /home/rocky/pbos/bond/lvm-rocky.yml inventory/$MYSITE/group_vars/all/lvm.yml && cp -a /home/rocky/pbos/bond/site.yml /home/rocky/pbos-ansible/site.yml && \
-cp -a /home/rocky/pbos/bond/site1.yml /home/rocky/pbos-ansible/site1.yml && cp -a /home/rocky/pbos/bond/site2.yml /home/rocky/pbos-ansible/site2.yml && \
-ansible -m ping all && ansible-galaxy role install --force --role-file requirements.yml
+# Preparation.:
+python3.9 -m venv ~/.envs/burrito && source ~/.envs/burrito/bin/activate && \
+git clone https://github.com/vpasias/pbos.git && git clone --recursive https://github.com/iorchard/burrito.git && \
+cp -rf /home/rocky/pbos/burrito/bond/hosts.sample /home/rocky/burrito/hosts.sample && \
+cp -rf /home/rocky/pbos/burrito/bond/vars.yml.sample /home/rocky/burrito/vars.yml.sample && \
+cd /home/rocky/burrito && ./prepare.sh
 
-ansible-playbook site.yml
+# Check connectivity.:
+ansible -m ping all
 
-# Install Designate - DNS
-ansible-playbook site1.yml
+# Install ceph.:
+ansible-playbook --extra-vars=@vars.yml ceph.yml
 
-# Install Octavia - LB
-ansible-playbook site2.yml
+# Check ceph health.:
+sudo ceph -s
 
-#vim site.yml
-#vim /home/rocky/.ansible/roles/pbos.common/tasks/tls.yml
+# Install k8s.:
+ansible-playbook --extra-vars=@vars.yml -b k8s.yml
 
-source ~/.bashrc
+# Check kubernetes node status.:
+sudo kubectl get nodes
 
-sudo ceph -s && sudo ceph health && sudo ceph osd status && sudo ceph df && \
-openstack service list && openstack network agent list && openstack compute service list && openstack volume service list && \
-openstack server list && openstack endpoint list && openstack catalog list && openstack image list && \
-openstack flavor list && openstack network list && openstack subnet list && openstack project list && openstack port list && openstack user list && \
-openstack hypervisor list && openstack volume list && openstack floating ip list
+# Install burrito.:
+sudo helm plugin install https://github.com/databus23/helm-diff
+ansible-playbook --extra-vars=@vars.yml burrito.yml
 
-# Testing
-# ./scripts/openstack_version.sh
-# ./scripts/openstack_test.sh
-# Network: 192.168.22.0/24
-# IP range: 192.168.22.200 - 192.168.22.220
-# VM IP = 192.168.22.215
-# To another terminal:
-## ssh rocky@node-6
-## sudo ifconfig bond1.10 192.168.22.6 netmask 255.255.255.0
-# ssh cirros@192.168.22.215
-# login account is: cirros. The password is: gocubsgo
-# openstack server show test
+# Check openstack status.:
+. ~/.btx.env
+bts
+# At 'btx@btx-0:/$' prompt execute: 
+openstack volume service list
+openstack network agent list
+openstack compute service list
 
-#openstack volume list
-#openstack volume create --size 1 test_vol
-#openstack server add volume test test_vol
-#openstack server show test
-#openstack volume delete test_vol
-#openstack server add floating ip test 192.168.22.217
-
-# Horizon dashboard
-# 8000 -> 192.168.20.100:8000
-# URL: http://localhost:8000/dashboard/
-# USERNAME=admin
-# PASSWORD=gprm8350
-# DOMAIN_NAME=default
+# Test.:
+. ~/.btx.env
+btx --test
 
 ##################################################################################################################################################################################
 ### Delete ###
