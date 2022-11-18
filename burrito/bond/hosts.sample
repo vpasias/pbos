@@ -1,0 +1,71 @@
+node-0 ansible_host=192.168.21.200 ansible_port=22 ansible_user=rocky ansible_connection=local ansible_python_interpreter=/usr/bin/python3
+node-1 ansible_host=192.168.21.201 ansible_port=22 ansible_user=rocky 
+node-2 ansible_host=192.168.21.202 ansible_port=22 ansible_user=rocky
+node-3 ansible_host=192.168.21.203 ansible_port=22 ansible_user=rocky
+node-4 ansible_host=192.168.21.204 ansible_port=22 ansible_user=rocky
+node-5 ansible_host=192.168.21.205 ansible_port=22 ansible_user=rocky
+node-6 ansible_host=192.168.21.206 ansible_port=22 ansible_user=rocky
+node-7 ansible_host=192.168.21.207 monitor_address=192.168.24.238 radosgw_address=192.168.24.238 ansible_port=22 ansible_user=rocky
+node-8 ansible_host=192.168.21.208 monitor_address=192.168.24.239 radosgw_address=192.168.24.239 ansible_port=22 ansible_user=rocky
+node-9 ansible_host=192.168.21.209 monitor_address=192.168.24.240 radosgw_address=192.168.24.240 ansible_port=22 ansible_user=rocky
+
+# ceph nodes
+[mons]
+node-[7:9]
+
+[mgrs]
+node-[7:9]
+
+[osds]
+node-[7:9]
+
+[rgws]
+node-[7:9]
+
+[clients]
+node-[0:2]
+node-[5:6]
+
+# kubernetes nodes
+[kube-master]
+node-[0:2]
+
+[kube-node]
+node-[0:6]
+
+# openstack nodes
+[controller-node]
+node-[0:2]
+
+[network-node]
+node-[3:4]
+
+[compute-node]
+node-[5:6]
+
+
+###################################################
+## Do not touch below if you are not an expert!!! #
+###################################################
+[ceph:children]
+mons
+mgrs
+osds
+rgws
+clients
+
+[etcd:children]
+kube-master
+
+[k8s-cluster:children]
+kube-master
+kube-node
+
+[controller-node:vars]
+node_labels={"openstack-control-plane":"enabled"}
+
+[network-node:vars]
+node_labels={"openstack-network-plane":"enabled", "openstack-network-dvr":"enabled", "linuxbridge":"enabled", "openvswitch":"enabled"}
+
+[compute-node:vars]
+node_labels={"openstack-compute-node":"enabled", "openstack-network-dvr":"enabled", "linuxbridge":"enabled", "openvswitch":"enabled"}
