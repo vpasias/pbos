@@ -1,0 +1,169 @@
+chmod +x cloudlab-setup-ubuntu-tl.sh && ./cloudlab-setup-ubuntu-tl.sh && \
+sudo apt-get install genisoimage libguestfs-tools libosinfo-bin virtinst qemu-kvm git vim net-tools wget curl bash-completion python3-pip libvirt-daemon-system virt-manager bridge-utils libnss-libvirt sysfsutils libvirt-clients osinfo-db-tools intltool sshpass ovmf genometools virt-top xorriso -y && \
+sudo sed -i 's/hosts:          files dns/hosts:          files libvirt libvirt_guest dns/' /etc/nsswitch.conf && sudo lsmod | grep kvm && sudo reboot
+#sudo systemctl restart libvirtd && sudo systemctl status libvirtd
+
+screen
+# Press Return to continue
+# detach from session without killing it: Ctrl a d 
+# to see screen sessions: screen -ls
+# detach from closed session: screen -d -r 1909.pts-0.node0
+# enter session: screen -r 1909.pts-0.node0
+# exit a session and terminate it: exit
+
+sudo -i
+cd /mnt/extra && cat /sys/module/kvm_intel/parameters/nested && cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l && free -h && df -hT && sudo virsh list --all && sudo brctl show && \
+wget -O "/mnt/extra/osinfo-db.tar.xz" https://releases.pagure.org/libosinfo/osinfo-db-20220516.tar.xz && sudo osinfo-db-import --local "/mnt/extra/osinfo-db.tar.xz"
+
+# Create the iason user
+sudo useradd iason -m -s /bin/bash && sudo usermod -aG sudo iason && echo "iason:iason" | chpasswd && echo "iason ALL=(root) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/iason && \
+sudo chmod 0440 /etc/sudoers.d/iason && su - iason
+
+# Install dependencies
+sudo apt update && sudo apt install software-properties-common -y && sudo add-apt-repository ppa:deadsnakes/ppa -y && sudo apt update && sudo apt install python3.9 -y && \
+sudo apt install -y python3-venv dirmngr openvswitch-switch && \
+sudo usermod -aG libvirt `id -un` && sudo adduser `id -un` libvirt-qemu && sudo adduser `id -un` kvm && sudo adduser `id -un` libvirt-dnsmasq && sudo sed -i 's/0770/0777/' /etc/libvirt/libvirtd.conf && \
+echo 0 | sudo tee /sys/module/kvm/parameters/halt_poll_ns && echo 'security_driver = "none"' | sudo tee /etc/libvirt/qemu.conf && sudo chmod 0644 /boot/vmlinuz* && \
+sudo systemctl restart libvirtd && sudo systemctl status libvirtd
+
+exit
+
+su - iason
+
+virsh list --all && virsh net-list --all && virsh pool-list && python3 --version && python --version && python3.9 --version && mkdir -p /home/iason/images && mkdir -p /home/iason/vms
+
+##################################################################################################################################################################################
+######################################## Rocky Linux 8.7 cloud image creation (https://github.com/vpasias/pbos) #############################################################################################################
+##################################################################################################################################################################################
+
+cd /home/iason/images && curl -sLO http://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.7-x86_64-minimal.iso && ls -lah && \
+cd ~ && git clone https://github.com/vpasias/pbos.git && cd /home/iason/pbos/rocky && chmod +x rocky_build.sh && ./rocky_build.sh
+
+#virsh start rocky-linux-8
+#virsh console rocky-linux-8
+#localhost login: root
+
+dnf -y update && dnf install -y git vim && dnf upgrade -y && rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org && \
+dnf install https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm -y && dnf --enablerepo=elrepo-kernel install kernel-lt kernel-lt-devel kernel-lt-headers -y && sleep 10 && systemctl reboot
+
+#virsh console rocky-linux-8
+#localhost login: root
+
+git clone https://github.com/vpasias/pbos.git && cp /root/pbos/rocky/vm_config.sh . && chmod +x vm_config.sh && ./vm_config.sh && \
+mv /etc/cloud/cloud.cfg /root/cloud.cfg.old && cp /root/pbos/rocky/cloud.cfg /etc/cloud/cloud.cfg && systemctl enable cloud-init sshd && sleep 10 && \
+cp /root/pbos/rocky/cleanup.sh . && chmod +x cleanup.sh && ./cleanup.sh && rm -f cleanup.sh && cd ~ && rm -rf /root/pbos && \
+cat /dev/null > ~/.bash_history && history -c && shutdown -h now
+
+sudo virt-sysprep -d rocky-linux-8 && cd /home/iason/images && sudo chown iason:iason rocky-8.6-x86_64-genericcloud.qcow2 && \
+mv rocky-8.7-x86_64-genericcloud.qcow2 rocky-8.7-x86_64-genericcloud.qcow2.new && \
+qemu-img convert -O qcow2 rocky-8.7-x86_64-genericcloud.qcow2.new Rocky-8.7-x86_64-GenericCloud.qcow2 && ls -lah && cd ~ && virsh undefine rocky-linux-8 && \
+rm -rf /home/iason/pbos/
+
+##################################################################################################################################################################################
+######################################## Robot4KVM (https://github.com/iorchard/robot4kvm) #############################################################################################################
+##################################################################################################################################################################################
+# su - iason
+
+cd ~ && git clone https://github.com/vpasias/pbos.git && cp -rf /home/iason/pbos/burrito/bond/deployment.sh . && chmod +x deployment.sh && ./deployment.sh && \
+sleep 10 && for i in {0..9}; do scp ~/.ssh/id* rocky@node-$i:~/.ssh/; done && for i in {0..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "systemctl restart network"; done
+
+# read -s -p 'user pw: ' USERPW
+#user pw: gprm8350
+# for i in {0..9}; do virsh shutdown node-$i; done && sleep 90 && virsh list --all && for i in {0..9}; do virsh start node-$i; done && sleep 90 && virsh list --all
+#unset USERPW
+##################################################################################################################################################################################
+######################################## Burrito Cluster based on Rocky Linux 8.7 (https://github.com/iorchard - https://github.com/vpasias/pbos/burrito) #############################################################################################################
+##################################################################################################################################################################################
+
+ssh rocky@node-0
+
+# Connectity tests
+#sudo cat /proc/net/bonding/bond1 && sudo cat /proc/net/vlan/config && sudo cat /proc/net/vlan/bond1.5
+# ping 192.168.21.203
+# sudo ping -I bond1.100 192.168.23.202
+# sudo ping -I bond1.200 192.168.25.205
+# ping 192.168.24.206
+
+#sudo -i
+#mkdir -p /etc/pki/pbos && mkdir -p /tmp/tls && chown rocky:rocky /tmp/tls && chown rocky:rocky /etc/pki/pbos
+#sudo openssl req -new -x509 -nodes -days 365000 -keyout /etc/pki/pbos/ca-key.pem -out /etc/pki/pbos/ca-cert.pem
+#exit
+
+### Install Burrito
+
+#sudo mkdir -p /etc/pki/pbos && sudo mkdir -p /tmp/tls && sudo chown rocky:rocky /tmp/tls && sudo chown rocky:rocky /etc/pki/pbos && \
+sudo dnf -y install epel-release && sudo dnf -y install python3 python39 sshpass python3-cryptography && \
+git clone https://github.com/vpasias/pbos.git && git clone https://github.com/iorchard/pbos-ansible.git && \
+python3.9 -m venv ~/.envs/pbos && source ~/.envs/pbos/bin/activate && \
+python -m pip install -U pip && python -m pip install wheel && python -m pip install ansible==5.10.0 pymysql openstacksdk netaddr && \
+cd pbos-ansible && export MYSITE="pbos" && cp -a inventory/default inventory/$MYSITE && cp -a /home/rocky/pbos/bond/hosts-rocky inventory/$MYSITE/hosts && \
+sed "s/MYSITE/$MYSITE/" ansible.cfg.sample > ansible.cfg && \
+wget https://tarballs.opendev.org/openstack/octavia/test-images/test-only-amphora-x64-haproxy-centos-8-stream.qcow2 && mv test-only-amphora-x64-haproxy-centos-8-stream.qcow2 amphora-x64-haproxy.qcow2 && mv amphora-x64-haproxy.qcow2 /home/rocky/
+
+./vault.sh
+# set password for vault: gprm8350 - gprm8350
+
+cp -a /home/rocky/pbos/bond/vars-rocky.yml inventory/$MYSITE/group_vars/all/vars.yml && cp -a /home/rocky/pbos/bond/ceph-rocky.yml inventory/$MYSITE/group_vars/all/ceph.yml && \
+cp -a /home/rocky/pbos/bond/lvm-rocky.yml inventory/$MYSITE/group_vars/all/lvm.yml && cp -a /home/rocky/pbos/bond/site.yml /home/rocky/pbos-ansible/site.yml && \
+cp -a /home/rocky/pbos/bond/site1.yml /home/rocky/pbos-ansible/site1.yml && cp -a /home/rocky/pbos/bond/site2.yml /home/rocky/pbos-ansible/site2.yml && \
+ansible -m ping all && ansible-galaxy role install --force --role-file requirements.yml
+
+ansible-playbook site.yml
+
+# Install Designate - DNS
+ansible-playbook site1.yml
+
+# Install Octavia - LB
+ansible-playbook site2.yml
+
+#vim site.yml
+#vim /home/rocky/.ansible/roles/pbos.common/tasks/tls.yml
+
+source ~/.bashrc
+
+sudo ceph -s && sudo ceph health && sudo ceph osd status && sudo ceph df && \
+openstack service list && openstack network agent list && openstack compute service list && openstack volume service list && \
+openstack server list && openstack endpoint list && openstack catalog list && openstack image list && \
+openstack flavor list && openstack network list && openstack subnet list && openstack project list && openstack port list && openstack user list && \
+openstack hypervisor list && openstack volume list && openstack floating ip list
+
+# Testing
+# ./scripts/openstack_version.sh
+# ./scripts/openstack_test.sh
+# Network: 192.168.22.0/24
+# IP range: 192.168.22.200 - 192.168.22.220
+# VM IP = 192.168.22.215
+# To another terminal:
+## ssh rocky@node-6
+## sudo ifconfig bond1.10 192.168.22.6 netmask 255.255.255.0
+# ssh cirros@192.168.22.215
+# login account is: cirros. The password is: gocubsgo
+# openstack server show test
+
+#openstack volume list
+#openstack volume create --size 1 test_vol
+#openstack server add volume test test_vol
+#openstack server show test
+#openstack volume delete test_vol
+#openstack server add floating ip test 192.168.22.217
+
+# Horizon dashboard
+# 8000 -> 192.168.20.100:8000
+# URL: http://localhost:8000/dashboard/
+# USERNAME=admin
+# PASSWORD=gprm8350
+# DOMAIN_NAME=default
+
+##################################################################################################################################################################################
+### Delete ###
+##################################################################################################################################################################################
+# To tear down VMs.:
+cd /home/iason/robot4kvm/ && source ~/.envs/robot/bin/activate && \
+robot -d output teardown.robot && rm -rf output/*.*  && \
+virsh net-destroy mgmt && rm -rf /home/iason/vms/mgmt.xml && virsh net-undefine mgmt && \
+virsh net-destroy ds1 && rm -rf /home/iason/vms/ds1.xml && virsh net-undefine ds1 && \
+virsh net-destroy ds2 && rm -rf /home/iason/vms/ds2.xml && virsh net-undefine ds2 && \
+virsh net-destroy ss1 && rm -rf /home/iason/vms/ss1.xml && virsh net-undefine ss1 && \
+virsh net-destroy ss2 && rm -rf /home/iason/vms/ss2.xml && virsh net-undefine ss2 && \
+rm -rf /home/iason/.ssh/known_hosts && touch /home/iason/.ssh/known_hosts && \
+virsh list --all && sudo brctl show && virsh net-list --all && cd ~ && rm -rf deployment.sh pbos/ robot4kvm/ && exit
