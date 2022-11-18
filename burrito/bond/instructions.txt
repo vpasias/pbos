@@ -54,7 +54,7 @@ mv /etc/cloud/cloud.cfg /root/cloud.cfg.old && cp /root/pbos/rocky/cloud.cfg /et
 cp /root/pbos/rocky/cleanup.sh . && chmod +x cleanup.sh && ./cleanup.sh && rm -f cleanup.sh && cd ~ && rm -rf /root/pbos && \
 cat /dev/null > ~/.bash_history && history -c && shutdown -h now
 
-sudo virt-sysprep -d rocky-linux-8 && cd /home/iason/images && sudo chown iason:iason rocky-8.6-x86_64-genericcloud.qcow2 && \
+sudo virt-sysprep -d rocky-linux-8 && cd /home/iason/images && sudo chown iason:iason rocky-8.7-x86_64-genericcloud.qcow2 && \
 mv rocky-8.7-x86_64-genericcloud.qcow2 rocky-8.7-x86_64-genericcloud.qcow2.new && \
 qemu-img convert -O qcow2 rocky-8.7-x86_64-genericcloud.qcow2.new Rocky-8.7-x86_64-GenericCloud.qcow2 && ls -lah && cd ~ && virsh undefine rocky-linux-8 && \
 rm -rf /home/iason/pbos/
