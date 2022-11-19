@@ -5,9 +5,9 @@ node-3 ansible_host=192.168.21.203 ansible_port=22 ansible_user=rocky
 node-4 ansible_host=192.168.21.204 ansible_port=22 ansible_user=rocky
 node-5 ansible_host=192.168.21.205 ansible_port=22 ansible_user=rocky
 node-6 ansible_host=192.168.21.206 ansible_port=22 ansible_user=rocky
-node-7 ansible_host=192.168.21.207 monitor_address=192.168.24.238 radosgw_address=192.168.24.238 ansible_port=22 ansible_user=rocky
-node-8 ansible_host=192.168.21.208 monitor_address=192.168.24.239 radosgw_address=192.168.24.239 ansible_port=22 ansible_user=rocky
-node-9 ansible_host=192.168.21.209 monitor_address=192.168.24.240 radosgw_address=192.168.24.240 ansible_port=22 ansible_user=rocky
+node-7 ansible_host=192.168.21.207 monitor_address=192.168.24.207 radosgw_address=192.168.24.207 ansible_port=22 ansible_user=rocky
+node-8 ansible_host=192.168.21.208 monitor_address=192.168.24.208 radosgw_address=192.168.24.208 ansible_port=22 ansible_user=rocky
+node-9 ansible_host=192.168.21.209 monitor_address=192.168.24.209 radosgw_address=192.168.24.209 ansible_port=22 ansible_user=rocky
 
 # ceph nodes
 [mons]
