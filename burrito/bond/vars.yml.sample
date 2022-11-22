@@ -215,7 +215,7 @@ cinder:
 # horizon
 horizon:
   password: "{{ common_password }}"
-  timezone: "Asia/Seoul"
+  timezone: "America/Denver"
 
 ### btx
 btx:
