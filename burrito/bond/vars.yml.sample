@@ -25,9 +25,9 @@ pod:
 
 ### keepalived role variables
 keepalived_interface: "{{ mgmt_iface_name }}"
-keepalived_vip: "192.168.21.250"
+keepalived_vip: "192.168.21.90"
 keepalived_interface_svc: "{{ svc_iface_name }}"
-keepalived_vip_svc: "192.168.20.250"
+keepalived_vip_svc: "192.168.20.90"
 
 ### MTU setting
 calico_mtu: 1500
