@@ -3,7 +3,7 @@
 common_password: "gprm8350"
 # define network interface names
 svc_iface_name: eth0
-mgmt_iface_name: bond1.5
+mgmt_iface_name: bond1
 provider_iface_name: bond1.10
 overlay_iface_name: bond1.100
 
