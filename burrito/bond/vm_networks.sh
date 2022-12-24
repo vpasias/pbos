@@ -20,7 +20,7 @@ cat > /home/iason/vms/ds1.xml <<EOF
   <bridge name='ds1' stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
   <mac address='52:54:00:8a:8b:cb'/>
-  <ip address='192.168.22.1' netmask='255.255.255.0'>
+  <ip address='192.168.21.1' netmask='255.255.255.0'>
   </ip>  
 </network>
 EOF
@@ -32,7 +32,7 @@ cat > /home/iason/vms/ds2.xml <<EOF
   <bridge name='ds2' stp='off' macTableManager="kernel"/>
   <mtu size="9216"/>
   <mac address='52:54:00:8a:8b:cc'/>
-  <ip address='192.168.26.1' netmask='255.255.255.0'>
+  <ip address='192.168.31.1' netmask='255.255.255.0'>
   </ip>    
 </network>
 EOF
