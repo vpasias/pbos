@@ -1,8 +1,8 @@
 # Bond case
 Hypervisor Hosts Interfaces:
 - eth0 - service (PXE-admin)
-- bond1 (eth1 + eth2) - cluster (management-overlay-provider)
-- bond2 (eth3 + eth4) - storage - rados GW
+- bond1 (eth1 + eth2) - management network
+- bond2 (eth3 + eth4) - provider - overlay - storage networks
 
 interfaces & VLANs allocation:
 - eth0: service network: 192.168.20.0/24
