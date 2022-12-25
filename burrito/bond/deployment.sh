@@ -79,7 +79,7 @@ EOF"; done
 ### Management (API-keepalived) network configuration
 ### Provider 1 (main) network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-0 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-IPADDR=192.168.21.200
+IPADDR=192.168.22.200
 NETMASK=255.255.255.0
 EOF"
 
