@@ -76,61 +76,51 @@ EOF"; done
 ### Management (API-keepalived) network configuration
 ### Provider 1 (main) network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-0 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-
 IPADDR=192.168.21.200
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-1 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-
 IPADDR=192.168.22.201
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-2 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-
 IPADDR=192.168.22.202
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-3 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-
 IPADDR=192.168.22.203
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-4 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-
 IPADDR=192.168.22.204
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-5 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-
 IPADDR=192.168.22.205
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-6 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-
 IPADDR=192.168.22.206
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-7 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-
 IPADDR=192.168.22.207
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-8 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-
 IPADDR=192.168.22.208
 NETMASK=255.255.255.0
 EOF"
 
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-9 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
-
 IPADDR=192.168.22.209
 NETMASK=255.255.255.0
 EOF"
