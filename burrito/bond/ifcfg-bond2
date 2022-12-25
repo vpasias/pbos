@@ -4,4 +4,4 @@ ONBOOT=yes
 BOOTPROTO=none
 TYPE=Bond
 BONDING_MASTER=yes
-BONDING_OPTS="mode=active-backup primary=eth3 miimon=100 primary_reselect=always fail_over_mac=follow use_carrier=0"
+BONDING_OPTS="mode=active-backup primary=eth4 miimon=100 primary_reselect=always fail_over_mac=follow use_carrier=0"
