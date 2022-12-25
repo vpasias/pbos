@@ -4,8 +4,8 @@ common_password: "gprm8350"
 # define network interface names
 svc_iface_name: eth0
 mgmt_iface_name: eth1
-provider_iface_name: bond1.100
-overlay_iface_name: bond1.200
+provider_iface_name: bond1
+overlay_iface_name: bond1.100
 
 ## ceph-ansible                     #
 # ceph network cidr - recommend the same cidr for public/cluster networks.
