@@ -112,11 +112,11 @@ IPS = {
     },
     PREFIX + '1': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+0),
+            'ip': NET['mgmt'] + '.' + str(IP+1),
             'nm': '255.255.255.0',
         },
         'admin': {
-            'ip': NET['admin'] + '.' + str(IP+0),
+            'ip': NET['admin'] + '.' + str(IP+1),
             'nm': '255.255.255.0',
             'gw': NET['admin'] + '.' + '1',
         },
@@ -132,11 +132,11 @@ IPS = {
     },
     PREFIX + '2': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+0),
+            'ip': NET['mgmt'] + '.' + str(IP+2),
             'nm': '255.255.255.0',
         },
         'admin': {
-            'ip': NET['admin'] + '.' + str(IP+0),
+            'ip': NET['admin'] + '.' + str(IP+2),
             'nm': '255.255.255.0',
             'gw': NET['admin'] + '.' + '1',
         },
@@ -152,11 +152,11 @@ IPS = {
     },
     PREFIX + '3': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+0),
+            'ip': NET['mgmt'] + '.' + str(IP+3),
             'nm': '255.255.255.0',
         },
         'admin': {
-            'ip': NET['admin'] + '.' + str(IP+0),
+            'ip': NET['admin'] + '.' + str(IP+3),
             'nm': '255.255.255.0',
             'gw': NET['admin'] + '.' + '1',
         },
@@ -172,11 +172,11 @@ IPS = {
     },
     PREFIX + '4': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+0),
+            'ip': NET['mgmt'] + '.' + str(IP+4),
             'nm': '255.255.255.0',
         },
         'admin': {
-            'ip': NET['admin'] + '.' + str(IP+0),
+            'ip': NET['admin'] + '.' + str(IP+4),
             'nm': '255.255.255.0',
             'gw': NET['admin'] + '.' + '1',
         },
@@ -192,11 +192,11 @@ IPS = {
     },
     PREFIX + '5': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+0),
+            'ip': NET['mgmt'] + '.' + str(IP+5),
             'nm': '255.255.255.0',
         },
         'admin': {
-            'ip': NET['admin'] + '.' + str(IP+0),
+            'ip': NET['admin'] + '.' + str(IP+5),
             'nm': '255.255.255.0',
             'gw': NET['admin'] + '.' + '1',
         },
@@ -212,11 +212,11 @@ IPS = {
     },
     PREFIX + '6': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+0),
+            'ip': NET['mgmt'] + '.' + str(IP+6),
             'nm': '255.255.255.0',
         },
         'admin': {
-            'ip': NET['admin'] + '.' + str(IP+0),
+            'ip': NET['admin'] + '.' + str(IP+6),
             'nm': '255.255.255.0',
             'gw': NET['admin'] + '.' + '1',
         },
@@ -232,11 +232,11 @@ IPS = {
     },
     PREFIX + '7': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+0),
+            'ip': NET['mgmt'] + '.' + str(IP+7),
             'nm': '255.255.255.0',
         },
         'admin': {
-            'ip': NET['admin'] + '.' + str(IP+0),
+            'ip': NET['admin'] + '.' + str(IP+7),
             'nm': '255.255.255.0',
             'gw': NET['admin'] + '.' + '1',
         },
@@ -252,11 +252,11 @@ IPS = {
     },
     PREFIX + '8': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+0),
+            'ip': NET['mgmt'] + '.' + str(IP+8),
             'nm': '255.255.255.0',
         },
         'admin': {
-            'ip': NET['admin'] + '.' + str(IP+0),
+            'ip': NET['admin'] + '.' + str(IP+8),
             'nm': '255.255.255.0',
             'gw': NET['admin'] + '.' + '1',
         },
@@ -272,11 +272,11 @@ IPS = {
     },
     PREFIX + '9': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+0),
+            'ip': NET['mgmt'] + '.' + str(IP+9),
             'nm': '255.255.255.0',
         },
         'admin': {
-            'ip': NET['admin'] + '.' + str(IP+0),
+            'ip': NET['admin'] + '.' + str(IP+9),
             'nm': '255.255.255.0',
             'gw': NET['admin'] + '.' + '1',
         },
