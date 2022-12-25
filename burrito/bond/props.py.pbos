@@ -80,12 +80,12 @@ OSD_SIZE = 120   # OSD disk size in GiB.
 # machine IP list.
 NET = {
         'mgmt': '192.168.20',       
+        'admin': '192.168.21',
         'ds1': '0.0.0',
-        'ds2': '0.0.0',
+        'ds1': '0.0.0',
         'ss1': '0.0.0',
-        'ss2': '0.0.0',
 }
-# GW = '192.168.20.1'    # Gateway IP address
+# GW = '192.168.21.1'    # Gateway IP address
 # DNS = '8.8.8.8'
 IP = 200  # The last octet of the IP address to begin.
 REP_BR = 'mgmt'  # Select this bridge's ip to insert into /etc/hosts
@@ -94,192 +94,201 @@ IPS = {
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+0),
             'nm': '255.255.255.0',
-            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'admin': {
+            'ip': NET['admin'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+            'gw': NET['admin'] + '.' + '1',
         },
         'ds1': {
             'ip': '',
         },
         'ds2': {
             'ip': '',
-        },
-        'ss1': {
-            'ip': '',
         },    
-        'ss2': {
+        'ss1': {
             'ip': '',
         },
     },
     PREFIX + '1': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+1),
+            'ip': NET['mgmt'] + '.' + str(IP+0),
             'nm': '255.255.255.0',
-            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'admin': {
+            'ip': NET['admin'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+            'gw': NET['admin'] + '.' + '1',
         },
         'ds1': {
             'ip': '',
         },
         'ds2': {
             'ip': '',
-        },
-        'ss1': {
-            'ip': '',
         },    
-        'ss2': {
+        'ss1': {
             'ip': '',
         },
     },
     PREFIX + '2': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+2),
+            'ip': NET['mgmt'] + '.' + str(IP+0),
             'nm': '255.255.255.0',
-            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'admin': {
+            'ip': NET['admin'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+            'gw': NET['admin'] + '.' + '1',
         },
         'ds1': {
             'ip': '',
         },
         'ds2': {
             'ip': '',
-        },
+        },    
         'ss1': {
             'ip': '',
-        },    
-        'ss2': {
-            'ip': '',
-        },    
+        },   
     },
     PREFIX + '3': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+3),
+            'ip': NET['mgmt'] + '.' + str(IP+0),
             'nm': '255.255.255.0',
-            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'admin': {
+            'ip': NET['admin'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+            'gw': NET['admin'] + '.' + '1',
         },
         'ds1': {
             'ip': '',
         },
         'ds2': {
             'ip': '',
-        },
-        'ss1': {
-            'ip': '',
         },    
-        'ss2': {
+        'ss1': {
             'ip': '',
         },
     },
     PREFIX + '4': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+4),
+            'ip': NET['mgmt'] + '.' + str(IP+0),
             'nm': '255.255.255.0',
-            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'admin': {
+            'ip': NET['admin'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+            'gw': NET['admin'] + '.' + '1',
         },
         'ds1': {
             'ip': '',
         },
         'ds2': {
             'ip': '',
-        },
-        'ss1': {
-            'ip': '',
         },    
-        'ss2': {
+        'ss1': {
             'ip': '',
         },
     },
     PREFIX + '5': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+5),
+            'ip': NET['mgmt'] + '.' + str(IP+0),
             'nm': '255.255.255.0',
-            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'admin': {
+            'ip': NET['admin'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+            'gw': NET['admin'] + '.' + '1',
         },
         'ds1': {
             'ip': '',
         },
         'ds2': {
             'ip': '',
-        },
+        },    
         'ss1': {
-            'ip': '',
-        },
-        'ss2': {
             'ip': '',
         },
     },
     PREFIX + '6': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+6),
+            'ip': NET['mgmt'] + '.' + str(IP+0),
             'nm': '255.255.255.0',
-            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'admin': {
+            'ip': NET['admin'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+            'gw': NET['admin'] + '.' + '1',
         },
         'ds1': {
             'ip': '',
         },
         'ds2': {
             'ip': '',
-        },
+        },    
         'ss1': {
-            'ip': '',
-        },
-        'ss2': {
             'ip': '',
         },
     },
     PREFIX + '7': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+7),
+            'ip': NET['mgmt'] + '.' + str(IP+0),
             'nm': '255.255.255.0',
-            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'admin': {
+            'ip': NET['admin'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+            'gw': NET['admin'] + '.' + '1',
         },
         'ds1': {
             'ip': '',
         },
         'ds2': {
             'ip': '',
-        },
+        },    
         'ss1': {
-            'ip': '',
-        },
-        'ss2': {
             'ip': '',
         },
     },
     PREFIX + '8': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+8),
+            'ip': NET['mgmt'] + '.' + str(IP+0),
             'nm': '255.255.255.0',
-            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'admin': {
+            'ip': NET['admin'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+            'gw': NET['admin'] + '.' + '1',
         },
         'ds1': {
             'ip': '',
         },
         'ds2': {
             'ip': '',
-        },
+        },    
         'ss1': {
-            'ip': '',
-        },
-        'ss2': {
             'ip': '',
         },
     },
     PREFIX + '9': {
         'mgmt': {
-            'ip': NET['mgmt'] + '.' + str(IP+9),
+            'ip': NET['mgmt'] + '.' + str(IP+0),
             'nm': '255.255.255.0',
-            'gw': NET['mgmt'] + '.' + '1',
+        },
+        'admin': {
+            'ip': NET['admin'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+            'gw': NET['admin'] + '.' + '1',
         },
         'ds1': {
             'ip': '',
         },
         'ds2': {
             'ip': '',
-        },
+        },    
         'ss1': {
             'ip': '',
         },
-        'ss2': {
-            'ip': '',
-        },
-    },
 }
         
 # which OS you choose. DEB or ROCKY?
