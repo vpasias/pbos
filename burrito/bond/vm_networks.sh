@@ -45,9 +45,27 @@ cat > /home/iason/vms/ds2.xml <<EOF
 </network>
 EOF
 
+cat > /home/iason/vms/ss1.xml <<EOF
+<network>
+  <name>ss1</name>   
+  <bridge name='ss1' stp='off' macTableManager="kernel"/>
+  <mtu size="9216"/>  
+</network>
+EOF
+
+cat > /home/iason/vms/ss2.xml <<EOF
+<network>
+  <name>ss2</name>   
+  <bridge name='ss2' stp='off' macTableManager="kernel"/>
+  <mtu size="9216"/>  
+</network>
+EOF
+
 virsh net-define /home/iason/vms/mgmt.xml && virsh net-autostart mgmt && virsh net-start mgmt
 virsh net-define /home/iason/vms/admin.xml && virsh net-autostart admin && virsh net-start admin
 virsh net-define /home/iason/vms/ds1.xml && virsh net-autostart ds1 && virsh net-start ds1
 virsh net-define /home/iason/vms/ds2.xml && virsh net-autostart ds2 && virsh net-start ds2
+virsh net-define /home/iason/vms/ss1.xml && virsh net-autostart ss1 && virsh net-start ss1
+virsh net-define /home/iason/vms/ss2.xml && virsh net-autostart ss2 && virsh net-start ss2
 
 ip a && sudo virsh net-list --all && sudo ovs-vsctl show
