@@ -67,6 +67,12 @@ MASTER=bond1
 SLAVE=yes
 EOF"; done
 
+for i in {0..9}; do sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-$i "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth4
+NAME=bond-slave-eth4
+MASTER=bond2
+SLAVE=yes
+EOF"; done
+
 ### Management (API-keepalived) network configuration
 ### Provider 1 (main) network configuration
 sshpass -p gprm8350 ssh -o "StrictHostKeyChecking=no" root@node-0 "cat << EOF | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-bond1
