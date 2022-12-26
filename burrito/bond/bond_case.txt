@@ -1,6 +1,6 @@
 # Bond case
 Hypervisor Hosts Interfaces:
-- eth0 - service (PXE)
+- eth0 - service (PXE - admin)
 - bond1 (eth1 + eth2) - management - provider - overlay - storage networks
 
 interfaces & VLANs allocation:
