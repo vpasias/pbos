@@ -3,9 +3,9 @@
 common_password: "gprm8350"
 # define network interface names
 svc_iface_name: eth0
-mgmt_iface_name: eth1
-provider_iface_name: bond1
-overlay_iface_name: bond1.100
+mgmt_iface_name: bond1
+provider_iface_name: bond1.200
+overlay_iface_name: bond1.300
 
 ## ceph-ansible                     #
 # ceph network cidr - recommend the same cidr for public/cluster networks.
@@ -158,7 +158,6 @@ registry_disk_size: "30Gi"
 registry_service_type: "NodePort"
 registry_service_nodeport: "32680"
 containerd_insecure_registries:
-#  "local_registry": "192.168.21.200:32680"
   "local_registry": "{{ keepalived_vip }}:32680"
 
 ### burrito variables
