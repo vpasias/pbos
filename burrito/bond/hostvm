@@ -14,20 +14,65 @@ OSD_DIR = '/home/' + os.environ.get('USER') + '/' + PREFIX + 'lab'
 # machine list.
 VMS = [
         PREFIX + '0',
+        PREFIX + '1',
+        PREFIX + '2',
+        PREFIX + '3',
+        PREFIX + '4',
+        PREFIX + '5',
+        PREFIX + '6',
+        PREFIX + '7',
+        PREFIX + '8',
+        PREFIX + '9',
 ]
 
 # machine role list.
 ROLES = {
         PREFIX + '0': ['storage'],
+        PREFIX + '1': ['storage'],
+        PREFIX + '2': ['storage'],
+        PREFIX + '3': ['storage'],
+        PREFIX + '4': ['storage'],
+        PREFIX + '5': ['storage'],
+        PREFIX + '6': ['storage'],
+        PREFIX + '7': ['storage'],
+        PREFIX + '8': ['storage'],
+        PREFIX + '9': ['storage'],
 }
 CORES = {
         PREFIX + '0': 48,
+        PREFIX + '1': 2,
+        PREFIX + '2': 2,
+        PREFIX + '3': 2,
+        PREFIX + '4': 2,
+        PREFIX + '5': 2,
+        PREFIX + '6': 2,
+        PREFIX + '7': 2,
+        PREFIX + '8': 2,
+        PREFIX + '9': 2,
 }
 MEM = {
-        PREFIX + '0': 208,
+        PREFIX + '0': 192,
+        PREFIX + '1': 4,
+        PREFIX + '2': 4,
+        PREFIX + '3': 4,
+        PREFIX + '4': 4,
+        PREFIX + '5': 4,
+        PREFIX + '6': 4,
+        PREFIX + '7': 4,
+        PREFIX + '8': 4,
+        PREFIX + '9': 4,
 }
 DISK = {
         PREFIX + '0': 960,
+        PREFIX + '1': 40,
+        PREFIX + '2': 40,
+        PREFIX + '3': 40,
+        PREFIX + '4': 40,
+        PREFIX + '5': 40,
+        PREFIX + '6': 40,
+        PREFIX + '7': 40,
+        PREFIX + '8': 40,
+        PREFIX + '9': 40,
 }
 # For VM with storage role
 OSD_NUM = 3     # The number of osd disks for VM with storage role
@@ -48,6 +93,168 @@ IPS = {
     PREFIX + '0': {
         'mgmt': {
             'ip': NET['mgmt'] + '.' + str(IP+0),
+            'nm': '255.255.255.0',
+        },
+        'ds1': {
+            'ip': '',
+        },
+        'ds2': {
+            'ip': '',
+        },    
+        'ss1': {
+            'ip': '',
+        },
+        'ss2': {
+            'ip': '',
+        },
+    },
+    PREFIX + '1': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+1),
+            'nm': '255.255.255.0',
+        },
+        'ds1': {
+            'ip': '',
+        },
+        'ds2': {
+            'ip': '',
+        },    
+        'ss1': {
+            'ip': '',
+        },
+        'ss2': {
+            'ip': '',
+        },
+    },
+    PREFIX + '2': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+2),
+            'nm': '255.255.255.0',
+        },
+        'ds1': {
+            'ip': '',
+        },
+        'ds2': {
+            'ip': '',
+        },    
+        'ss1': {
+            'ip': '',
+        },
+        'ss2': {
+            'ip': '',
+        },
+    },
+    PREFIX + '3': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+3),
+            'nm': '255.255.255.0',
+        },
+        'ds1': {
+            'ip': '',
+        },
+        'ds2': {
+            'ip': '',
+        },    
+        'ss1': {
+            'ip': '',
+        },
+        'ss2': {
+            'ip': '',
+        },
+    },
+    PREFIX + '4': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+4),
+            'nm': '255.255.255.0',
+        },
+        'ds1': {
+            'ip': '',
+        },
+        'ds2': {
+            'ip': '',
+        },    
+        'ss1': {
+            'ip': '',
+        },
+        'ss2': {
+            'ip': '',
+        },
+    },
+    PREFIX + '5': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+5),
+            'nm': '255.255.255.0',
+        },
+        'ds1': {
+            'ip': '',
+        },
+        'ds2': {
+            'ip': '',
+        },    
+        'ss1': {
+            'ip': '',
+        },
+        'ss2': {
+            'ip': '',
+        },
+    },
+    PREFIX + '6': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+6),
+            'nm': '255.255.255.0',
+        },
+        'ds1': {
+            'ip': '',
+        },
+        'ds2': {
+            'ip': '',
+        },    
+        'ss1': {
+            'ip': '',
+        },
+        'ss2': {
+            'ip': '',
+        },
+    },
+    PREFIX + '7': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+7),
+            'nm': '255.255.255.0',
+        },
+        'ds1': {
+            'ip': '',
+        },
+        'ds2': {
+            'ip': '',
+        },    
+        'ss1': {
+            'ip': '',
+        },
+        'ss2': {
+            'ip': '',
+        },
+    },
+    PREFIX + '8': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+8),
+            'nm': '255.255.255.0',
+        },
+        'ds1': {
+            'ip': '',
+        },
+        'ds2': {
+            'ip': '',
+        },    
+        'ss1': {
+            'ip': '',
+        },
+        'ss2': {
+            'ip': '',
+        },
+    },
+    PREFIX + '9': {
+        'mgmt': {
+            'ip': NET['mgmt'] + '.' + str(IP+9),
             'nm': '255.255.255.0',
         },
         'ds1': {
