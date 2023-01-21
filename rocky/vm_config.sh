@@ -5,7 +5,8 @@ cat /etc/os-release
 uname -a
 dnf -y install cloud-utils-growpart curl epel-release 
 dnf -y install python3 bind-utils
-dnf -y install openssh-server cloud-init sshpass
+dnf -y install openssh-server cloud-init sshpass 
+dnf -y install python39 python3-cryptography
 dnf install -y net-tools wget curl bash-completion iperf3 mtr traceroute netcat socat xfsprogs jq redhat-lsb-core mdadm
 
 echo "configfs" >> /etc/modules
